@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
-import AnimatedIndicatorNavbar from "@/components/AnimatedIndicatorNavbar"
+import { AnimatedIndicatorNavbar } from "@/components/navbars/animated-indicator-navbar";
 
 interface MachineryBrand {
   name: string

@@ -1,4 +1,4 @@
-import { AnimatedIndicatorNavbar } from "@/components/animated-indicator-navbar"
+import { AnimatedIndicatorNavbar } from "@/components/navbars/animated-indicator-navbar"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
