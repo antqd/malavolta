@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { Input } from "@/components/ui/input"
-import { AnimatedIndicatorNavbar } from "@/components/ui/animated-indicator-navbar"
+import { AnimatedIndicatorNavbar } from "@/components/navbars/animated-indicator-navbar"
 import { CalendarDays, Users, TrendingUp, Award, Mail, Phone, MapPin, Tractor, Wheat, Leaf, Heart } from "lucide-react"
 
 export default function ChiSiamo() {
