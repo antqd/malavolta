@@ -2,6 +2,8 @@
 
 import { Menu, X, Truck } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -22,6 +24,7 @@ const NAV_LOGO = {
   alt: "Malavolta logo",
   title: "Malavolta",
 };
+
 const NAV_ITEMS = [
   { name: "Chi Siamo", link: "/chi-siamo" },
   { name: "Trattori", link: "/prodotti" },
@@ -33,34 +36,44 @@ const NAV_ITEMS = [
 ];
 
 const AnimatedIndicatorNavbar = () => {
-  const [activeItem, setActiveItem] = useState(NAV_ITEMS[0].name);
+  const pathname = usePathname();
+  const initial =
+    NAV_ITEMS.find((i) => i.link === pathname)?.name ?? NAV_ITEMS[0].name;
+
+  const [activeItem, setActiveItem] = useState(initial);
 
   const indicatorRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLUListElement>(null);
+
+  // aggiorna activeItem quando cambia route
+  useEffect(() => {
+    const hit = NAV_ITEMS.find((i) => i.link === pathname);
+    if (hit) setActiveItem(hit.name);
+  }, [pathname]);
 
   useEffect(() => {
     const updateIndicator = () => {
       const activeEl = document.querySelector(
         `[data-nav-item="${activeItem}"]`
-      ) as HTMLElement;
+      ) as HTMLElement | null;
 
       if (activeEl && indicatorRef.current && menuRef.current) {
         const menuRect = menuRef.current.getBoundingClientRect();
         const itemRect = activeEl.getBoundingClientRect();
-
         indicatorRef.current.style.width = `${itemRect.width}px`;
         indicatorRef.current.style.left = `${itemRect.left - menuRect.left}px`;
       }
     };
+
+    // prima misura + al resize
     updateIndicator();
     window.addEventListener("resize", updateIndicator);
-
     return () => window.removeEventListener("resize", updateIndicator);
   }, [activeItem]);
 
   return (
     <section className="py-4 bg-white">
-      <nav className="container flex items-center justify-between mx-auto">
+      <nav className="container mx-auto flex items-center justify-between">
         {/* Left WordMark */}
         <a href={NAV_LOGO.url} className="flex items-center gap-2">
           <Truck className="h-8 w-8 text-primary" />
@@ -69,15 +82,18 @@ const AnimatedIndicatorNavbar = () => {
           </span>
         </a>
 
+        {/* Desktop */}
         <NavigationMenu className="hidden lg:block">
           <NavigationMenuList
             ref={menuRef}
-            className="rounded-4xl flex items-center gap-6 px-8 py-3"
+            className="relative rounded-4xl flex items-center gap-6 px-8 py-3"
           >
             {NAV_ITEMS.map((item) => (
-              <React.Fragment key={item.name}>
-                <NavigationMenuItem>
-                  <NavigationMenuLink
+              <NavigationMenuItem key={item.name}>
+                {/* Link reale: NavigationMenuLink asChild => passa className/props al child */}
+                <NavigationMenuLink asChild>
+                  <Link
+                    href={item.link}
                     data-nav-item={item.name}
                     onClick={() => setActiveItem(item.name)}
                     className={`relative cursor-pointer text-sm font-medium hover:bg-transparent ${
@@ -87,21 +103,22 @@ const AnimatedIndicatorNavbar = () => {
                     }`}
                   >
                     {item.name}
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-              </React.Fragment>
+                  </Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
             ))}
+
             {/* Active Indicator */}
             <div
               ref={indicatorRef}
-              className="absolute bottom-2 flex h-1 items-center justify-center px-2 transition-all duration-300"
+              className="pointer-events-none absolute bottom-2 h-1 transition-all duration-300"
             >
               <div className="bg-secondary h-0.5 w-full rounded-t-none transition-all duration-300" />
             </div>
           </NavigationMenuList>
         </NavigationMenu>
 
-        {/* Mobile Menu Popover */}
+        {/* Mobile */}
         <MobileNav activeItem={activeItem} setActiveItem={setActiveItem} />
       </nav>
     </section>
@@ -141,8 +158,10 @@ const MobileNav = ({
   return (
     <div className="block lg:hidden">
       <Popover open={isOpen} onOpenChange={setIsOpen}>
-        <PopoverTrigger>
-          <AnimatedHamburger isOpen={isOpen} />
+        <PopoverTrigger asChild>
+          <button aria-label="Apri menu">
+            <AnimatedHamburger isOpen={isOpen} />
+          </button>
         </PopoverTrigger>
 
         <PopoverContent
@@ -150,11 +169,14 @@ const MobileNav = ({
           className="relative -left-4 -top-4 block w-screen max-w-md overflow-hidden rounded-xl p-0 lg:hidden bg-white"
         >
           <ul className="bg-white text-primary w-full py-4">
-            {NAV_ITEMS.map((navItem, idx) => (
-              <li key={idx}>
-                <a
+            {NAV_ITEMS.map((navItem) => (
+              <li key={navItem.name}>
+                <Link
                   href={navItem.link}
-                  onClick={() => setActiveItem(navItem.name)}
+                  onClick={() => {
+                    setActiveItem(navItem.name);
+                    setIsOpen(false); // chiude il popover dopo la navigazione
+                  }}
                   className={`text-primary flex items-center border-l-[3px] px-6 py-4 text-sm font-medium transition-all duration-75 ${
                     activeItem === navItem.name
                       ? "border-secondary text-primary"
@@ -162,7 +184,7 @@ const MobileNav = ({
                   }`}
                 >
                   {navItem.name}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

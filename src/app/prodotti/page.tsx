@@ -1,192 +1,279 @@
+"use client";
+
+import { useRef } from "react";
+import Link from "next/link";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 import { AnimatedIndicatorNavbar } from "@/components/navbars/animated-indicator-navbar";
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { 
-  Wheat, 
-  Sprout, 
-  Shield, 
-  Wrench, 
-  Leaf, 
-  Award, 
-  Search, 
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Wrench,
+  Shield,
+  Truck,
+  Award,
+  Search,
   Filter,
   ShoppingCart,
   Phone,
-  Mail,
   CheckCircle,
   Star,
-  Truck,
   Clock,
-  Users
-} from 'lucide-react'
+  Users,
+} from "lucide-react";
 
-interface Product {
-  id: string
-  name: string
-  category: string
-  description: string
-  benefits: string[]
-  specifications: string[]
-  certification: string
-  image: string
-  featured: boolean
-}
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-const products: Product[] = [
-  {
-    id: '1',
-    name: 'Sementi Grano Duro Senatore Cappelli',
-    category: 'sementi',
-    description: 'Varietà antica di grano duro di alta qualità, perfetta per terreni del Sud Italia',
-    benefits: ['Resistente alla siccità', 'Alto contenuto proteico', 'Sapore tradizionale'],
-    specifications: ['Peso ettolitrico: 78-80 kg/hl', 'Contenuto proteico: 14-16%', 'Ciclo: medio-tardivo'],
-    certification: 'Biologico Certificato',
-    image: '/api/placeholder/400/300',
-    featured: true
-  },
-  {
-    id: '2',
-    name: 'Fertilizzante Organico NPK 4-3-3',
-    category: 'fertilizzanti',
-    description: 'Fertilizzante organico completo derivato da letame bovino compostato',
-    benefits: ['Migliora la struttura del suolo', 'Rilascio graduale', 'Completamente naturale'],
-    specifications: ['Azoto organico: 4%', 'Fosforo: 3%', 'Potassio: 3%', 'Sostanza organica: 65%'],
-    certification: 'Consentito in Agricoltura Biologica',
-    image: '/api/placeholder/400/300',
-    featured: true
-  },
-  {
-    id: '3',
-    name: 'Antiparassitario Naturale Olio di Neem',
-    category: 'antiparassitari',
-    description: 'Insetticida biologico estratto dai semi di Azadirachta indica',
-    benefits: ['Non tossico per gli insetti utili', 'Azione sistemica', 'Biodegradabile'],
-    specifications: ['Concentrazione: 1%', 'Principio attivo: Azadiractina', 'pH: 6.5-7.5'],
-    certification: 'Registrato per Agricoltura Biologica',
-    image: '/api/placeholder/400/300',
-    featured: true
-  },
-  {
-    id: '4',
-    name: 'Trattore Compatto 45 CV 4WD',
-    category: 'attrezzature',
-    description: 'Trattore compatto ideale per aziende di piccole e medie dimensioni',
-    benefits: ['Consumi ridotti', 'Manovrabilità eccellente', 'Comfort di guida'],
-    specifications: ['Potenza: 45 CV', 'Trazione: 4WD', 'Sollevatore: 1200 kg'],
-    certification: 'Omologazione EU Stage V',
-    image: '/api/placeholder/400/300',
-    featured: false
-  },
-  {
-    id: '5',
-    name: 'Sementi Pomodoro San Marzano DOP',
-    category: 'sementi',
-    description: 'Varietà tradizionale campana, ideale per conserve e pelati di qualità',
-    benefits: ['Polpa soda e compatta', 'Pochi semi', 'Gusto intenso'],
-    specifications: ['Ciclo: 120-130 giorni', 'Peso medio: 80-100g', 'Forma: allungata'],
-    certification: 'DOP Certificato',
-    image: '/api/placeholder/400/300',
-    featured: true
-  },
-  {
-    id: '6',
-    name: 'Concime Liquido Microelementi',
-    category: 'fertilizzanti',
-    description: 'Concime fogliare ricco di microelementi chelati per correzioni nutrizionali',
-    benefits: ['Assorbimento rapido', 'Previene carenze', 'Compatibile con fitofarmaci'],
-    specifications: ['Ferro: 3%', 'Manganese: 2%', 'Zinco: 1%', 'Rame: 0.5%'],
-    certification: 'Consentito in Agricoltura Biologica',
-    image: '/api/placeholder/400/300',
-    featured: false
-  }
-]
+type Tractor = {
+  id: string;
+  name: string;
+  category: "compatti" | "utility" | "vigneto" | "cingolati" | "elettrici";
+  description: string;
+  powerHp: number;
+  drive: "2WD" | "4WD" | "cingolato";
+  features: string[];
+  cert?: string;
+  image?: string;
+  featured: boolean;
+};
 
-const categories = [
+const tractors: Tractor[] = [
   {
-    id: 'sementi',
-    name: 'Sementi',
-    description: 'Cereali, ortaggi e foraggere',
-    icon: Wheat,
-    subcategories: ['Cereali', 'Ortaggi', 'Foraggere', 'Leguminose']
+    id: "t1",
+    name: "Compatto 45 CV 4WD",
+    category: "compatti",
+    description:
+      "Trattore compatto per aziende di piccole/medie dimensioni, ottimo per maneggevolezza e consumi.",
+    powerHp: 45,
+    drive: "4WD",
+    features: ["Raggio di sterzo ridotto", "Sollevatore 1200 kg", "Cabina comfort"],
+    cert: "EU Stage V",
+    image: "/api/placeholder/400/300",
+    featured: true,
   },
   {
-    id: 'fertilizzanti',
-    name: 'Fertilizzanti',
-    description: 'Organici e minerali',
-    icon: Sprout,
-    subcategories: ['Organici', 'Minerali', 'Fogliari', 'Ammendanti']
+    id: "t2",
+    name: "Utility 90 CV",
+    category: "utility",
+    description:
+      "Versatile per campo aperto e trasporto. Rapporto peso/potenza bilanciato.",
+    powerHp: 90,
+    drive: "4WD",
+    features: ["PTO 540/540E", "Sollevatore 4000 kg", "Trasmissione 24+24"],
+    cert: "EU Stage V",
+    image: "/api/placeholder/400/300",
+    featured: true,
   },
   {
-    id: 'antiparassitari',
-    name: 'Antiparassitari',
-    description: 'Fitofarmaci e biologici',
-    icon: Shield,
-    subcategories: ['Insetticidi', 'Fungicidi', 'Erbicidi', 'Biologici']
+    id: "t3",
+    name: "Vigneto/Frutteto 75 CV Stretta",
+    category: "vigneto",
+    description:
+      "Profilo stretto per filari e manovre in spazi ridotti, con protezione colture.",
+    powerHp: 75,
+    drive: "4WD",
+    features: ["Larghezza < 1.4 m", "Cabina categoria 4 (opz.)", "Idraulica load-sensing"],
+    cert: "EU Stage V",
+    image: "/api/placeholder/400/300",
+    featured: true,
   },
   {
-    id: 'attrezzature',
-    name: 'Attrezzature',
-    description: 'Macchinari e strumenti',
-    icon: Wrench,
-    subcategories: ['Trattori', 'Attrezzi', 'Irrigazione', 'Raccolta']
+    id: "t4",
+    name: "Cingolato 105 CV",
+    category: "cingolati",
+    description:
+      "Massima trazione su terreni declivi o bagnati. Stabilità e spinta costante.",
+    powerHp: 105,
+    drive: "cingolato",
+    features: ["Cingoli gomma 450 mm", "Baricentro basso", "PTO sincronizzata"],
+    cert: "EU Stage V",
+    image: "/api/placeholder/400/300",
+    featured: false,
   },
   {
-    id: 'biologici',
-    name: 'Prodotti Biologici',
-    description: 'Certificati per agricoltura bio',
-    icon: Leaf,
-    subcategories: ['Sementi Bio', 'Fertilizzanti Bio', 'Antiparassitari Bio']
-  }
-]
+    id: "t5",
+    name: "Elettrico 50 CV eq.",
+    category: "elettrici",
+    description:
+      "Zero emissioni locali, coppia immediata. Ideale per serre e aree sensibili.",
+    powerHp: 50,
+    drive: "4WD",
+    features: ["Batteria 60 kWh", "Ricarica AC/DC", "Rumorosità ridotta"],
+    cert: "CE",
+    image: "/api/placeholder/400/300",
+    featured: true,
+  },
+  {
+    id: "t6",
+    name: "Utility 120 CV",
+    category: "utility",
+    description:
+      "Per attrezzi esigenti e lavorazioni gravose. Efficienza e affidabilità.",
+    powerHp: 120,
+    drive: "4WD",
+    features: ["Sollevatore 6500 kg", "Isobus ready", "Sospensioni anteriori"],
+    cert: "EU Stage V",
+    image: "/api/placeholder/400/300",
+    featured: false,
+  },
+  {
+    id: "t6",
+    name: "Utility 120 CV",
+    category: "utility",
+    description:
+      "Per attrezzi esigenti e lavorazioni gravose. Efficienza e affidabilità.",
+    powerHp: 120,
+    drive: "4WD",
+    features: ["Sollevatore 6500 kg", "Isobus ready", "Sospensioni anteriori"],
+    cert: "EU Stage V",
+    image: "/api/placeholder/400/300",
+    featured: false,
+  },
+  {
+    id: "t6",
+    name: "Utility 120 CV",
+    category: "utility",
+    description:
+      "Per attrezzi esigenti e lavorazioni gravose. Efficienza e affidabilità.",
+    powerHp: 120,
+    drive: "4WD",
+    features: ["Sollevatore 6500 kg", "Isobus ready", "Sospensioni anteriori"],
+    cert: "EU Stage V",
+    image: "/api/placeholder/400/300",
+    featured: false,
+  },
+  {
+    id: "t6",
+    name: "Utility 120 CV",
+    category: "utility",
+    description:
+      "Per attrezzi esigenti e lavorazioni gravose. Efficienza e affidabilità.",
+    powerHp: 120,
+    drive: "4WD",
+    features: ["Sollevatore 6500 kg", "Isobus ready", "Sospensioni anteriori"],
+    cert: "EU Stage V",
+    image: "/api/placeholder/400/300",
+    featured: false,
+  },
+];
 
 const stats = [
-  { label: 'Prodotti in Catalogo', value: '500+', icon: Award },
-  { label: 'Anni di Esperienza', value: '25', icon: Clock },
-  { label: 'Agricoltori Serviti', value: '1000+', icon: Users },
-  { label: 'Consegne Annuali', value: '5000+', icon: Truck }
-]
+  { label: "Trattori a Catalogo", value: "150+", icon: Award },
+  { label: "Anni di Esperienza", value: "25", icon: Clock },
+  { label: "Clienti Serviti", value: "1000+", icon: Users },
+  { label: "Consegne Annue", value: "2000+", icon: Truck },
+];
 
-export default function ProdottiPage() {
+const tractorTabs: { id: Tractor["category"] | "tutti"; label: string; emoji: string }[] = [
+  { id: "tutti", label: "Tutti", emoji: "🚜" },
+  { id: "compatti", label: "Compatti", emoji: "📦" },
+  { id: "utility", label: "Utility", emoji: "🧰" },
+  { id: "vigneto", label: "Vigneto", emoji: "🍇" },
+  { id: "cingolati", label: "Cingolati", emoji: "🛤️" },
+  { id: "elettrici", label: "Elettrici", emoji: "⚡" },
+];
+
+export default function TrattoriPage() {
+  // scope per @gsap/react (selettori stringa safe tipati)
+  const pageRef = useRef<HTMLDivElement>(null);
+
+  // Animazioni GSAP (niente NodeList|undefined)
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
+
+      // HERO: titolo / testo / CTA
+      tl.from(".hero-animate", {
+        opacity: 0,
+        y: 24,
+        duration: 0.6,
+        stagger: 0.12,
+      });
+
+      // STATS: fade-in su scroll
+      gsap.from(".stat-item", {
+        opacity: 0,
+        y: 16,
+        duration: 0.6,
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: ".stats-section",
+          start: "top 80%",
+        },
+      });
+
+      // CARDS: reveal per-card su scroll
+      gsap.utils.toArray<HTMLElement>(".tractor-card").forEach((el, i) => {
+        gsap.from(el, {
+          opacity: 0,
+          y: 24,
+          duration: 0.5,
+          delay: Math.min(i * 0.05, 0.4),
+          scrollTrigger: {
+            trigger: el,
+            start: "top 85%",
+          },
+        });
+      });
+    },
+    { scope: pageRef } // cleanup automatico
+  );
+
   return (
-    <div className="min-h-screen bg-background">
+    <div ref={pageRef} className="min-h-screen bg-background">
       <AnimatedIndicatorNavbar />
-      
-      {/* Hero Section */}
+
+      {/* HERO */}
       <section className="relative bg-gradient-to-br from-primary to-secondary text-white py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-black/20"></div>
+        <div className="absolute inset-0 bg-black/20" />
         <div className="container relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              I Nostri Prodotti
+            <h1 className="hero-animate text-5xl md:text-6xl font-bold mb-6">
+              Trattori & Macchine Agricole
             </h1>
-            <p className="text-xl md:text-2xl mb-8 text-white/90">
-              Soluzioni complete per l'agricoltura moderna. Qualità garantita, 
-              risultati eccellenti per ogni esigenza agricola.
+            <p className="hero-animate text-xl md:text-2xl mb-8 text-white/90">
+              Compatti, utility, cingolati ed elettrici: prestazioni e affidabilità per ogni esigenza.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" variant="secondary" className="text-lg px-8">
-                <ShoppingCart className="mr-2 h-5 w-5" />
-                Sfoglia Catalogo
-              </Button>
-              <Button size="lg" variant="outline" className="bg-white/10 border-white text-white hover:bg-white hover:text-primary text-lg px-8">
-                <Phone className="mr-2 h-5 w-5" />
-                Consulenza Gratuita
-              </Button>
+            <div className="hero-animate flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/ecommerce">
+                <Button size="lg" variant="secondary" className="text-lg px-8">
+                  <ShoppingCart className="mr-2 h-5 w-5" />
+                  Vedi Modelli Disponibili
+                </Button>
+              </Link>
+              <Link href="/contatti">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="bg-white/10 border-white text-white hover:bg-white hover:text-primary text-lg px-8"
+                >
+                  <Phone className="mr-2 h-5 w-5" />
+                  Consulenza Gratuita
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-16 bg-muted/50">
+      {/* STATS */}
+      <section className="stats-section py-16 bg-muted/50">
         <div className="container">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
+            {stats.map((stat) => (
+              <div key={stat.label} className="stat-item text-center">
                 <div className="inline-flex items-center justify-center w-12 h-12 bg-primary text-white rounded-lg mb-3">
                   <stat.icon className="h-6 w-6" />
                 </div>
@@ -198,17 +285,14 @@ export default function ProdottiPage() {
         </div>
       </section>
 
-      {/* Search and Filter Section */}
+      {/* SEARCH/FILTER */}
       <section className="py-12 bg-white border-b">
         <div className="container">
           <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
             <div className="flex-1 max-w-md">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-                <Input 
-                  placeholder="Cerca prodotti..." 
-                  className="pl-10"
-                />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground h-4 w-4" />
+                <Input placeholder="Cerca trattori (es. 90 CV, vigneto…)" className="pl-10" />
               </div>
             </div>
             <div className="flex gap-2 items-center">
@@ -216,329 +300,179 @@ export default function ProdottiPage() {
                 <Filter className="mr-2 h-4 w-4" />
                 Filtri
               </Button>
-              <Badge variant="secondary">Tutti i prodotti</Badge>
+              <Badge variant="secondary">Tutti i trattori</Badge>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Product Categories */}
-      <section className="py-16">
+      {/* CATEGORIE */}
+      <section className="py-12">
         <div className="container">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Categorie Prodotti</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Esplora la nostra gamma completa di prodotti per ogni fase del ciclo agricolo
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-            {categories.map((category) => (
-              <Card key={category.id} className="group hover:shadow-lg transition-shadow cursor-pointer">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+            {[
+              { id: "compatti", label: "Compatti", desc: "Agili e parsimoniosi" },
+              { id: "utility", label: "Utility", desc: "Versatilità in campo" },
+              { id: "vigneto", label: "Vigneto/Frutteto", desc: "Stretti per filari" },
+              { id: "cingolati", label: "Cingolati", desc: "Trazione e stabilità" },
+              { id: "elettrici", label: "Elettrici", desc: "Zero emissioni" },
+            ].map((c) => (
+              <Card key={c.id} className="group hover:shadow-lg transition-shadow">
                 <CardHeader className="text-center pb-3">
                   <div className="inline-flex items-center justify-center w-16 h-16 bg-primary/10 text-primary rounded-lg mb-4 group-hover:bg-primary group-hover:text-white transition-colors">
-                    <category.icon className="h-8 w-8" />
+                    <Truck className="h-8 w-8" />
                   </div>
-                  <CardTitle className="text-lg">{category.name}</CardTitle>
-                  <CardDescription className="text-sm">{category.description}</CardDescription>
+                  <CardTitle className="text-lg">{c.label}</CardTitle>
+                  <CardDescription className="text-sm">{c.desc}</CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-1">
-                    {category.subcategories.map((sub, index) => (
-                      <div key={index} className="text-xs text-muted-foreground flex items-center">
-                        <CheckCircle className="h-3 w-3 mr-2 text-accent" />
-                        {sub}
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
               </Card>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Featured Products */}
+      {/* PRODOTTI IN EVIDENZA */}
       <section className="py-16 bg-muted/50">
         <div className="container">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Prodotti in Evidenza</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              I nostri prodotti più apprezzati, selezionati per qualità e risultati garantiti
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold mb-2">Modelli in Evidenza</h2>
+            <p className="text-muted-foreground">
+              Selezionati per prestazioni, qualità costruttiva e rapporto qualità/prezzo
             </p>
           </div>
 
           <Tabs defaultValue="tutti" className="w-full">
-            <TabsList className="grid w-full max-w-md mx-auto grid-cols-4 mb-8">
-              <TabsTrigger value="tutti">Tutti</TabsTrigger>
-              <TabsTrigger value="sementi">Sementi</TabsTrigger>
-              <TabsTrigger value="fertilizzanti">Fertilizzanti</TabsTrigger>
-              <TabsTrigger value="bio">Bio</TabsTrigger>
+            <TabsList className="grid w-full max-w-3xl mx-auto grid-cols-6 mb-8">
+              {[
+                { id: "tutti", label: "Tutti", emoji: "🚜" },
+                { id: "compatti", label: "Compatti", emoji: "📦" },
+                { id: "utility", label: "Utility", emoji: "🧰" },
+                { id: "vigneto", label: "Vigneto", emoji: "🍇" },
+                { id: "cingolati", label: "Cingolati", emoji: "🛤️" },
+                { id: "elettrici", label: "Elettrici", emoji: "⚡" },
+              ].map((t) => (
+                <TabsTrigger key={t.id} value={t.id}>
+                  {t.emoji} {t.label}
+                </TabsTrigger>
+              ))}
             </TabsList>
 
-            <TabsContent value="tutti">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {products.filter(p => p.featured).map((product) => (
-                  <Card key={product.id} className="group hover:shadow-lg transition-all duration-300">
-                    <div className="aspect-video bg-muted rounded-t-lg overflow-hidden">
-                      <div className="w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
-                        <div className="text-6xl text-primary/30">
-                          {product.category === 'sementi' && '🌾'}
-                          {product.category === 'fertilizzanti' && '🌱'}
-                          {product.category === 'antiparassitari' && '🛡️'}
-                          {product.category === 'attrezzature' && '🚜'}
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <CardHeader>
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1">
-                          <Badge variant="secondary" className="mb-2 text-xs">
-                            {categories.find(c => c.id === product.category)?.name}
-                          </Badge>
-                          <CardTitle className="text-xl group-hover:text-primary transition-colors">
-                            {product.name}
-                          </CardTitle>
-                        </div>
-                        <Badge variant="outline" className="text-xs">
-                          <Award className="h-3 w-3 mr-1" />
-                          {product.certification}
-                        </Badge>
-                      </div>
-                      <CardDescription className="line-clamp-2">
-                        {product.description}
-                      </CardDescription>
-                    </CardHeader>
+            {(["tutti", "compatti", "utility", "vigneto", "cingolati", "elettrici"] as const).map(
+              (tabId) => {
+                const list =
+                  tabId === "tutti"
+                    ? tractors.filter((m) => m.featured)
+                    : tractors.filter((m) => m.category === tabId && m.featured);
 
-                    <CardContent>
-                      <div className="space-y-4">
-                        <div>
-                          <h4 className="font-medium mb-2 text-sm">Benefici Principali:</h4>
-                          <div className="space-y-1">
-                            {product.benefits.slice(0, 2).map((benefit, index) => (
-                              <div key={index} className="flex items-center text-sm text-muted-foreground">
-                                <CheckCircle className="h-3 w-3 mr-2 text-accent flex-shrink-0" />
-                                {benefit}
+                return (
+                  <TabsContent key={tabId} value={tabId}>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {list.map((tractor) => (
+                        <Card
+                          key={tractor.id}
+                          className="tractor-card group hover:shadow-lg transition-all duration-300"
+                        >
+                          <div className="aspect-video bg-muted rounded-t-lg overflow-hidden">
+                            <div className="w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
+                              <div className="text-6xl text-primary/30">
+                                {tractor.category === "compatti" && "📦"}
+                                {tractor.category === "utility" && "🧰"}
+                                {tractor.category === "vigneto" && "🍇"}
+                                {tractor.category === "cingolati" && "🛤️"}
+                                {tractor.category === "elettrici" && "⚡"}
                               </div>
-                            ))}
+                            </div>
                           </div>
-                        </div>
 
-                        <Separator />
-
-                        <div className="flex gap-2">
-                          <Button className="flex-1" size="sm">
-                            <ShoppingCart className="h-4 w-4 mr-2" />
-                            Aggiungi al Carrello
-                          </Button>
-                          <Button variant="outline" size="sm">
-                            Dettagli
-                          </Button>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </TabsContent>
-
-            <TabsContent value="sementi">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {products.filter(p => p.category === 'sementi').map((product) => (
-                  <Card key={product.id} className="group hover:shadow-lg transition-all duration-300">
-                    <div className="aspect-video bg-muted rounded-t-lg overflow-hidden">
-                      <div className="w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
-                        <div className="text-6xl text-primary/30">🌾</div>
-                      </div>
-                    </div>
-                    
-                    <CardHeader>
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1">
-                          <Badge variant="secondary" className="mb-2 text-xs">Sementi</Badge>
-                          <CardTitle className="text-xl group-hover:text-primary transition-colors">
-                            {product.name}
-                          </CardTitle>
-                        </div>
-                        <Badge variant="outline" className="text-xs">
-                          <Award className="h-3 w-3 mr-1" />
-                          {product.certification}
-                        </Badge>
-                      </div>
-                      <CardDescription className="line-clamp-2">
-                        {product.description}
-                      </CardDescription>
-                    </CardHeader>
-
-                    <CardContent>
-                      <div className="space-y-4">
-                        <div>
-                          <h4 className="font-medium mb-2 text-sm">Benefici Principali:</h4>
-                          <div className="space-y-1">
-                            {product.benefits.slice(0, 2).map((benefit, index) => (
-                              <div key={index} className="flex items-center text-sm text-muted-foreground">
-                                <CheckCircle className="h-3 w-3 mr-2 text-accent flex-shrink-0" />
-                                {benefit}
+                          <CardHeader>
+                            <div className="flex items-start justify-between">
+                              <div className="flex-1">
+                                <Badge variant="secondary" className="mb-2 text-xs">
+                                  {tabId === "tutti"
+                                    ? tractor.category.toUpperCase()
+                                    : tLabel(tabId)}
+                                </Badge>
+                                <CardTitle className="text-xl group-hover:text-primary transition-colors">
+                                  {tractor.name}
+                                </CardTitle>
                               </div>
-                            ))}
-                          </div>
-                        </div>
+                              <Badge variant="outline" className="text-xs">
+                                <Award className="h-3 w-3 mr-1" />
+                                {tractor.cert ?? "Certificato"}
+                              </Badge>
+                            </div>
+                            <CardDescription className="line-clamp-2">
+                              {tractor.description}
+                            </CardDescription>
+                          </CardHeader>
 
-                        <Separator />
-
-                        <div className="flex gap-2">
-                          <Button className="flex-1" size="sm">
-                            <ShoppingCart className="h-4 w-4 mr-2" />
-                            Aggiungi al Carrello
-                          </Button>
-                          <Button variant="outline" size="sm">
-                            Dettagli
-                          </Button>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </TabsContent>
-
-            <TabsContent value="fertilizzanti">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {products.filter(p => p.category === 'fertilizzanti').map((product) => (
-                  <Card key={product.id} className="group hover:shadow-lg transition-all duration-300">
-                    <div className="aspect-video bg-muted rounded-t-lg overflow-hidden">
-                      <div className="w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
-                        <div className="text-6xl text-primary/30">🌱</div>
-                      </div>
-                    </div>
-                    
-                    <CardHeader>
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1">
-                          <Badge variant="secondary" className="mb-2 text-xs">Fertilizzanti</Badge>
-                          <CardTitle className="text-xl group-hover:text-primary transition-colors">
-                            {product.name}
-                          </CardTitle>
-                        </div>
-                        <Badge variant="outline" className="text-xs">
-                          <Award className="h-3 w-3 mr-1" />
-                          {product.certification}
-                        </Badge>
-                      </div>
-                      <CardDescription className="line-clamp-2">
-                        {product.description}
-                      </CardDescription>
-                    </CardHeader>
-
-                    <CardContent>
-                      <div className="space-y-4">
-                        <div>
-                          <h4 className="font-medium mb-2 text-sm">Benefici Principali:</h4>
-                          <div className="space-y-1">
-                            {product.benefits.slice(0, 2).map((benefit, index) => (
-                              <div key={index} className="flex items-center text-sm text-muted-foreground">
-                                <CheckCircle className="h-3 w-3 mr-2 text-accent flex-shrink-0" />
-                                {benefit}
+                          <CardContent>
+                            <div className="space-y-4">
+                              <div className="grid grid-cols-3 gap-2 text-sm">
+                                <div className="flex items-center">
+                                  <Shield className="h-3.5 w-3.5 mr-2 text-accent" />
+                                  {tractor.powerHp} CV
+                                </div>
+                                <div className="flex items-center">
+                                  <Wrench className="h-3.5 w-3.5 mr-2 text-accent" />
+                                  {tractor.drive}
+                                </div>
+                                <div className="flex items-center">
+                                  <Star className="h-3.5 w-3.5 mr-2 text-accent" />
+                                  Premium
+                                </div>
                               </div>
-                            ))}
-                          </div>
-                        </div>
 
-                        <Separator />
-
-                        <div className="flex gap-2">
-                          <Button className="flex-1" size="sm">
-                            <ShoppingCart className="h-4 w-4 mr-2" />
-                            Aggiungi al Carrello
-                          </Button>
-                          <Button variant="outline" size="sm">
-                            Dettagli
-                          </Button>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </TabsContent>
-
-            <TabsContent value="bio">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {products.filter(p => p.certification.includes('Biologic')).map((product) => (
-                  <Card key={product.id} className="group hover:shadow-lg transition-all duration-300">
-                    <div className="aspect-video bg-muted rounded-t-lg overflow-hidden">
-                      <div className="w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
-                        <div className="text-6xl text-primary/30">
-                          {product.category === 'sementi' && '🌾'}
-                          {product.category === 'fertilizzanti' && '🌱'}
-                          {product.category === 'antiparassitari' && '🛡️'}
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <CardHeader>
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1">
-                          <Badge variant="secondary" className="mb-2 text-xs">
-                            {categories.find(c => c.id === product.category)?.name}
-                          </Badge>
-                          <CardTitle className="text-xl group-hover:text-primary transition-colors">
-                            {product.name}
-                          </CardTitle>
-                        </div>
-                        <Badge variant="outline" className="text-xs bg-accent/10 text-accent border-accent">
-                          <Leaf className="h-3 w-3 mr-1" />
-                          Biologico
-                        </Badge>
-                      </div>
-                      <CardDescription className="line-clamp-2">
-                        {product.description}
-                      </CardDescription>
-                    </CardHeader>
-
-                    <CardContent>
-                      <div className="space-y-4">
-                        <div>
-                          <h4 className="font-medium mb-2 text-sm">Benefici Principali:</h4>
-                          <div className="space-y-1">
-                            {product.benefits.slice(0, 2).map((benefit, index) => (
-                              <div key={index} className="flex items-center text-sm text-muted-foreground">
-                                <CheckCircle className="h-3 w-3 mr-2 text-accent flex-shrink-0" />
-                                {benefit}
+                              <div>
+                                <h4 className="font-medium mb-2 text-sm">Punti di forza:</h4>
+                                <div className="space-y-1">
+                                  {tractor.features.slice(0, 2).map((f, i) => (
+                                    <div
+                                      key={i}
+                                      className="flex items-center text-sm text-muted-foreground"
+                                    >
+                                      <CheckCircle className="h-3 w-3 mr-2 text-accent flex-shrink-0" />
+                                      {f}
+                                    </div>
+                                  ))}
+                                </div>
                               </div>
-                            ))}
-                          </div>
-                        </div>
 
-                        <Separator />
+                              <Separator />
 
-                        <div className="flex gap-2">
-                          <Button className="flex-1" size="sm">
-                            <ShoppingCart className="h-4 w-4 mr-2" />
-                            Aggiungi al Carrello
-                          </Button>
-                          <Button variant="outline" size="sm">
-                            Dettagli
-                          </Button>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </TabsContent>
+                              <div className="flex gap-2">
+                                <Link href="/ecommerce">
+                                  <Button className="flex-1" size="sm">
+                                    <ShoppingCart className="h-4 w-4 mr-2" />
+                                    Aggiungi al Carrello
+                                  </Button>
+                                </Link>
+                                <Link href={`/prodotti/${tractor.id}`}>
+                                  <Button variant="outline" size="sm">
+                                    Dettagli
+                                  </Button>
+                                </Link>
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </div>
+                  </TabsContent>
+                );
+              }
+            )}
           </Tabs>
         </div>
       </section>
 
-      {/* Quality Certifications */}
+      {/* QUALITÀ & SERVIZI */}
       <section className="py-16 bg-white">
         <div className="container">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-6">Qualità e Certificazioni</h2>
+            <h2 className="text-3xl font-bold mb-6">Qualità & Servizi</h2>
             <p className="text-lg text-muted-foreground mb-12">
-              Tutti i nostri prodotti rispettano i più alti standard di qualità e sicurezza
+              Supporto tecnico, ricambi e finanziamenti per mantenere al massimo l’operatività.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -546,29 +480,29 @@ export default function ProdottiPage() {
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-primary text-white rounded-full mb-4">
                   <Award className="h-8 w-8" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2">Certificazioni EU</h3>
+                <h3 className="text-xl font-semibold mb-2">Certificazioni</h3>
                 <p className="text-muted-foreground">
-                  Tutti i prodotti sono conformi alle normative europee per l'agricoltura
-                </p>
-              </div>
-
-              <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-accent text-white rounded-full mb-4">
-                  <Leaf className="h-8 w-8" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2">Biologico Certificato</h3>
-                <p className="text-muted-foreground">
-                  Ampia gamma di prodotti biologici certificati per agricoltura sostenibile
+                  Modelli conformi agli standard EU Stage V/CE.
                 </p>
               </div>
 
               <div className="text-center">
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-secondary text-white rounded-full mb-4">
-                  <Star className="h-8 w-8" />
+                  <Wrench className="h-8 w-8" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2">Qualità Premium</h3>
+                <h3 className="text-xl font-semibold mb-2">Assistenza</h3>
                 <p className="text-muted-foreground">
-                  Selezioniamo solo fornitori di eccellenza per garantire risultati superiori
+                  Officina e manutenzione programmata con ricambi originali.
+                </p>
+              </div>
+
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-accent text-white rounded-full mb-4">
+                  <Shield className="h-8 w-8" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">Garanzie</h3>
+                <p className="text-muted-foreground">
+                  Estensioni di garanzia e coperture assicurative dedicate.
                 </p>
               </div>
             </div>
@@ -576,52 +510,54 @@ export default function ProdottiPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA */}
       <section className="py-16 bg-gradient-to-br from-primary to-secondary text-white">
         <div className="container">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-4">Pronto per Migliorare la Tua Produzione?</h2>
+            <h2 className="text-3xl font-bold mb-4">Pronto a Scegliere il Tuo Trattore?</h2>
             <p className="text-xl mb-8 text-white/90">
-              Contattaci per una consulenza personalizzata e scopri i prodotti più adatti alle tue esigenze
+              Contattaci per un preventivo personalizzato o prova un modello in demo.
             </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" variant="secondary" className="text-lg px-8">
-                <ShoppingCart className="mr-2 h-5 w-5" />
-                Visita E-commerce
-              </Button>
-              <Button size="lg" variant="outline" className="bg-white/10 border-white text-white hover:bg-white hover:text-primary text-lg px-8">
-                <Phone className="mr-2 h-5 w-5" />
-                Richiedi Preventivo
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Newsletter Footer */}
-      <section className="py-12 bg-muted">
-        <div className="container">
-          <div className="max-w-2xl mx-auto text-center">
-            <h3 className="text-2xl font-bold mb-4">Resta Aggiornato</h3>
-            <p className="text-muted-foreground mb-6">
-              Iscriviti alla nostra newsletter per ricevere offerte speciali e consigli agricoli
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-              <Input 
-                type="email" 
-                placeholder="La tua email"
-                className="flex-1"
-              />
-              <Button type="submit">
-                <Mail className="mr-2 h-4 w-4" />
-                Iscriviti
-              </Button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/ecommerce">
+                <Button size="lg" variant="secondary" className="text-lg px-8">
+                  <ShoppingCart className="mr-2 h-5 w-5" />
+                  Vai all’E-commerce
+                </Button>
+              </Link>
+              <Link href="/contatti">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="bg-white/10 border-white text-white hover:bg-white hover:text-primary text-lg px-8"
+                >
+                  <Phone className="mr-2 h-5 w-5" />
+                  Richiedi Preventivo
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
       </section>
     </div>
-  )
+  );
+}
+
+// helper per label tab
+function tLabel(id: string) {
+  switch (id) {
+    case "compatti":
+      return "Compatti";
+    case "utility":
+      return "Utility";
+    case "vigneto":
+      return "Vigneto";
+    case "cingolati":
+      return "Cingolati";
+    case "elettrici":
+      return "Elettrici";
+    default:
+      return id.toUpperCase();
+  }
 }
