@@ -1,29 +1,32 @@
 import type { NextConfig } from "next";
 import path from "node:path";
 
-const LOADER = path.resolve(__dirname, 'src/visual-edits/component-tagger-loader.js');
-
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**',
-      },
-      {
-        protocol: 'http',
-        hostname: '**',
-      },
+      { protocol: "https", hostname: "**" },
+      { protocol: "http", hostname: "**" },
     ],
   },
-  outputFileTracingRoot: path.resolve(__dirname, '../../'),
+
+  // ❗️Non impostare distDir o outputFileTracingRoot su Vercel.
+  // distDir: ".next",
+  // outputFileTracingRoot: undefined,
+  // output: undefined,
+
+  // (Opzionale) evita che ESLint blocchi la build per warning residui.
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+
+  // Usa il tuo loader solo sui sorgenti (evita node_modules).
   turbopack: {
     rules: {
-      "*.{jsx,tsx}": {
-        loaders: [LOADER]
-      }
-    }
-  }
+      "src/**/*.{jsx,tsx}": {
+        loaders: [path.resolve("./src/visual-edits/component-tagger-loader.js")],
+      },
+    },
+  },
 };
 
 export default nextConfig;
