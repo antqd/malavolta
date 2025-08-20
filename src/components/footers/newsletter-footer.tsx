@@ -142,9 +142,7 @@ export default function SiteFooter() {
                 <Button className="h-10 px-5">Iscriviti</Button>
               </form>
 
-              <p className="mt-2 text-xs text-muted-foreground">
-                Zero spam. Potrai disiscriverti quando vuoi.
-              </p>
+
             </div>
 
             {/* Navigazione */}

@@ -37,30 +37,31 @@ const deepBlueText = "text-[#0E3A66]";
    SLIDER "INFINITO" DEI LOGHI (MARQUEE)
    ================================= */
 
-
 export default function RicambiPage() {
   // --- stato quick search ---
   const [codice, setCodice] = useState("");
   const [query, setQuery] = useState("");
 
   const top15Logos = [
-  { src: "/images/loghi/petronas-logo.png", alt: "petronas" },
-  { src: "/images/loghi/claas-logo.png", alt: "CLAAS" },
-  { src: "/images/loghi/logo-new-holland-agriculture.png", alt: "New Holland" },
-  { src: "/images/loghi/logo-case-IH.png", alt: "Case IH" },
-  { src: "/images/loghi/logo-massey-ferguson.png", alt: "Massey Ferguson" },
-  { src: "/images/loghi/toyota-material-handling.png", alt: "toyota" },
-  { src: "/images/loghi/logo-krone.png", alt: "Krone" },
-  { src: "/images/loghi/logo-kuhn.png", alt: "Kuhn" },
-  { src: "/images/loghi/logo-landini.png", alt: "Landini" },
-  { src: "/images/loghi/logo-antonio-carraro.png", alt: "Antonio Carraro" },
-  { src: "/images/loghi/logo-lamborghini-trattori.png", alt: "Lamborghini" },
-  { src: "/images/loghi/logo-valpadana-trattori.png", alt: "Valpadana" },
-  { src: "/images/loghi/logo-bcs.png", alt: "BCS" },
-  { src: "/images/loghi/logo-berti.png", alt: "Berti" },
-  { src: "/images/loghi/logo-comet.png", alt: "Comet" },
-];
-
+    { src: "/images/loghi/petronas-logo.png", alt: "petronas" },
+    { src: "/images/loghi/claas-logo.png", alt: "CLAAS" },
+    {
+      src: "/images/loghi/logo-new-holland-agriculture.png",
+      alt: "New Holland",
+    },
+    { src: "/images/loghi/logo-case-IH.png", alt: "Case IH" },
+    { src: "/images/loghi/logo-massey-ferguson.png", alt: "Massey Ferguson" },
+    { src: "/images/loghi/toyota-material-handling.png", alt: "toyota" },
+    { src: "/images/loghi/logo-krone.png", alt: "Krone" },
+    { src: "/images/loghi/logo-kuhn.png", alt: "Kuhn" },
+    { src: "/images/loghi/logo-landini.png", alt: "Landini" },
+    { src: "/images/loghi/logo-antonio-carraro.png", alt: "Antonio Carraro" },
+    { src: "/images/loghi/logo-lamborghini-trattori.png", alt: "Lamborghini" },
+    { src: "/images/loghi/logo-valpadana-trattori.png", alt: "Valpadana" },
+    { src: "/images/loghi/logo-bcs.png", alt: "BCS" },
+    { src: "/images/loghi/logo-berti.png", alt: "Berti" },
+    { src: "/images/loghi/logo-comet.png", alt: "Comet" },
+  ];
 
   // --- stato filtri (mock) ---
   const [stato, setStato] = useState("");
@@ -113,7 +114,6 @@ export default function RicambiPage() {
 
   // loghi (metti i file in /public/images/loghi/)
 
-
   return (
     <div className="min-h-screen bg-background">
       <AnimatedIndicatorNavbar />
@@ -126,8 +126,10 @@ export default function RicambiPage() {
               {/* Blocco testo blu */}
               <div className={`${deepBlue} text-white p-8 md:p-12`}>
                 <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
-                  <span className={gold}>RICAMBI</span> <span className="text-white">AGRICOLI <br /> E INDUSTRIALI</span> 
-                  
+                  <span className={gold}>RICAMBI</span>{" "}
+                  <span className="text-white">
+                    AGRICOLI <br /> E INDUSTRIALI
+                  </span>
                 </h1>
                 <p className="mt-5 text-white/90 max-w-prose">
                   Disponiamo di un magazzino con oltre <strong>15.000</strong>{" "}
@@ -226,9 +228,11 @@ export default function RicambiPage() {
               {/* Pannello info */}
               <div className={`${deepBlue} text-white p-8`}>
                 <h3 className="text-2xl font-extrabold">
-                  <span className={gold}> Cerca trattori e macchine
-                  <br /> agricole e industriali</span>
-                 
+                  <span className={gold}>
+                    {" "}
+                    Cerca trattori e macchine
+                    <br /> agricole e industriali
+                  </span>
                 </h3>
                 <p className="mt-3 text-white/85">
                   Trova velocemente mezzi <strong>nuovi</strong> e{" "}
@@ -378,26 +382,34 @@ export default function RicambiPage() {
 
       {/* MARCHE PRINCIPALI – slider loghi */}
       <section className="pb-20">
-  <div className="container">
-    <div className="text-center mb-8">
-      <h3 className={`text-3xl font-bold ${deepBlueText}`}>Marche principali</h3>
-      <p className="text-muted-foreground">Supportiamo tutti i brand leader</p>
-    </div>
+        <div className="container">
+          <div className="text-center mb-8">
+            <h3 className={`text-3xl font-bold ${deepBlueText}`}>
+              Marche principali
+            </h3>
+            <p className="text-muted-foreground">
+              Supportiamo tutti i brand leader
+            </p>
+          </div>
 
-    <LogoMarquee logos={top15Logos} speed={36} itemWidth={140} itemHeight={70} />
+          <LogoMarquee
+            logos={top15Logos}
+            speed={36}
+            itemWidth={140}
+            itemHeight={70}
+          />
 
-    <div className="text-center mt-8">
-      <a
-        href="/loghi"
-        className="inline-flex items-center rounded-md border px-4 py-2 text-sm hover:bg-accent/10"
-      >
-        Vedi tutti i loghi e collaborazioni
-        <ArrowRight className="ml-2 h-4 w-4" />
-      </a>
-    </div>
-  </div>
-</section>
-
+          <div className="text-center mt-8">
+            <a
+              href="/loghi"
+              className="inline-flex items-center rounded-md border px-4 py-2 text-sm hover:bg-accent/10"
+            >
+              Vedi tutti i loghi e collaborazioni
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </a>
+          </div>
+        </div>
+      </section>
 
       {/* FOOTER */}
       <SiteFooter />

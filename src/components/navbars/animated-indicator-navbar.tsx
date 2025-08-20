@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/popover";
 
 const NAV_LOGO = {
-  url: "https://malavolta.com",
+  url: "/",
   src: "/malavolta-logo.png",
   alt: "Malavolta logo",
   title: "Malavolta",
