@@ -214,3 +214,24 @@
     padding-inline: 2rem;
   }
 }
+
+
+/* ==== LOGO MARQUEE ==== */
+@keyframes brand-marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.brand-marquee {
+  width: max-content;               /* la riga è larga quanto i contenuti */
+  display: flex;
+  gap: var(--gap, 2.5rem);          /* spazio tra loghi */
+  animation: brand-marquee var(--duration, 35s) linear infinite;
+}
+
+.brand-marquee:hover { animation-play-state: paused; }
+
+/* rispetto per chi preferisce meno animazioni */
+@media (prefers-reduced-motion: reduce) {
+  .brand-marquee { animation: none !important; }
+}

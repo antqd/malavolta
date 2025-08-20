@@ -1,132 +1,209 @@
-import { Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
+"use client";
+
+import Link from "next/link";
+import { useMemo } from "react";
+import {
+  Facebook,
+  Instagram,
+  Linkedin,
+  Youtube,
+  Phone,
+  Mail,
+  MapPin,
+} from "lucide-react";
+
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 
 const navigation = [
   {
     title: "Azienda",
     links: [
-      { name: "Chi Siamo", href: "#" },
-      { name: "La Nostra Storia", href: "#" },
-      { name: "Team", href: "#" },
-      { name: "Certificazioni", href: "#" },
+      { name: "Chi Siamo", href: "/chi-siamo" },
+      { name: "La Nostra Storia", href: "/chi-siamo#storia" },
+      { name: "Staff", href: "/chi-siamo#staff" },
+      { name: "Certificazioni", href: "/chi-siamo#certificazioni" },
     ],
   },
   {
     title: "Prodotti",
     links: [
-      { name: "Semi", href: "#" },
-      { name: "Fertilizzanti", href: "#" },
-      { name: "Fitosanitari", href: "#" },
-      { name: "Attrezzature", href: "#" },
+      { name: "Trattori gommati", href: "/prodotti#trattori" },
+      { name: "Macchine operatrici", href: "/prodotti#operatrici" },
+      { name: "Ricambi", href: "/ricambi" },
+      { name: "E-commerce", href: "/ecommerce" },
     ],
   },
   {
     title: "Servizi",
     links: [
-      { name: "Assistenza Tecnica", href: "#" },
-      { name: "Consulenza", href: "#" },
-      { name: "Formazione", href: "#" },
-      { name: "E-commerce", href: "#" },
+      { name: "Post Vendita", href: "/servizi#post-vendita" },
+      { name: "Finanziamenti", href: "/servizi#finanziamenti" },
+      { name: "Officina", href: "/servizi#officina" },
+      { name: "Consulenza", href: "/servizi#consulenza" },
     ],
   },
   {
     title: "Supporto",
     links: [
-      { name: "Contatti", href: "#" },
-      { name: "FAQ", href: "#" },
-      { name: "Garanzie", href: "#" },
-      { name: "Privacy Policy", href: "#" },
+      { name: "Contatti", href: "/contatti" },
+      { name: "FAQ", href: "/faq" },
+      { name: "Garanzie", href: "/garanzie" },
+      { name: "Privacy Policy", href: "/privacy" },
     ],
   },
 ];
 
 const socialLinks = [
-  { name: "Facebook", icon: Facebook, href: "https://facebook.com" },
-  { name: "Instagram", icon: Instagram, href: "https://instagram.com" },
-  { name: "LinkedIn", icon: Linkedin, href: "https://linkedin.com" },
-  { name: "YouTube", icon: Youtube, href: "https://youtube.com" },
+  { name: "Facebook", icon: Facebook, href: "#" },
+  { name: "Instagram", icon: Instagram, href: "#" },
+  { name: "LinkedIn", icon: Linkedin, href: "#" },
+  { name: "YouTube", icon: Youtube, href: "#" },
 ];
 
-export const NewsletterFooter = () => {
+export default function SiteFooter() {
+  const year = useMemo(() => new Date().getFullYear(), []);
+
   return (
-    <section className="bg-background py-12 sm:py-16 md:py-24">
-      <div className="container mx-auto max-w-6xl px-5 md:px-6">
-        {/* Logo and newsletter section */}
-        <div className="mb-10 flex flex-col items-start justify-between gap-10 border-b pb-10 sm:mb-16 sm:pb-12 md:flex-row">
-          <div className="w-full max-w-full sm:max-w-sm">
-            <div className="mb-6">
-              <h1 className="text-2xl font-bold text-primary mb-2">AgroItalia</h1>
-              <p className="text-sm text-muted-foreground">Soluzioni per l'Agricoltura</p>
-            </div>
-            
-            <div className="mb-8">
-              <h3 className="mb-2 text-lg font-semibold">Iscriviti alla Newsletter</h3>
-              <p className="text-base text-muted-foreground">
-                Ricevi aggiornamenti su prodotti, offerte e consigli agricoli
-              </p>
-            </div>
-
-            {/* Newsletter subscription */}
-            <div className="flex w-full max-w-full flex-col gap-3 sm:max-w-md sm:flex-row">
-              <input
-                type="email"
-                placeholder="La tua email"
-                className="flex h-12 flex-1 rounded-md border border-input bg-background px-4 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 sm:h-10 sm:text-sm"
-              />
-              <button className="inline-flex h-12 items-center justify-center rounded-md bg-primary px-6 py-2 text-base font-medium whitespace-nowrap text-primary-foreground ring-offset-background transition-colors hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 sm:h-10 sm:px-4 sm:text-sm">
-                Iscriviti
-              </button>
-            </div>
+    <footer className="bg-background">
+      {/* Top strip con contatti rapidi */}
+      <div className="border-b">
+        <div className="container mx-auto max-w-6xl px-5 md:px-6 py-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
+            <a href="tel:+390000000000" className="inline-flex items-center gap-2 hover:text-foreground">
+              <Phone className="h-4 w-4" />
+              +39 000 000 000
+            </a>
+            <a href="mailto:info@giovannimalavolta.it" className="inline-flex items-center gap-2 hover:text-foreground">
+              <Mail className="h-4 w-4" />
+              info@giovannimalavolta.it
+            </a>
+            <a
+              href="https://maps.google.com/?q=Giovanni+Malavolta+S.r.l."
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 hover:text-foreground"
+            >
+              <MapPin className="h-4 w-4" />
+              SS106 Jonica, Zona Industriale · Corigliano-Rossano (CS)
+            </a>
           </div>
 
-          {/* Navigation Section */}
-          <div className="w-full border-t pt-8 sm:border-t-0 sm:pt-0">
-            <nav className="grid w-full grid-cols-1 gap-x-12 gap-y-8 sm:grid-cols-2 md:w-auto md:grid-cols-4">
-              {navigation.map((section) => (
-                <div key={section.title} className="min-w-[140px]">
-                  <h2 className="mb-4 text-lg font-semibold">
-                    {section.title}
-                  </h2>
-                  <ul className="space-y-3.5">
-                    {section.links.map((link) => (
-                      <li key={link.name}>
-                        <a
-                          href={link.href}
-                          className="inline-block py-1 text-muted-foreground transition-colors duration-200 hover:text-foreground active:text-primary"
-                        >
-                          {link.name}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </nav>
-          </div>
-        </div>
-
-        {/* Bottom Section */}
-        <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
-          <div className="order-1 mb-6 flex w-full items-center justify-center gap-6 sm:justify-start md:order-2 md:mb-0 md:w-auto">
-            {socialLinks.map((link) => (
+          <div className="flex items-center gap-2">
+            {socialLinks.map((s) => (
               <a
-                key={link.href}
-                href={link.href}
-                aria-label={`Visita la nostra pagina ${link.name}`}
-                className="rounded-full p-3 text-muted-foreground transition-all duration-200 hover:bg-accent hover:text-foreground active:bg-accent/70"
-                rel="noopener noreferrer"
+                key={s.name}
+                href={s.href}
+                aria-label={s.name}
+                className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
                 target="_blank"
+                rel="noreferrer"
               >
-                <link.icon className="h-6 w-6 sm:h-5 sm:w-5" />
+                <s.icon className="h-5 w-5" />
               </a>
             ))}
           </div>
-
-          {/* Copyright - Below on mobile, left on desktop */}
-          <p className="order-2 text-center text-sm text-muted-foreground sm:text-left md:order-1">
-            © 2024 AgroItalia S.r.l. - Partita IVA: 12345678901 - Tutti i diritti riservati
-          </p>
         </div>
       </div>
-    </section>
+
+      {/* Corpo: brand + newsletter + colonne */}
+      <section className="py-12 sm:py-16 md:py-20">
+        <div className="container mx-auto max-w-6xl px-5 md:px-6">
+          <div className="mb-10 flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
+            {/* Brand + newsletter */}
+            <div className="w-full md:w-[360px]">
+              <div className="mb-5">
+                <h1 className="text-2xl font-black tracking-tight text-primary">
+                  GIOVANNI <span className="text-[#D5B46E]">MALAVOLTA</span>
+                </h1>
+                <p className="text-sm text-muted-foreground">
+                  Al tuo fianco in ogni campo.
+                </p>
+              </div>
+
+              <div className="mb-3">
+                <h3 className="mb-2 text-base font-semibold">Iscriviti alla newsletter</h3>
+                <p className="text-sm text-muted-foreground">
+                  Aggiornamenti su servizi, novità e promozioni.
+                </p>
+              </div>
+
+              <form
+                onSubmit={(e) => e.preventDefault()}
+                className="flex w-full max-w-md flex-col gap-3 sm:flex-row"
+              >
+                <Input
+                  type="email"
+                  placeholder="La tua email"
+                  className="h-10"
+                  required
+                />
+                <Button className="h-10 px-5">Iscriviti</Button>
+              </form>
+
+              <p className="mt-2 text-xs text-muted-foreground">
+                Zero spam. Potrai disiscriverti quando vuoi.
+              </p>
+            </div>
+
+            {/* Navigazione */}
+            <nav className="w-full">
+              <div className="grid grid-cols-1 gap-x-12 gap-y-8 sm:grid-cols-2 md:grid-cols-4">
+                {navigation.map((section) => (
+                  <div key={section.title} className="min-w-[160px]">
+                    <h2 className="mb-4 text-lg font-semibold">{section.title}</h2>
+                    <ul className="space-y-3.5">
+                      {section.links.map((link) => (
+                        <li key={link.name}>
+                          <Link
+                            href={link.href}
+                            className="inline-block py-1 text-muted-foreground transition-colors hover:text-foreground"
+                          >
+                            {link.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </nav>
+          </div>
+
+          <Separator className="my-6" />
+
+          {/* Bottom row */}
+          <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
+            <p className="text-center text-sm text-muted-foreground md:text-left">
+              © {year} Giovanni Malavolta S.r.l. — P.IVA: ________ — Tutti i diritti riservati
+            </p>
+
+            <div className="flex items-center gap-2">
+              <Link
+                href="/privacy"
+                className="text-sm text-muted-foreground hover:text-foreground"
+              >
+                Privacy
+              </Link>
+              <span className="text-muted-foreground/40">•</span>
+              <Link
+                href="/cookie"
+                className="text-sm text-muted-foreground hover:text-foreground"
+              >
+                Cookie
+              </Link>
+              <span className="text-muted-foreground/40">•</span>
+              <Link
+                href="/termini"
+                className="text-sm text-muted-foreground hover:text-foreground"
+              >
+                Termini
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+    </footer>
   );
-};
+}

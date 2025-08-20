@@ -7,7 +7,7 @@ import { CenteredTeamCards } from "@/components/teams/centered-team-cards";
 import { CompanyLogoTestimonials } from "@/components/testimonials/company-logo-testimonials";
 import { GradientOverlayCta } from "@/components/cta/gradient-overlay-cta";
 import { ComprehensiveContactForm } from "@/components/contact/comprehensive-contact-form";
-import { NewsletterFooter } from "@/components/footers/newsletter-footer";
+import SiteFooter from "@/components/footers/newsletter-footer";
 
 export default function Home() {
   return (
@@ -21,7 +21,7 @@ export default function Home() {
       <CompanyLogoTestimonials />
       <GradientOverlayCta />
       <ComprehensiveContactForm />
-      <NewsletterFooter />
+      <SiteFooter />
     </>
   );
 }
