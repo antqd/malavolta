@@ -396,7 +396,7 @@ export default function RicambiPage() {
       </a>
     </div>
   </div>
-</section>;
+</section>
 
 
       {/* FOOTER */}
