@@ -1,14 +1,21 @@
 // src/app/blog/[slug]/page.tsx
+import { use } from "react"; // 👈 per unwrap dei params in RSC
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+
 import { AnimatedIndicatorNavbar } from "@/components/navbars/animated-indicator-navbar";
 import SiteFooter from "@/components/footers/newsletter-footer";
 import { Badge } from "@/components/ui/badge";
 import { getPostBySlug } from "../data";
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post = getPostBySlug(params.slug);
+export default function BlogPostPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>; // 👈 tipo corretto
+}) {
+  const { slug } = use(params); // 👈 unwrap (oppure await se usi async)
+  const post = getPostBySlug(slug);
   if (!post) return notFound();
 
   const date = new Date(post.date).toLocaleDateString("it-IT", {
@@ -51,7 +58,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         <div className="container grid gap-8 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <div className="prose prose-slate max-w-none">
-              {post.content.map((p, i) => (
+              {post.content.map((p: string, i: number) => (
                 <p key={i}>{p}</p>
               ))}
             </div>
@@ -62,8 +69,8 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
                 src={post.cover}
                 alt={post.title}
                 fill
-                className="object-cover"
                 sizes="(min-width: 1024px) 40vw, 100vw"
+                className="object-cover"
               />
             </div>
           </div>
