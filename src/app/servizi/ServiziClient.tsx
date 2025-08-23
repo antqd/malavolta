@@ -193,7 +193,7 @@ export default function ServiziClient({
         }}
       >
         <Image
-          src="https://images.unsplash.com/photo-1556228230-1393f2a4a962?q=80&w=2000&auto=format&fit=crop"
+          src="/images/postvendita.png"
           alt="Malavolta sede"
           fill
           priority

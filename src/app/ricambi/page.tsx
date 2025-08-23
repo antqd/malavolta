@@ -15,6 +15,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import PageHero from "@/components/sections/page-hero";
+import { MapPin, Megaphone, CalendarDays } from "lucide-react";
 
 import {
   Search,
@@ -117,6 +119,18 @@ export default function RicambiPage() {
   return (
     <div className="min-h-screen bg-background">
       <AnimatedIndicatorNavbar />
+
+      <PageHero
+        titleWhite="RICAMBI"
+        titleGold="AGRICOLI E INDUSTRIALI"
+        description="Magazzino con oltre 15.000 codici. Originali e di concorrenza, spedizioni 24/48h."
+        imageSrc="/images/postvendita.png"
+        badges={[
+          { label: "Garanzia 24 mesi", icon: Shield },
+          { label: "Consegna 24/48h", icon: Truck },
+          { label: "Assistenza tecnica", icon: Wrench },
+        ]}
+      />
 
       {/* HERO */}
       <section className="pt-24">

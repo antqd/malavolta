@@ -30,7 +30,7 @@ const NAV_ITEMS = [
   { name: "Trattori", link: "/prodotti" },
   { name: "Ricambi", link: "/ricambi" },
   { name: "Servizi", link: "/servizi" },
-  { name: "E-commerce", link: "/ecommerce" },
+  // { name: "E-commerce", link: "/ecommerce" },
   { name: "Blog", link: "/blog" },
   { name: "Contatti", link: "/contatti" },
 ];

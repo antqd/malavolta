@@ -174,7 +174,7 @@ export default function ChiSiamo() {
         }}
       >
         <Image
-          src="https://images.unsplash.com/photo-1605901309584-818e25960a8b?q=80&w=2000&auto=format&fit=crop"
+          src="/images/postvendita.png"
           alt="Sede Malavolta"
           fill
           priority

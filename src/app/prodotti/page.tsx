@@ -1,5 +1,15 @@
 // src/app/trattori/page.tsx
 "use client";
+import PageHero from "@/components/sections/page-hero";
+import {
+  Clock,
+  Shield,
+  MapPin,
+  Truck,
+  Wrench,
+  Megaphone,
+  CalendarDays,
+} from "lucide-react";
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
@@ -84,6 +94,18 @@ export default function TrattoriPage() {
     <div className="min-h-screen bg-background">
       <AnimatedIndicatorNavbar />
 
+      <PageHero
+        titleWhite="TRATTORI & MACCHINE"
+        titleGold="IN VENDITA"
+        description="Filtra per condizione, categoria o marca. Nuovo e Usato selezionato con garanzia."
+        imageSrc="/images/postvendita.png"
+        badges={[
+          { label: "Nuovo & Usato", icon: Megaphone },
+          { label: "Pronta consegna", icon: Truck },
+          { label: "Finanziamenti", icon: Shield },
+        ]}
+      />
+
       {/* HEADER */}
       <section className="pt-24">
         <div className="container">
@@ -94,8 +116,12 @@ export default function TrattoriPage() {
                   Catalogo macchine
                 </Badge>
                 <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
-                  <span className={gold}>TRATTORI</span> &amp; <span className="text-white"> MACCHINE
-                  <br /> IN VENDITA</span>
+                  <span className={gold}>TRATTORI</span> &amp;{" "}
+                  <span className="text-white">
+                    {" "}
+                    MACCHINE
+                    <br /> IN VENDITA
+                  </span>
                 </h1>
                 <p className="mt-4 text-white/90 max-w-prose">
                   Filtra per <strong>condizione</strong> (Nuovo/Usato),

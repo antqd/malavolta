@@ -1,118 +1,151 @@
-import { AnimatedIndicatorNavbar } from '@/components/navbars/animated-indicator-navbar'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Input } from '@/components/ui/input'
-import { ShoppingCart, Truck, CreditCard, Shield, Clock, Users, CheckCircle, Star, Package, HeadphonesIcon, ArrowRight, Search, Filter } from 'lucide-react'
-import Image from 'next/image'
+import { AnimatedIndicatorNavbar } from "@/components/navbars/animated-indicator-navbar";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import {
+  ShoppingCart,
+  Truck,
+  CreditCard,
+  Shield,
+  Clock,
+  Users,
+  CheckCircle,
+  Star,
+  Package,
+  HeadphonesIcon,
+  ArrowRight,
+  Search,
+  Filter,
+} from "lucide-react";
+import Image from "next/image";
+import PageHero from "@/components/sections/page-hero";
+import { MapPin, Wrench, Megaphone, CalendarDays } from "lucide-react";
 
 interface Product {
-  id: number
-  name: string
-  price: string
-  originalPrice?: string
-  image: string
-  category: string
-  rating: number
-  reviews: number
-  badge?: string
+  id: number;
+  name: string;
+  price: string;
+  originalPrice?: string;
+  image: string;
+  category: string;
+  rating: number;
+  reviews: number;
+  badge?: string;
 }
 
 interface Category {
-  id: number
-  name: string
-  image: string
-  productCount: number
+  id: number;
+  name: string;
+  image: string;
+  productCount: number;
 }
 
 const featuredProducts: Product[] = [
   {
     id: 1,
-    name: 'Trattore Compatto 35HP',
-    price: '€24.500',
-    originalPrice: '€26.000',
-    image: '/api/placeholder/300/250',
-    category: 'Trattori',
+    name: "Trattore Compatto 35HP",
+    price: "€24.500",
+    originalPrice: "€26.000",
+    image: "/api/placeholder/300/250",
+    category: "Trattori",
     rating: 4.8,
     reviews: 24,
-    badge: 'Bestseller'
+    badge: "Bestseller",
   },
   {
     id: 2,
-    name: 'Seminatrice Precisione',
-    price: '€8.200',
-    image: '/api/placeholder/300/250',
-    category: 'Attrezzature',
+    name: "Seminatrice Precisione",
+    price: "€8.200",
+    image: "/api/placeholder/300/250",
+    category: "Attrezzature",
     rating: 4.9,
     reviews: 18,
-    badge: 'Nuovo'
+    badge: "Nuovo",
   },
   {
     id: 3,
-    name: 'Kit Ricambi Completo',
-    price: '€450',
-    originalPrice: '€520',
-    image: '/api/placeholder/300/250',
-    category: 'Ricambi',
+    name: "Kit Ricambi Completo",
+    price: "€450",
+    originalPrice: "€520",
+    image: "/api/placeholder/300/250",
+    category: "Ricambi",
     rating: 4.7,
     reviews: 89,
-    badge: 'Offerta'
+    badge: "Offerta",
   },
   {
     id: 4,
-    name: 'Fertilizzante Bio Premium',
-    price: '€85',
-    image: '/api/placeholder/300/250',
-    category: 'Fertilizzanti',
+    name: "Fertilizzante Bio Premium",
+    price: "€85",
+    image: "/api/placeholder/300/250",
+    category: "Fertilizzanti",
     rating: 4.6,
     reviews: 156,
-  }
-]
+  },
+];
 
 const categories: Category[] = [
   {
     id: 1,
-    name: 'Trattori e Macchine',
-    image: '/api/placeholder/200/150',
-    productCount: 45
+    name: "Trattori e Macchine",
+    image: "/api/placeholder/200/150",
+    productCount: 45,
   },
   {
     id: 2,
-    name: 'Attrezzature Agricole',
-    image: '/api/placeholder/200/150',
-    productCount: 127
+    name: "Attrezzature Agricole",
+    image: "/api/placeholder/200/150",
+    productCount: 127,
   },
   {
     id: 3,
-    name: 'Ricambi e Componenti',
-    image: '/api/placeholder/200/150',
-    productCount: 234
+    name: "Ricambi e Componenti",
+    image: "/api/placeholder/200/150",
+    productCount: 234,
   },
   {
     id: 4,
-    name: 'Fertilizzanti e Semi',
-    image: '/api/placeholder/200/150',
-    productCount: 89
+    name: "Fertilizzanti e Semi",
+    image: "/api/placeholder/200/150",
+    productCount: 89,
   },
   {
     id: 5,
-    name: 'Irrigazione',
-    image: '/api/placeholder/200/150',
-    productCount: 67
+    name: "Irrigazione",
+    image: "/api/placeholder/200/150",
+    productCount: 67,
   },
   {
     id: 6,
-    name: 'Attrezzi da Lavoro',
-    image: '/api/placeholder/200/150',
-    productCount: 156
-  }
-]
+    name: "Attrezzi da Lavoro",
+    image: "/api/placeholder/200/150",
+    productCount: 156,
+  },
+];
 
 export default function EcommercePage() {
   return (
     <div className="min-h-screen bg-background">
       <AnimatedIndicatorNavbar />
-      
+      <PageHero
+        titleWhite="IL NOSTRO"
+        titleGold="ECOMMERCE"
+        description="Consegne, promozioni, bandi ed eventi. Le novità dal mondo Malavolta."
+        imageSrc="/images/postvendita.png"
+        badges={[
+          { label: "Consegne", icon: Truck },
+          { label: "Promozioni", icon: Megaphone },
+          { label: "Eventi", icon: CalendarDays },
+        ]}
+      />
+
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-primary to-secondary py-20 px-4">
         <div className="container mx-auto text-center">
@@ -122,18 +155,21 @@ export default function EcommercePage() {
               Acquista Direttamente
             </h1>
             <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-              Il tuo negozio agricolo online di fiducia. Prodotti professionali, 
+              Il tuo negozio agricolo online di fiducia. Prodotti professionali,
               prezzi competitivi e consegna rapida direttamente in azienda.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
               <div className="relative w-full sm:w-96">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-                <Input 
-                  placeholder="Cerca prodotti agricoli..." 
+                <Input
+                  placeholder="Cerca prodotti agricoli..."
                   className="pl-10 pr-4 py-3 bg-white border-0"
                 />
               </div>
-              <Button size="lg" className="bg-accent hover:bg-accent/90 text-white px-8">
+              <Button
+                size="lg"
+                className="bg-accent hover:bg-accent/90 text-white px-8"
+              >
                 <Filter className="w-5 h-5 mr-2" />
                 Filtra
               </Button>
@@ -168,13 +204,17 @@ export default function EcommercePage() {
               Prodotti in Evidenza
             </h2>
             <p className="text-lg text-text-secondary max-w-2xl mx-auto">
-              Scopri i nostri prodotti più richiesti, selezionati per qualità e affidabilità
+              Scopri i nostri prodotti più richiesti, selezionati per qualità e
+              affidabilità
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {featuredProducts.map((product) => (
-              <Card key={product.id} className="group hover:shadow-lg transition-all duration-300 border-0 shadow-md">
+              <Card
+                key={product.id}
+                className="group hover:shadow-lg transition-all duration-300 border-0 shadow-md"
+              >
                 <div className="relative overflow-hidden">
                   <Image
                     src={product.image}
@@ -209,8 +249,8 @@ export default function EcommercePage() {
                           key={i}
                           className={`w-4 h-4 ${
                             i < Math.floor(product.rating)
-                              ? 'text-yellow-400 fill-current'
-                              : 'text-gray-300'
+                              ? "text-yellow-400 fill-current"
+                              : "text-gray-300"
                           }`}
                         />
                       ))}
@@ -253,13 +293,17 @@ export default function EcommercePage() {
               Categorie Prodotti
             </h2>
             <p className="text-lg text-text-secondary max-w-2xl mx-auto">
-              Naviga facilmente tra le nostre categorie specializzate per trovare esattamente quello che cerchi
+              Naviga facilmente tra le nostre categorie specializzate per
+              trovare esattamente quello che cerchi
             </p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
             {categories.map((category) => (
-              <Card key={category.id} className="group hover:shadow-lg transition-all duration-300 cursor-pointer border-0 shadow-md">
+              <Card
+                key={category.id}
+                className="group hover:shadow-lg transition-all duration-300 cursor-pointer border-0 shadow-md"
+              >
                 <div className="relative overflow-hidden">
                   <Image
                     src={category.image}
@@ -270,8 +314,12 @@ export default function EcommercePage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute bottom-2 left-2 text-white">
-                    <h3 className="font-semibold text-sm mb-1">{category.name}</h3>
-                    <p className="text-xs opacity-90">{category.productCount} prodotti</p>
+                    <h3 className="font-semibold text-sm mb-1">
+                      {category.name}
+                    </h3>
+                    <p className="text-xs opacity-90">
+                      {category.productCount} prodotti
+                    </p>
                   </div>
                 </div>
               </Card>
@@ -288,7 +336,8 @@ export default function EcommercePage() {
               Perché Scegliere il Nostro E-commerce
             </h2>
             <p className="text-lg text-text-secondary max-w-2xl mx-auto">
-              Offriamo un'esperienza di acquisto completa e sicura per professionisti del settore agricolo
+              Offriamo un'esperienza di acquisto completa e sicura per
+              professionisti del settore agricolo
             </p>
           </div>
 
@@ -348,12 +397,16 @@ export default function EcommercePage() {
                 <Card className="p-4 text-center border-0 shadow-md">
                   <CreditCard className="w-8 h-8 mx-auto mb-2 text-primary" />
                   <p className="font-medium">Carte di Credito</p>
-                  <p className="text-sm text-text-secondary">Visa, Mastercard</p>
+                  <p className="text-sm text-text-secondary">
+                    Visa, Mastercard
+                  </p>
                 </Card>
                 <Card className="p-4 text-center border-0 shadow-md">
                   <Shield className="w-8 h-8 mx-auto mb-2 text-primary" />
                   <p className="font-medium">PayPal</p>
-                  <p className="text-sm text-text-secondary">Pagamento sicuro</p>
+                  <p className="text-sm text-text-secondary">
+                    Pagamento sicuro
+                  </p>
                 </Card>
                 <Card className="p-4 text-center border-0 shadow-md">
                   <Clock className="w-8 h-8 mx-auto mb-2 text-primary" />
@@ -382,7 +435,9 @@ export default function EcommercePage() {
                     <Truck className="w-6 h-6 text-primary" />
                     <div>
                       <p className="font-medium">Consegna Standard</p>
-                      <p className="text-sm text-text-secondary">3-5 giorni lavorativi - Gratuita sopra €500</p>
+                      <p className="text-sm text-text-secondary">
+                        3-5 giorni lavorativi - Gratuita sopra €500
+                      </p>
                     </div>
                   </div>
                 </Card>
@@ -391,7 +446,9 @@ export default function EcommercePage() {
                     <Clock className="w-6 h-6 text-accent" />
                     <div>
                       <p className="font-medium">Consegna Express</p>
-                      <p className="text-sm text-text-secondary">24-48h - €50 (gratuita sopra €1000)</p>
+                      <p className="text-sm text-text-secondary">
+                        24-48h - €50 (gratuita sopra €1000)
+                      </p>
                     </div>
                   </div>
                 </Card>
@@ -400,7 +457,9 @@ export default function EcommercePage() {
                     <Package className="w-6 h-6 text-secondary" />
                     <div>
                       <p className="font-medium">Ritiro in Magazzino</p>
-                      <p className="text-sm text-text-secondary">Gratuito - Disponibile dal lunedì al venerdì</p>
+                      <p className="text-sm text-text-secondary">
+                        Gratuito - Disponibile dal lunedì al venerdì
+                      </p>
                     </div>
                   </div>
                 </Card>
@@ -418,7 +477,8 @@ export default function EcommercePage() {
               Vantaggi Account Cliente
             </h2>
             <p className="text-lg text-text-secondary max-w-2xl mx-auto">
-              Registrati gratuitamente e accedi a servizi esclusivi per la tua azienda agricola
+              Registrati gratuitamente e accedi a servizi esclusivi per la tua
+              azienda agricola
             </p>
           </div>
 
@@ -429,7 +489,8 @@ export default function EcommercePage() {
               </div>
               <h3 className="text-xl font-semibold mb-3">Storico Ordini</h3>
               <p className="text-text-secondary mb-4">
-                Accedi facilmente a tutti i tuoi acquisti precedenti e riordina con un click
+                Accedi facilmente a tutti i tuoi acquisti precedenti e riordina
+                con un click
               </p>
               <ul className="text-sm text-left space-y-2">
                 <li className="flex items-center gap-2">
@@ -453,7 +514,8 @@ export default function EcommercePage() {
               </div>
               <h3 className="text-xl font-semibold mb-3">Sconti Esclusivi</h3>
               <p className="text-text-secondary mb-4">
-                Offerte personalizzate e sconti progressivi in base al volume di acquisto
+                Offerte personalizzate e sconti progressivi in base al volume di
+                acquisto
               </p>
               <ul className="text-sm text-left space-y-2">
                 <li className="flex items-center gap-2">
@@ -475,9 +537,12 @@ export default function EcommercePage() {
               <div className="bg-secondary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                 <HeadphonesIcon className="w-8 h-8 text-secondary" />
               </div>
-              <h3 className="text-xl font-semibold mb-3">Supporto Prioritario</h3>
+              <h3 className="text-xl font-semibold mb-3">
+                Supporto Prioritario
+              </h3>
               <p className="text-text-secondary mb-4">
-                Assistenza dedicata con consulenti specializzati nel settore agricolo
+                Assistenza dedicata con consulenti specializzati nel settore
+                agricolo
               </p>
               <ul className="text-sm text-left space-y-2">
                 <li className="flex items-center gap-2">
@@ -500,7 +565,11 @@ export default function EcommercePage() {
             <Button size="lg" className="bg-primary hover:bg-primary/90 mr-4">
               Registrati Gratuitamente
             </Button>
-            <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary/10">
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-primary text-primary hover:bg-primary/10"
+            >
               Accedi al tuo Account
             </Button>
           </div>
@@ -515,7 +584,8 @@ export default function EcommercePage() {
               Garanzia e Sicurezza
             </h2>
             <p className="text-lg text-text-secondary max-w-2xl mx-auto">
-              La tua soddisfazione è la nostra priorità. Acquista con fiducia grazie alle nostre garanzie
+              La tua soddisfazione è la nostra priorità. Acquista con fiducia
+              grazie alle nostre garanzie
             </p>
           </div>
 
@@ -523,25 +593,33 @@ export default function EcommercePage() {
             <Card className="p-6 text-center border-0 shadow-md">
               <Shield className="w-12 h-12 mx-auto mb-4 text-primary" />
               <h3 className="font-semibold mb-2">Garanzia Soddisfazione</h3>
-              <p className="text-sm text-text-secondary">100% soddisfatto o rimborsato entro 30 giorni</p>
+              <p className="text-sm text-text-secondary">
+                100% soddisfatto o rimborsato entro 30 giorni
+              </p>
             </Card>
 
             <Card className="p-6 text-center border-0 shadow-md">
               <CheckCircle className="w-12 h-12 mx-auto mb-4 text-accent" />
               <h3 className="font-semibold mb-2">Prodotti Certificati</h3>
-              <p className="text-sm text-text-secondary">Solo marchi leader con certificazioni europee</p>
+              <p className="text-sm text-text-secondary">
+                Solo marchi leader con certificazioni europee
+              </p>
             </Card>
 
             <Card className="p-6 text-center border-0 shadow-md">
               <CreditCard className="w-12 h-12 mx-auto mb-4 text-secondary" />
               <h3 className="font-semibold mb-2">Pagamenti Sicuri</h3>
-              <p className="text-sm text-text-secondary">Crittografia SSL 256-bit per ogni transazione</p>
+              <p className="text-sm text-text-secondary">
+                Crittografia SSL 256-bit per ogni transazione
+              </p>
             </Card>
 
             <Card className="p-6 text-center border-0 shadow-md">
               <HeadphonesIcon className="w-12 h-12 mx-auto mb-4 text-primary" />
               <h3 className="font-semibold mb-2">Assistenza 24/7</h3>
-              <p className="text-sm text-text-secondary">Supporto tecnico sempre disponibile</p>
+              <p className="text-sm text-text-secondary">
+                Supporto tecnico sempre disponibile
+              </p>
             </Card>
           </div>
         </div>
@@ -554,7 +632,7 @@ export default function EcommercePage() {
             Resta Aggiornato sulle Novità
           </h2>
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Iscriviti alla nostra newsletter per ricevere offerte esclusive, 
+            Iscriviti alla nostra newsletter per ricevere offerte esclusive,
             nuovi prodotti e consigli agricoli direttamente nella tua email
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-lg mx-auto">
@@ -562,15 +640,19 @@ export default function EcommercePage() {
               placeholder="La tua email aziendale"
               className="bg-white border-0 flex-1"
             />
-            <Button size="lg" className="bg-accent hover:bg-accent/90 text-white">
+            <Button
+              size="lg"
+              className="bg-accent hover:bg-accent/90 text-white"
+            >
               Iscriviti Gratis
             </Button>
           </div>
           <p className="text-sm text-white/70 mt-4">
-            Rispettiamo la tua privacy. Cancellazione facile in qualsiasi momento.
+            Rispettiamo la tua privacy. Cancellazione facile in qualsiasi
+            momento.
           </p>
         </div>
       </section>
     </div>
-  )
+  );
 }
