@@ -502,7 +502,8 @@ export default function Home() {
             />
           </div>
         </div>
-      </section>
+      </section> 
+      {/* dio bestia */}
 
       <SiteFooter />
     </div>
