@@ -360,7 +360,7 @@ export default function ServiziClient({
               </div>
               <div className="relative min-h-[260px] md:min-h-[420px]">
                 <Image
-                  src="/images/officina.png"
+                  src="/images/ricambi2.png"
                   alt="Officina"
                   fill
                   sizes="(min-width: 768px) 50vw, 100vw"
@@ -375,7 +375,7 @@ export default function ServiziClient({
             <div className="grid md:grid-cols-2 gap-0">
               <div className="relative order-1 md:order-none min-h-[260px] md:min-h-[420px]">
                 <Image
-                  src="/images/consulenza.png"
+                  src="/images/logo2.png"
                   alt="Consulenza"
                   fill
                   sizes="(min-width: 768px) 50vw, 100vw"

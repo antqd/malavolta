@@ -55,7 +55,7 @@ export default function ContattiPage() {
                       className="text-muted-foreground hover:underline"
                       href="tel:+390983497245"
                     >
-                      +39 0983 497245
+                      +39 0983 857079
                     </a>
                   </div>
                 </div>
@@ -66,11 +66,11 @@ export default function ContattiPage() {
                     <div className="font-medium">WhatsApp</div>
                     <a
                       className="text-muted-foreground hover:underline"
-                      href="https://wa.me/393491732415"
+                      href="https://wa.me/3355993930"
                       target="_blank"
                       rel="noreferrer"
                     >
-                      +39 349 173 2415
+                      +39 3355993930
                     </a>
                   </div>
                 </div>
@@ -83,7 +83,7 @@ export default function ContattiPage() {
                       className="text-muted-foreground hover:underline"
                       href="mailto:info@malavolta.com"
                     >
-                      info@malavolta.com
+                      malavoltafa@yahoo.it
                     </a>
                   </div>
                 </div>
@@ -93,9 +93,9 @@ export default function ContattiPage() {
                   <div>
                     <div className="font-medium">Sede</div>
                     <div className="text-muted-foreground">
-                      S.S. 106 – Zona Industriale
+                      C/da Losina SS 106 BIS
                       <br />
-                      Corigliano-Rossano (CS)
+                      87064 Corigliano-Rossano (CS)
                     </div>
                   </div>
                 </div>
@@ -170,7 +170,7 @@ export default function ContattiPage() {
                   <CardTitle>Dove siamo</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <MapEmbed query="Giovanni Malavolta S.r.l., S.S. 106 Zona Industriale, Corigliano-Rossano (CS)" />
+                  <MapEmbed query="Alfonso Malavolta S.r.l., S.S. 106 Zona Industriale, Corigliano-Rossano (CS)" />
                 </CardContent>
               </Card>
             </Card>

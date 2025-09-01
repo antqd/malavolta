@@ -73,20 +73,20 @@ export default function SiteFooter() {
           <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
             <a href="tel:+390000000000" className="inline-flex items-center gap-2 hover:text-foreground">
               <Phone className="h-4 w-4" />
-              +39 000 000 000
+                0983 867079
             </a>
-            <a href="mailto:info@giovannimalavolta.it" className="inline-flex items-center gap-2 hover:text-foreground">
+            <a href="mailto:info@Alfonsomalavolta.it" className="inline-flex items-center gap-2 hover:text-foreground">
               <Mail className="h-4 w-4" />
-              info@giovannimalavolta.it
+              malavoltafa@yahoo.it
             </a>
             <a
-              href="https://maps.google.com/?q=Giovanni+Malavolta+S.r.l."
+              href="https://maps.google.com/?q=Alfonso+Malavolta+S.r.l."
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-2 hover:text-foreground"
             >
               <MapPin className="h-4 w-4" />
-              SS106 Jonica, Zona Industriale · Corigliano-Rossano (CS)
+              C/da Losina - SS 106 Bis 87064 Schiavonea di corigliano (Cs)
             </a>
           </div>
 
@@ -115,7 +115,7 @@ export default function SiteFooter() {
             <div className="w-full md:w-[360px]">
               <div className="mb-5">
                 <h1 className="text-2xl font-black tracking-tight text-primary">
-                  GIOVANNI <span className="text-[#D5B46E]">MALAVOLTA</span>
+                  Alfonso <span className="text-[#D5B46E]">MALAVOLTA</span>
                 </h1>
                 <p className="text-sm text-muted-foreground">
                   Al tuo fianco in ogni campo.
@@ -174,7 +174,7 @@ export default function SiteFooter() {
           {/* Bottom row */}
           <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
             <p className="text-center text-sm text-muted-foreground md:text-left">
-              © {year} Giovanni Malavolta S.r.l. — P.IVA: ________ — Tutti i diritti riservati
+              © {year} Alfonso Malavolta S.r.l. — P.IVA: ________ — Tutti i diritti riservati
             </p>
 
             <div className="flex items-center gap-2">

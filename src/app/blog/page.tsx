@@ -7,6 +7,7 @@ import SiteFooter from "@/components/footers/newsletter-footer";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { ChevronRight } from "lucide-react";
+import PageHero from "@/components/sections/page-hero";
 
 export default function BlogIndexPage() {
   return (
@@ -14,23 +15,12 @@ export default function BlogIndexPage() {
       <AnimatedIndicatorNavbar />
 
       {/* Header gradient uguale alle altre pagine */}
-      <section
-        className="relative pt-28 pb-16 overflow-hidden"
-        style={{
-          background:
-            "linear-gradient(135deg,#0E3A66 0%,#164B83 50%,#1C6FB2 100%)",
-        }}
-      >
-        <div className="container relative z-10 text-white">
-          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">
-            <span className="text-white">NEWS &</span>{" "}
-            <span className="text-[#D5B46E]">ARTICOLI</span>
-          </h1>
-          <p className="mt-3 text-white/90 max-w-3xl">
-            Bandi, agevolazioni, consegne e novità dal mondo Malavolta.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        titleWhite="BLOG"
+        titleGold="MALAVOLTA"
+        description="Novità e offerte"
+        imageSrc="/images/postvendita.png"
+      />
 
       <section className="py-14">
         <div className="container">
@@ -39,7 +29,12 @@ export default function BlogIndexPage() {
               <Link key={p.slug} href={`/blog/${p.slug}`} className="group">
                 <Card className="hover:shadow-lg transition-shadow overflow-hidden">
                   <div className="relative aspect-[16/10]">
-                    <Image src={p.cover} alt={p.title} fill className="object-cover" />
+                    <Image
+                      src={p.cover}
+                      alt={p.title}
+                      fill
+                      className="object-cover"
+                    />
                   </div>
                   <CardContent className="p-5">
                     <Badge variant="secondary" className="mb-3">

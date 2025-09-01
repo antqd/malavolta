@@ -33,14 +33,15 @@ const HERO = {
   titleTop: "LE NOSTRE",
   titleAccent: "MACCHINE",
   text: "Disponiamo di un parco macchine vastissimo con attrezzature nuove e moderne, e una ricchissima sezione di usato scelto e garantito.",
-  bgImage: "/images/officina.png",
+  bgImage: "/images/home.png",
 };
 
 const NEWS = [
   {
     slug: "bando-zes-unica-2025-opportunita",
     tag: "BANDO",
-    title: "Bando ZES Unica 2025: opportunità di crescita per le imprese agricole",
+    title:
+      "Bando ZES Unica 2025: opportunità di crescita per le imprese agricole",
     excerpt:
       "Regole e modello per il credito d’imposta nelle aree ZES: come accedervi e a chi conviene.",
     img: "/images/news/img1.png",
@@ -56,7 +57,8 @@ const NEWS = [
   {
     slug: "risparmio-energetico-atomizzatori",
     tag: "AGEVOLAZIONI",
-    title: "Risparmio energetico: voucher per atomizzatori di nuova generazione",
+    title:
+      "Risparmio energetico: voucher per atomizzatori di nuova generazione",
     excerpt:
       "Contributi fino a 5.000€ per attrezzature più efficienti e meno energivore.",
     img: "/images/news/img3.png",
@@ -71,30 +73,32 @@ const NEWS = [
   },
 ];
 
-
 const CATEGORIE = [
   {
     title: "Trattori nuovi",
     href: "/prodotti?condizione=nuovo",
-    img: "/images/tratt.png",
+    img: "/images/trattori.png",
     icon: <Tractor className="h-5 w-5" />,
   },
   {
     title: "Trattori usati",
     href: "/prodotti?condizione=usato",
-    img: "/images/postvendita.png",
+    img: "/images/trattori2.png",
     icon: <ShoppingCart className="h-5 w-5" />,
   },
   {
     title: "Officina meccanica",
     href: "/servizi#officina",
-    img: "/images/officina.png",
+    img: "/images/ricambi.png",
     icon: <Wrench className="h-5 w-5" />,
   },
 ];
 
 const BRANDS = [
-  { name: "New Holland", src: "/images/loghi/logo-new-holland-agriculture.png" },
+  {
+    name: "New Holland",
+    src: "/images/loghi/logo-new-holland-agriculture.png",
+  },
   { name: "Merlo", src: "/images/loghi/merlo-logo.png" },
   { name: "CASE IH", src: "/images/loghi/logo-case-IH.png" },
   { name: "Antonio Carraro", src: "/images/loghi/logo-antonio-carraro.png" },
@@ -286,7 +290,7 @@ export default function Home() {
           {/* immagine a destra “solida” */}
           <div className="hidden md:block relative min-h-[360px]">
             <Image
-              src="/images/postvendita.png"
+              src="/images/home2.png"
               alt="Showroom"
               fill
               className="object-cover rounded-2xl ring-1 ring-white/10"
@@ -352,7 +356,9 @@ export default function Home() {
       {/* RIVENDITORI AUTORIZZATI / STRIP BRAND (loghi più grandi, senza box) */}
       <section className="py-10 bg-[#0E3A66] text-white overflow-hidden">
         <div className="container mb-5">
-          <h3 className="text-lg font-semibold text-white">Rivenditori autorizzati</h3>
+          <h3 className="text-lg font-semibold text-white">
+            Rivenditori autorizzati
+          </h3>
         </div>
         <div className="relative">
           <div className="brand-strip-inner flex gap-14 whitespace-nowrap will-change-transform items-center">
@@ -489,7 +495,7 @@ export default function Home() {
           </div>
           <div className="relative min-h-[280px]">
             <Image
-              src="/images/consulenza.png"
+              src="/images/logo2.png"
               alt="Consulenza e assistenza"
               fill
               className="object-cover rounded-2xl ring-1 ring-white/10"

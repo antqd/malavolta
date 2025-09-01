@@ -200,66 +200,43 @@ export default function ChiSiamo() {
       <section className="py-14">
         <div className="container max-w-5xl">
           <h2 className={`text-3xl md:text-4xl font-bold ${deepBlueText} mb-6`}>
-            Da oltre settant&apos;anni nel campo della meccanizzazione
+            TESTO
           </h2>
           <div className="prose prose-neutral max-w-none leading-relaxed text-muted-foreground">
             <p>
-              Assieme ai nostri clienti abbiamo percorso una strada comune che
-              oggi si apre a prospettive completamente nuove. L’azienda conta su
-              personale altamente qualificato, addetto al servizio vendita e
-              post-vendita, in continuo aggiornamento e con esperienza
-              pluriennale maturata nella ditta omonima fondata oltre mezzo
-              secolo fa da Giovanni Malavolta.
+              TESTO
             </p>
             <p>
-              Con un magazzino ricambi di oltre 1200 m² e circa 20.000 articoli
-              disponibili, il reparto ricambi evade in un’ora circa il 90% delle
-              richieste di parti originali dei marchi commercializzati; su
-              richiesta in 24/48 ore il mancante e anche parti di ricambio di
-              altre marche.
+              TESTO
             </p>
             <p>
-              Il team tecnico mantiene alta la professionalità grazie
-              all’esperienza sul campo e alla costante partecipazione ai corsi
-              di aggiornamento delle case costruttrici di cui l’azienda è
-              concessionaria. Anche nella prevendita, le scelte dei clienti
-              vengono supportate da prove in campo e consulenze dedicate.
+              TESTO
             </p>
             <p>
-              Per la <strong>Giovanni Malavolta srl</strong> l’obiettivo resta
-              quello di aumentare l’efficienza e garantire un costante ed
-              elevato livello qualitativo in tutte le attività e i servizi
-              offerti. Dal 2007 siamo tra le prime aziende del settore ad
-              ottenere la{" "}
+              TESTO
               <strong>
-                certificazione di qualità secondo gli standard ISO 9001
+                TESTO
               </strong>
-              , rilasciata da Certiquality, ente leader in Italia.
+              TESTO
             </p>
           </div>
 
           <h3
             className={`mt-10 text-2xl md:text-3xl font-bold ${deepBlueText}`}
           >
-            Certificazione di qualità
+            TESTO
           </h3>
           <p className="mt-3 text-muted-foreground">
-            La certificazione conferma il nostro impegno a migliorare
-            continuamente processi interni, rapporto con la clientela e qualità
-            dei servizi. Tecnologia, gamma prodotti e servizi pre- e
-            post-vendita facilitano il lavoro e la competitività dei nostri
-            clienti.
+            TESTO
           </p>
 
           <h3
             className={`mt-10 text-2xl md:text-3xl font-bold ${deepBlueText}`}
           >
-            Da oltre mezzo secolo meccanizziamo l’agricoltura
+            TESTO
           </h3>
           <p className="mt-3 text-muted-foreground">
-            Attivi da oltre 70 anni nel settore, mettiamo al servizio dei
-            clienti un patrimonio di competenze, passione e affidabilità
-            costruito nel tempo.
+            TESTO
           </p>
         </div>
       </section>
@@ -270,7 +247,7 @@ export default function ChiSiamo() {
           <Card className="border-dashed">
             <CardHeader>
               <CardTitle className={`${deepBlueText}`}>
-                Giovanni Malavolta
+                Alfonso Malavolta
               </CardTitle>
               <CardDescription>
                 Spazio riservato a un contenuto dedicato (biografia, foto,
@@ -522,64 +499,7 @@ export default function ChiSiamo() {
       </section>
 
       {/* CONTATTI + MAPPA */}
-      <section className="py-16">
-        <div className="container max-w-6xl">
-          <div className="grid lg:grid-cols-2 gap-10 items-start">
-            {/* modulo contatti rapido */}
-            <div>
-              <h3 className={`text-3xl font-bold ${deepBlueText} mb-4`}>
-                Contatti
-              </h3>
-              <Card>
-                <CardContent className="p-6 space-y-4">
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <Input placeholder="Nome" />
-                    <Input placeholder="Cognome" />
-                  </div>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <Input type="email" placeholder="Email" />
-                    <Input type="tel" placeholder="Telefono" />
-                  </div>
-                  <Textarea
-                    placeholder="Scrivi il tuo messaggio..."
-                    className="min-h-[110px]"
-                  />
-                  <Button className={`${deepBlue} text-white hover:opacity-90`}>
-                    <Phone className="w-4 h-4 mr-2" />
-                    Invia richiesta
-                  </Button>
-                  <div className="grid sm:grid-cols-3 gap-3 pt-2 text-sm text-muted-foreground">
-                    <div className="flex items-center gap-2">
-                      <Phone className="w-4 h-4" /> +39 0983 497243
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Mail className="w-4 h-4" /> info@giovannimalavolta.it
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <MapPin className="w-4 h-4" /> SS 106 Jonica km 18, 87064
-                      Corigliano CS
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* mappa */}
-            <div className="w-full h-[420px] overflow-hidden rounded-2xl ring-1 ring-border/50">
-              <iframe
-                title="Mappa Giovanni Malavolta S.r.l."
-                src="https://maps.google.com/maps?q=Giovanni%20Malavolta%20S.r.l.%20SS%20106%20Jonica%20km%2018%2087064%20Corigliano%20Calabro%20CS&z=15&output=embed"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
+     
       {/* FOOTER (coerente con servizi) */}
       <SiteFooter />
     </div>

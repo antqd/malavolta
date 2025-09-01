@@ -124,7 +124,7 @@ export default function RicambiPage() {
         titleWhite="RICAMBI"
         titleGold="AGRICOLI E INDUSTRIALI"
         description="Magazzino con oltre 15.000 codici. Originali e di concorrenza, spedizioni 24/48h."
-        imageSrc="/images/postvendita.png"
+        imageSrc="/images/ricambibg.png"
         badges={[
           { label: "Garanzia 24 mesi", icon: Shield },
           { label: "Consegna 24/48h", icon: Truck },
@@ -171,7 +171,7 @@ export default function RicambiPage() {
               {/* Immagine */}
               <div className="relative h-64 md:h-auto">
                 <Image
-                  src="/images/postvendita.png"
+                  src="/images/ricambi2.png"
                   alt="Sede e flotta"
                   fill
                   className="object-cover"
