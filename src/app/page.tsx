@@ -489,7 +489,6 @@ export default function Home() {
                   className="bg-white/10 border-white text-white hover:bg-white hover:text-[#0E3A66] text-lg px-7"
                 >
                   Scopri i servizi 
-                  {/* ,kjb */}
                 </Button>
               </Link>
             </div>
