@@ -299,6 +299,40 @@ export default function Home() {
         </div>
       </section>
 
+      {/* CATEGORIE PRINCIPALI */}
+      <section className="py-16">
+        <div className="container">
+          <div className="grid gap-6 md:grid-cols-3">
+            {CATEGORIE.map((c) => (
+              <Link key={c.title} href={c.href} className="cat-card group">
+                <article className="relative overflow-hidden rounded-2xl border bg-card hover:shadow-xl transition-all">
+                  <div className="relative aspect-[16/10]">
+                    <Image
+                      src={c.img}
+                      alt={c.title}
+                      fill
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                    <div className="absolute bottom-4 left-4 right-4 text-white">
+                      <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-sm backdrop-blur">
+                        {c.icon}
+                        <span>{c.title}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="p-5">
+                    <div className="inline-flex items-center text-primary font-medium">
+                      Entra <ArrowRight className="ml-2 h-4 w-4" />
+                    </div>
+                  </div>
+                </article>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* NOTIZIE IN EVIDENZA (con immagine) */}
       <section className="py-14 bg-muted/40">
         <div className="container">
@@ -380,40 +414,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CATEGORIE PRINCIPALI */}
-      <section className="py-16">
-        <div className="container">
-          <div className="grid gap-6 md:grid-cols-3">
-            {CATEGORIE.map((c) => (
-              <Link key={c.title} href={c.href} className="cat-card group">
-                <article className="relative overflow-hidden rounded-2xl border bg-card hover:shadow-xl transition-all">
-                  <div className="relative aspect-[16/10]">
-                    <Image
-                      src={c.img}
-                      alt={c.title}
-                      fill
-                      className="object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                    <div className="absolute bottom-4 left-4 right-4 text-white">
-                      <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-sm backdrop-blur">
-                        {c.icon}
-                        <span>{c.title}</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="p-5">
-                    <div className="inline-flex items-center text-primary font-medium">
-                      Entra <ArrowRight className="ml-2 h-4 w-4" />
-                    </div>
-                  </div>
-                </article>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* RECENSIONI SCORREVOLI */}
       <section className="py-14 bg-muted/40 overflow-hidden">
         <div className="container mb-6">
@@ -488,7 +488,7 @@ export default function Home() {
                   variant="outline"
                   className="bg-white/10 border-white text-white hover:bg-white hover:text-[#0E3A66] text-lg px-7"
                 >
-                  Scopri i servizi 
+                  Scopri i servizi
                   {/* ,kjb */}
                 </Button>
               </Link>
@@ -503,7 +503,7 @@ export default function Home() {
             />
           </div>
         </div>
-      </section> 
+      </section>
       {/* dio bestia */}
 
       <SiteFooter />
