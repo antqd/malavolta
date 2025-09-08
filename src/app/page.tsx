@@ -399,8 +399,6 @@ export default function Home() {
             {[...BRANDS, ...BRANDS].map((b, i) => (
               <div key={i} className="shrink-0 px-2 flex items-center">
                 <div className="relative h-12 w-44">
-                  {" "}
-                  {/* più grande */}
                   <Image
                     src={b.src}
                     alt={b.name}
