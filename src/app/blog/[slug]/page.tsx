@@ -1,27 +1,24 @@
-// ---------- src/app/blog/[slug]/page.tsx ----------
+// src/app/blog/[slug]/page.tsx
+import { use } from "react"; // 👈 per unwrap dei params in RSC
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { prisma } from "@/lib/prisma";
+
 import { AnimatedIndicatorNavbar } from "@/components/navbars/animated-indicator-navbar";
 import SiteFooter from "@/components/footers/newsletter-footer";
 import { Badge } from "@/components/ui/badge";
+import { getPostBySlug } from "../data";
 
-export default async function BlogPostPage({
+export default function BlogPostPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string }>; // 👈 tipo corretto
 }) {
-  const { slug } = await params;
+  const { slug } = use(params); // 👈 unwrap (oppure await se usi async)
+  const post = getPostBySlug(slug);
+  if (!post) return notFound();
 
-  const post = await prisma.blogPost.findUnique({
-    where: { slug },
-    include: { cover: true },
-  });
-
-  if (!post || post.status !== "PUBLISHED") return notFound();
-
-  const date = (post.publishedAt ?? post.createdAt).toLocaleDateString("it-IT", {
+  const date = new Date(post.date).toLocaleDateString("it-IT", {
     day: "2-digit",
     month: "long",
     year: "numeric",
@@ -31,6 +28,7 @@ export default async function BlogPostPage({
     <div className="min-h-screen bg-background">
       <AnimatedIndicatorNavbar />
 
+      {/* Header gradient */}
       <section
         className="relative pt-28 pb-10"
         style={{
@@ -43,43 +41,37 @@ export default async function BlogPostPage({
             <Link href="/blog" className="hover:underline">
               Blog
             </Link>{" "}
-            / Articoli
+            / {post.tag}
           </div>
           <Badge className="bg-white/15 border-white/25 text-white mb-3">
-            Articolo
+            {post.tag}
           </Badge>
           <h1 className="text-3xl md:text-5xl font-extrabold max-w-4xl">
-            {post.title_it}
+            {post.title}
           </h1>
           <div className="mt-2 text-white/80">{date}</div>
         </div>
       </section>
 
+      {/* Cover + contenuto */}
       <section className="py-10">
         <div className="container grid gap-8 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <div className="prose prose-slate max-w-none">
-              {(post.content_it ?? "")
-                .split("\n\n")
-                .map((p: string, i: number) => <p key={i}>{p}</p>)}
+              {post.content.map((p: string, i: number) => (
+                <p key={i}>{p}</p>
+              ))}
             </div>
           </div>
-
           <div className="lg:col-span-5">
             <div className="relative aspect-[16/10] rounded-xl overflow-hidden border">
-              {post.cover?.url ? (
-                <Image
-                  src={post.cover.url}
-                  alt={post.title_it}
-                  fill
-                  sizes="(min-width: 1024px) 40vw, 100vw"
-                  className="object-cover"
-                />
-              ) : (
-                <div className="absolute inset-0 grid place-items-center text-sm text-muted-foreground">
-                  Nessuna immagine
-                </div>
-              )}
+              <Image
+                src={post.cover}
+                alt={post.title}
+                fill
+                sizes="(min-width: 1024px) 40vw, 100vw"
+                className="object-cover"
+              />
             </div>
           </div>
         </div>

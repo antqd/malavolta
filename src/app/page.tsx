@@ -30,9 +30,9 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 // Contenuti (puoi editarli al volo)
 // -----------------------------
 const HERO = {
-  titleTop: "LE NOSTRE",
-  titleAccent: "MACCHINE",
-  text: "Disponiamo di un parco macchine vastissimo con attrezzature nuove e moderne, e una ricchissima sezione di usato scelto e garantito.",
+  titleTop: " LE TUE SFIDE",
+  titleAccent: "DIVENTANO LA NOSTRA MISSIONE",
+  text: "Un’ampia scelta di macchine agricole, attrezzature e servizi post-vendita per accompagnarti in ogni stagione.”",
   bgImage: "/images/home.png",
 };
 
@@ -489,6 +489,7 @@ export default function Home() {
                   className="bg-white/10 border-white text-white hover:bg-white hover:text-[#0E3A66] text-lg px-7"
                 >
                   Scopri i servizi 
+                  {/* ,kjb */}
                 </Button>
               </Link>
             </div>
