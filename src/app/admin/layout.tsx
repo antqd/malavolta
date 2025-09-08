@@ -1,23 +1,15 @@
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen grid md:grid-cols-[240px_1fr]">
-      <aside className="hidden md:block border-r">
-        <nav className="p-4 space-y-1 text-sm">
-          {[
-            ["Dashboard", "/admin"],
-            ["Blog", "/admin/blog"],
-            ["Prodotti/Trattori", "/admin/products"],
-            ["Ricambi", "/admin/spare-parts"],
-            ["Team", "/admin/team"],
-            ["Media", "/admin/media"],
-            ["Partner/Loghi", "/admin/partners"],
-            ["Apertura/Info", "/admin/settings/opening-hours"],
-          ].map(([label, href]) => (
-            <a key={href} href={href} className="block rounded px-2 py-1 hover:bg-gray-100">{label}</a>
-          ))}
+    <div className="min-h-screen grid lg:grid-cols-[240px_1fr]">
+      <aside className="border-r p-4 space-y-2">
+        <div className="font-bold">Malavolta • Admin</div>
+        <nav className="grid gap-2 text-sm">
+          <a className="hover:underline" href="/admin">Dashboard</a>
+          <a className="hover:underline" href="/admin/products">Prodotti</a>
+          {/* aggiungi Ricambi, Servizi, Blog, Brand, Category, Media */}
         </nav>
       </aside>
-      <main className="p-4 md:p-8">{children}</main>
+      <main className="p-6">{children}</main>
     </div>
   );
 }
