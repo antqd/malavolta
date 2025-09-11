@@ -1,23 +1,19 @@
 // src/lib/api.ts
-const PROXY_BASE = "/api-proxy"; // usa la rewrite di vercel.json
+const REL_BASE = "/api-proxy";
 
-function withOrigin(path: string) {
-  // se siamo sul server, serve un origin assoluto
-  if (typeof window === "undefined") {
-    // usa NEXT_PUBLIC_SITE_URL oppure la domain di Vercel
-    const site =
-      process.env.NEXT_PUBLIC_SITE_URL ||
-      process.env.VERCEL_URL ||
-      "http://localhost:3000";
-    const origin = site.startsWith("http") ? site : `https://${site}`;
-    return origin + path;
-  }
-  // lato client: le URL relative vanno bene
-  return path;
+function getOrigin() {
+  if (typeof window !== "undefined") return ""; // client: relative ok
+  const site = process.env.NEXT_PUBLIC_SITE_URL || process.env.VERCEL_URL || "";
+  if (!site) return "http://localhost:3000";
+  return site.startsWith("http") ? site : `https://${site}`;
+}
+
+function abs(path: string) {
+  return `${getOrigin()}${path}`;
 }
 
 async function fetchJSON<T>(path: string, init?: RequestInit): Promise<T> {
-  const url = withOrigin(path);
+  const url = abs(path);
   const r = await fetch(url, { ...init, cache: "no-store" });
   const ct = r.headers.get("content-type") || "";
   const data = ct.includes("application/json")
@@ -30,10 +26,10 @@ async function fetchJSON<T>(path: string, init?: RequestInit): Promise<T> {
 export const api = {
   list: (tipo: "nuovi" | "usati", q = "") =>
     fetchJSON(
-      `${PROXY_BASE}/api/trattori/${tipo}${
+      `${REL_BASE}/api/trattori/${tipo}${
         q ? `?q=${encodeURIComponent(q)}` : ""
       }`
     ),
   get: (tipo: "nuovi" | "usati", id: number | string) =>
-    fetchJSON(`${PROXY_BASE}/api/trattori/${tipo}/${id}`),
+    fetchJSON(`${REL_BASE}/api/trattori/${tipo}/${id}`),
 };
