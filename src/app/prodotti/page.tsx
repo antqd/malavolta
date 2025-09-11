@@ -30,13 +30,17 @@ import {
   type Category,
   type Condition,
   type CatalogItem,
+  // ⬇️ helper per il badge “solo 1 disponibile”
+  isLowStock1,
+  LOW_STOCK_LABEL,
 } from "@/app/prodotti/data";
 
 import { Search, Filter, ChevronDown } from "lucide-react";
 
-const gold = "text-[#D5B46E]";
-const deepBlue = "bg-[#0E3A66]";
-const deepBlueText = "text-[#0E3A66]";
+/** Palette nero + giallo */
+const gold = "text-[#FFD700]";
+const deepBlue = "bg-black";       // ex blu → nero
+const deepBlueText = "text-black"; // ex blu → nero
 
 function formatPrice(p?: number) {
   if (!p || p <= 0) return "Su richiesta";
@@ -153,7 +157,7 @@ export default function TrattoriPage() {
                   <div className="mt-3 flex gap-2">
                     <Button
                       variant="outline"
-                      className="bg-white/10 border-white text-white hover:bg-white hover:text-primary"
+                      className="bg-white/10 border-white text-white hover:bg-white hover:text-black"
                       onClick={() => {
                         setQ("");
                         setCond("");
@@ -272,7 +276,7 @@ function Chip({
       className={[
         "px-3 py-1.5 rounded-full text-sm border transition-colors",
         active
-          ? "bg-primary text-white border-primary"
+          ? "bg-[#FFD700] text-black border-[#FFD700]" // ex primary -> giallo
           : "bg-background border-input hover:bg-muted",
       ].join(" ")}
     >
@@ -318,7 +322,7 @@ function ProductCard({ item }: { item: CatalogItem }) {
       </div>
 
       <CardContent className="p-4 space-y-3">
-        {/* titolo + categoria QUI nella parte bianca */}
+        {/* titolo + categoria nella parte bianca */}
         <div>
           <div className="text-xs text-muted-foreground mb-1">
             {CATEGORIES[item.category]}
@@ -334,8 +338,17 @@ function ProductCard({ item }: { item: CatalogItem }) {
             {item.powerHp ? ` • ${item.powerHp} CV` : ""}
             {item.year ? ` • ${item.year}` : ""}
           </div>
-          <div className={`text-sm font-semibold ${deepBlueText}`}>
-            {formatPrice(item.price)}
+
+          {/* Prezzo + “solo 1 disponibile” */}
+          <div className="flex items-center gap-2">
+            <div className={`text-sm font-semibold ${deepBlueText}`}>
+              {formatPrice(item.price)}
+            </div>
+            {isLowStock1(item) && (
+              <span className="text-xs font-semibold text-red-600 whitespace-nowrap">
+                {LOW_STOCK_LABEL}
+              </span>
+            )}
           </div>
         </div>
 
@@ -345,14 +358,19 @@ function ProductCard({ item }: { item: CatalogItem }) {
             className="w-full"
             onClick={(e) => e.stopPropagation()}
           >
-            <Button className="w-full">Dettagli</Button>
+            <Button className="w-full bg-[#FFD700] text-black hover:bg-[#e6c200]">
+              Dettagli
+            </Button>
           </Link>
           <Link
             href="/contatti"
             className="w-full"
             onClick={(e) => e.stopPropagation()}
           >
-            <Button variant="outline" className="w-full">
+            <Button
+              variant="outline"
+              className="w-full border-black text-black hover:bg-[#FFD700] hover:text-black"
+            >
               Richiedi info
             </Button>
           </Link>

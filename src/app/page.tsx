@@ -26,13 +26,10 @@ import {
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-// -----------------------------
-// Contenuti (puoi editarli al volo)
-// -----------------------------
 const HERO = {
   titleTop: " LE TUE SFIDE",
   titleAccent: "DIVENTANO LA NOSTRA MISSIONE",
-  text: "Un’ampia scelta di macchine agricole, attrezzature e servizi post-vendita per accompagnarti in ogni stagione.”",
+  text: "Un’ampia scelta di macchine agricole, attrezzature e servizi post-vendita per accompagnarti in ogni stagione.”",
   bgImage: "/images/home.png",
 };
 
@@ -95,14 +92,10 @@ const CATEGORIE = [
 ];
 
 const BRANDS = [
-  {
-    name: "New Holland",
-    src: "/images/loghi/logo-new-holland-agriculture.png",
-  },
+  { name: "New Holland", src: "/images/loghi/logo-new-holland-agriculture.png" },
   { name: "Merlo", src: "/images/loghi/merlo-logo.png" },
   { name: "CASE IH", src: "/images/loghi/logo-case-IH.png" },
   { name: "Antonio Carraro", src: "/images/loghi/logo-antonio-carraro.png" },
-  // aggiungi/aggiorna i path: meglio PNG/SVG con sfondo trasparente
 ];
 
 const REVIEWS = [
@@ -132,15 +125,11 @@ const REVIEWS = [
   },
 ];
 
-// -----------------------------
-// Pagina
-// -----------------------------
 export default function Home() {
   const pageRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
-      // HERO: entra titolo + testo
       gsap.from(".hero-stagger", {
         opacity: 0,
         y: 28,
@@ -149,7 +138,6 @@ export default function Home() {
         ease: "power2.out",
       });
 
-      // Parallax lieve sull’immagine hero
       gsap.to(".hero-image", {
         yPercent: 12,
         ease: "none",
@@ -161,7 +149,6 @@ export default function Home() {
         },
       });
 
-      // Notizie: reveal su scroll
       gsap.utils.toArray<HTMLElement>(".news-card").forEach((el, i) => {
         gsap.from(el, {
           opacity: 0,
@@ -175,7 +162,6 @@ export default function Home() {
         });
       });
 
-      // Categorie: reveal su scroll
       gsap.utils.toArray<HTMLElement>(".cat-card").forEach((el, i) => {
         gsap.from(el, {
           opacity: 0,
@@ -189,30 +175,16 @@ export default function Home() {
         });
       });
 
-      // Strip brand: auto-marquee (loghi più grandi, senza box)
       const strip = document.querySelector(".brand-strip-inner");
       if (strip) {
         const totalW = strip.scrollWidth / 2;
-        gsap.to(strip, {
-          x: -totalW,
-          ease: "none",
-          duration: 55,
-          repeat: -1,
-        });
+        gsap.to(strip, { x: -totalW, ease: "none", duration: 55, repeat: -1 });
       }
 
-      // Recensioni: marquee orizzontale lenta, pausa all'hover
-      const reviews = document.querySelector(
-        ".reviews-track"
-      ) as HTMLElement | null;
+      const reviews = document.querySelector(".reviews-track") as HTMLElement | null;
       if (reviews) {
         const distance = reviews.scrollWidth / 2;
-        const tween = gsap.to(reviews, {
-          x: -distance,
-          ease: "none",
-          duration: 60,
-          repeat: -1,
-        });
+        const tween = gsap.to(reviews, { x: -distance, ease: "none", duration: 60, repeat: -1 });
         reviews.addEventListener("mouseenter", () => tween.pause());
         reviews.addEventListener("mouseleave", () => tween.resume());
       }
@@ -221,18 +193,14 @@ export default function Home() {
   );
 
   return (
-    <div ref={pageRef} className="min-h-screen bg-background">
+    <div ref={pageRef} className="min-h-screen bg-white">
       <AnimatedIndicatorNavbar />
 
       {/* HERO */}
       <section
         className="hero relative overflow-hidden pt-24 pb-20 md:pb-28"
-        style={{
-          background:
-            "linear-gradient(135deg,#0E3A66 0%,#164B83 50%,#1C6FB2 100%)",
-        }}
+        style={{ background: "linear-gradient(135deg,#000000 0%,#222222 50%,#000000 100%)" }}
       >
-        {/* bg image (parallax) */}
         <div className="absolute inset-0">
           <Image
             src={HERO.bgImage}
@@ -248,22 +216,22 @@ export default function Home() {
           <div>
             <h1 className="hero-stagger text-4xl md:text-6xl font-extrabold tracking-tight">
               <span className="text-white">{HERO.titleTop}</span>{" "}
-              <span className="text-[#D5B46E]">{HERO.titleAccent}</span>
+              <span className="text-[#FFD700]">{HERO.titleAccent}</span>
             </h1>
             <p className="hero-stagger mt-4 text-lg md:text-2xl text-white/90 max-w-3xl">
               {HERO.text}
             </p>
 
             <div className="hero-stagger mt-6 flex flex-wrap gap-3">
-              <Badge className="bg-white/15 border-white/25 text-white">
+              <Badge className="bg-[#FFD700] text-black">
                 <Tractor className="w-4 h-4 mr-2" />
                 Nuovo & Usato
               </Badge>
-              <Badge className="bg-white/15 border-white/25 text-white">
+              <Badge className="bg-[#FFD700] text-black">
                 <Wrench className="w-4 h-4 mr-2" />
                 Assistenza rapida
               </Badge>
-              <Badge className="bg-white/15 border-white/25 text-white">
+              <Badge className="bg-[#FFD700] text-black">
                 <Newspaper className="w-4 h-4 mr-2" />
                 Bandi & Agevolazioni
               </Badge>
@@ -271,15 +239,17 @@ export default function Home() {
 
             <div className="hero-stagger mt-8 flex flex-wrap gap-3">
               <Link href="/trattori">
-                <Button size="lg" variant="secondary" className="text-lg px-7">
+                <Button
+                  size="lg"
+                  className="text-lg px-7 bg-[#FFD700] text-black hover:bg-yellow-400"
+                >
                   Vedi i trattori <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
               <Link href="/contatti">
                 <Button
                   size="lg"
-                  variant="outline"
-                  className="bg-white/10 border-white text-white hover:bg-white hover:text-[#0E3A66] text-lg px-7"
+                  className="text-lg px-7 bg-white border border-black text-black hover:bg-[#FFD700] hover:text-black"
                 >
                   Contattaci
                 </Button>
@@ -287,7 +257,6 @@ export default function Home() {
             </div>
           </div>
 
-          {/* immagine a destra “solida” */}
           <div className="hidden md:block relative min-h-[360px]">
             <Image
               src="/images/home2.png"
@@ -299,30 +268,25 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CATEGORIE PRINCIPALI */}
+      {/* CATEGORIE */}
       <section className="py-16">
         <div className="container">
           <div className="grid gap-6 md:grid-cols-3">
             {CATEGORIE.map((c) => (
               <Link key={c.title} href={c.href} className="cat-card group">
-                <article className="relative overflow-hidden rounded-2xl border bg-card hover:shadow-xl transition-all">
+                <article className="relative overflow-hidden rounded-2xl border bg-white hover:shadow-xl transition-all">
                   <div className="relative aspect-[16/10]">
-                    <Image
-                      src={c.img}
-                      alt={c.title}
-                      fill
-                      className="object-cover"
-                    />
+                    <Image src={c.img} alt={c.title} fill className="object-cover" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                     <div className="absolute bottom-4 left-4 right-4 text-white">
-                      <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-sm backdrop-blur">
+                      <div className="inline-flex items-center gap-2 rounded-full bg-black/60 px-3 py-1 text-sm backdrop-blur">
                         {c.icon}
                         <span>{c.title}</span>
                       </div>
                     </div>
                   </div>
                   <div className="p-5">
-                    <div className="inline-flex items-center text-primary font-medium">
+                    <div className="inline-flex items-center text-[#FFD700] font-medium">
                       Entra <ArrowRight className="ml-2 h-4 w-4" />
                     </div>
                   </div>
@@ -333,50 +297,39 @@ export default function Home() {
         </div>
       </section>
 
-      {/* NOTIZIE IN EVIDENZA (con immagine) */}
-      <section className="py-14 bg-muted/40">
+      {/* NOTIZIE */}
+      <section className="py-14 bg-gray-50">
         <div className="container">
           <div className="flex items-end justify-between mb-6">
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-[#0E3A66]">
+              <h2 className="text-2xl md:text-3xl font-bold text-black">
                 Notizie in evidenza
               </h2>
-              <p className="text-muted-foreground">
+              <p className="text-gray-600">
                 Bandi, agevolazioni, consegne e novità dal mondo Malavolta.
               </p>
             </div>
-            <Link
-              href="/blog"
-              className="text-primary inline-flex items-center"
-            >
+            <Link href="/blog" className="text-[#FFD700] inline-flex items-center">
               Vai al blog <ChevronRight className="ml-1 h-4 w-4" />
             </Link>
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {NEWS.map((n, i) => (
+            {NEWS.map((n) => (
               <Link key={n.slug} href={`/blog/${n.slug}`} className="group">
                 <Card className="news-card hover:shadow-lg transition-shadow overflow-hidden">
                   <div className="relative aspect-[16/10]">
-                    <Image
-                      src={n.img}
-                      alt={n.title}
-                      unoptimized
-                      fill
-                      className="object-cover"
-                    />
+                    <Image src={n.img} alt={n.title} fill className="object-cover" />
                   </div>
                   <CardContent className="p-5">
-                    <Badge variant="secondary" className="mb-3">
+                    <Badge className="mb-3 bg-[#FFD700] text-black">
                       {n.tag}
                     </Badge>
                     <h3 className="font-semibold mb-2 leading-snug line-clamp-2">
                       {n.title}
                     </h3>
-                    <p className="text-sm text-muted-foreground line-clamp-3">
-                      {n.excerpt}
-                    </p>
-                    <div className="mt-3 text-sm text-primary inline-flex items-center">
+                    <p className="text-sm text-gray-600 line-clamp-3">{n.excerpt}</p>
+                    <div className="mt-3 text-sm text-[#FFD700] inline-flex items-center">
                       Leggi di più <ChevronRight className="ml-1 h-4 w-4" />
                     </div>
                   </CardContent>
@@ -387,24 +340,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* RIVENDITORI AUTORIZZATI / STRIP BRAND (loghi più grandi, senza box) */}
-      <section className="py-10 bg-[#0E3A66] text-white overflow-hidden">
+      {/* BRANDS */}
+      <section className="py-10 bg-black text-white overflow-hidden">
         <div className="container mb-5">
-          <h3 className="text-lg font-semibold text-white">
-            Rivenditori autorizzati
-          </h3>
+          <h3 className="text-lg font-semibold text-white">Rivenditori autorizzati</h3>
         </div>
         <div className="relative">
           <div className="brand-strip-inner flex gap-14 whitespace-nowrap will-change-transform items-center">
             {[...BRANDS, ...BRANDS].map((b, i) => (
               <div key={i} className="shrink-0 px-2 flex items-center">
                 <div className="relative h-12 w-44">
-                  <Image
-                    src={b.src}
-                    alt={b.name}
-                    fill
-                    className="object-contain"
-                  />
+                  <Image src={b.src} alt={b.name} fill className="object-contain" />
                 </div>
               </div>
             ))}
@@ -412,49 +358,38 @@ export default function Home() {
         </div>
       </section>
 
-      {/* RECENSIONI SCORREVOLI */}
-      <section className="py-14 bg-muted/40 overflow-hidden">
+      {/* RECENSIONI */}
+      <section className="py-14 bg-gray-50 overflow-hidden">
         <div className="container mb-6">
-          <h2 className="text-2xl md:text-3xl font-bold text-[#0E3A66]">
+          <h2 className="text-2xl md:text-3xl font-bold text-black">
             Cosa dicono i nostri clienti
           </h2>
-          <p className="text-muted-foreground">
-            Recensioni verificate da aziende agricole e professionisti.
-          </p>
+          <p className="text-gray-600">Recensioni verificate da aziende agricole e professionisti.</p>
         </div>
 
         <div className="relative">
           <div className="reviews-viewport overflow-hidden">
             <div className="reviews-track flex gap-6 px-4 will-change-transform">
               {[...REVIEWS, ...REVIEWS].map((r, i) => (
-                <Card
-                  key={i}
-                  className="shrink-0 w-[360px] md:w-[420px] hover:shadow-lg transition-shadow"
-                >
+                <Card key={i} className="shrink-0 w-[360px] md:w-[420px] hover:shadow-lg transition-shadow">
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between">
                       <div>
                         <div className="font-semibold">{r.name}</div>
-                        <div className="text-xs text-muted-foreground">
-                          {r.company}
-                        </div>
+                        <div className="text-xs text-gray-600">{r.company}</div>
                       </div>
                       <div className="flex">
                         {Array.from({ length: 5 }).map((_, idx) => (
                           <Star
                             key={idx}
                             className={`h-4 w-4 ${
-                              idx < r.rating
-                                ? "text-yellow-500 fill-yellow-500"
-                                : "text-muted-foreground/40"
+                              idx < r.rating ? "text-[#FFD700] fill-[#FFD700]" : "text-gray-300"
                             }`}
                           />
                         ))}
                       </div>
                     </div>
-                    <p className="mt-4 text-sm text-muted-foreground leading-relaxed">
-                      “{r.text}”
-                    </p>
+                    <p className="mt-4 text-sm text-gray-600 leading-relaxed">“{r.text}”</p>
                   </CardContent>
                 </Card>
               ))}
@@ -463,31 +398,31 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA FINALE */}
-      <section className="py-16 bg-gradient-to-br from-[#0E3A66] to-[#1C6FB2] text-white">
+      {/* CTA */}
+      <section className="py-16 bg-gradient-to-br from-black to-[#222222] text-white">
         <div className="container grid md:grid-cols-2 gap-10 items-center">
           <div>
             <h3 className="text-3xl font-bold">
               Hai bisogno di un preventivo o vuoi una consulenza?
             </h3>
             <p className="mt-3 text-white/90">
-              Siamo al tuo fianco: finanziamenti, officina, ricambi e
-              configurazioni su misura.
+              Siamo al tuo fianco: finanziamenti, officina, ricambi e configurazioni su misura.
             </p>
             <div className="mt-6 flex gap-3">
               <Link href="/contatti">
-                <Button size="lg" variant="secondary" className="text-lg px-7">
+                <Button
+                  size="lg"
+                  className="text-lg px-7 bg-[#FFD700] text-black hover:bg-yellow-400"
+                >
                   Contattaci <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
               <Link href="/servizi">
                 <Button
                   size="lg"
-                  variant="outline"
-                  className="bg-white/10 border-white text-white hover:bg-white hover:text-[#0E3A66] text-lg px-7"
+                  className="text-lg px-7 bg-white border border-black text-black hover:bg-[#FFD700] hover:text-black"
                 >
                   Scopri i servizi
-                  {/* ,kjb */}
                 </Button>
               </Link>
             </div>
@@ -502,7 +437,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* dio bestia */}
 
       <SiteFooter />
     </div>

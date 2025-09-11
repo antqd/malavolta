@@ -29,11 +29,11 @@ import {
 } from "lucide-react";
 import SiteFooter from "@/components/footers/newsletter-footer";
 
-/** Palette coerente col sito */
-const gold = "text-[#D5B46E]";
-const goldBg = "bg-[#D5B46E]";
-const deepBlue = "bg-[#0E3A66]";
-const deepBlueText = "text-[#0E3A66]";
+/** Palette coerente col sito (nero + giallo) */
+const gold = "text-[#FFD700]";
+const goldBg = "bg-[#FFD700]";
+const deepBlue = "bg-black";          // prima blu
+const deepBlueText = "text-black";    // prima blu
 
 /* ================================
    SLIDER "INFINITO" DEI LOGHI (MARQUEE)
@@ -137,7 +137,7 @@ export default function RicambiPage() {
         <div className="container">
           <Card className="overflow-hidden border-border/50">
             <div className="grid md:grid-cols-2">
-              {/* Blocco testo blu */}
+              {/* Blocco testo (nero) */}
               <div className={`${deepBlue} text-white p-8 md:p-12`}>
                 <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
                   <span className={gold}>RICAMBI</span>{" "}
@@ -199,7 +199,7 @@ export default function RicambiPage() {
                     value={codice}
                     onChange={(e) => setCodice(e.target.value)}
                     placeholder="Es. RE68766"
-                    className="mt-1"
+                    className="mt-1 focus:border-[#FFD700] focus:ring-[#FFD700]"
                   />
                 </div>
                 <div>
@@ -210,12 +210,12 @@ export default function RicambiPage() {
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="Es. filtro idraulico, pompa..."
-                    className="mt-1"
+                    className="mt-1 focus:border-[#FFD700] focus:ring-[#FFD700]"
                   />
                 </div>
                 <Button
                   type="submit"
-                  className="mt-6 md:mt-7 bg-primary hover:bg-primary/90"
+                  className="mt-6 md:mt-7 bg-[#FFD700] text-black hover:bg-[#e6c200]"
                 >
                   <Search className="h-4 w-4 mr-2" />
                   Ricerca
@@ -239,7 +239,7 @@ export default function RicambiPage() {
         <div className="container">
           <Card className="overflow-hidden border-border/50">
             <div className="grid lg:grid-cols-[360px_1fr]">
-              {/* Pannello info */}
+              {/* Pannello info (nero) */}
               <div className={`${deepBlue} text-white p-8`}>
                 <h3 className="text-2xl font-extrabold">
                   <span className={gold}>
@@ -266,7 +266,7 @@ export default function RicambiPage() {
               </div>
 
               {/* Filtri */}
-              <div className="p-6 md:p-8 bg-[#D5B46E]/10">
+              <div className="p-6 md:p-8 bg-[#FFD700]/10">
                 <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
                   <SelectBlock
                     label="STATO"
@@ -365,7 +365,7 @@ export default function RicambiPage() {
           <div className="grid gap-6 md:grid-cols-3">
             <Card className="text-center border-border/50">
               <CardHeader>
-                <Wrench className="h-10 w-10 text-primary mx-auto mb-2" />
+                <Wrench className="h-10 w-10 mx-auto mb-2 text-[#FFD700]" />
                 <CardTitle>Ricambi Originali & Compatibili</CardTitle>
                 <CardDescription>
                   Scelta ampia con consigli del nostro team
@@ -374,7 +374,7 @@ export default function RicambiPage() {
             </Card>
             <Card className="text-center border-border/50">
               <CardHeader>
-                <Shield className="h-10 w-10 text-primary mx-auto mb-2" />
+                <Shield className="h-10 w-10 mx-auto mb-2 text-[#FFD700]" />
                 <CardTitle>Qualità Garantita</CardTitle>
                 <CardDescription>
                   Standard ISO e test su ogni articolo
@@ -383,7 +383,7 @@ export default function RicambiPage() {
             </Card>
             <Card className="text-center border-border/50">
               <CardHeader>
-                <Clock className="h-10 w-10 text-primary mx-auto mb-2" />
+                <Clock className="h-10 w-10 mx-auto mb-2 text-[#FFD700]" />
                 <CardTitle>Spedizione Rapida</CardTitle>
                 <CardDescription>
                   24/48h con tracking e supporto
@@ -416,7 +416,7 @@ export default function RicambiPage() {
           <div className="text-center mt-8">
             <a
               href="/loghi"
-              className="inline-flex items-center rounded-md border px-4 py-2 text-sm hover:bg-accent/10"
+              className="inline-flex items-center rounded-md border px-4 py-2 text-sm hover:bg-[#FFD700]/10"
             >
               Vedi tutti i loghi e collaborazioni
               <ArrowRight className="ml-2 h-4 w-4" />
@@ -451,7 +451,7 @@ function SelectBlock({
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD700] focus:border-[#FFD700]"
       >
         <option value="">Scegli</option>
         {options.map((o) => (

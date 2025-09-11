@@ -15,10 +15,17 @@ import { Badge } from "@/components/ui/badge";
 import { Phone, ArrowRight } from "lucide-react";
 
 import type { CatalogItem } from "../data";
-import { ITEMS, CATEGORIES } from "../data";
+import {
+  ITEMS,
+  CATEGORIES,
+  // helper per badge “solo 1 disponibile”
+  isLowStock1,
+  LOW_STOCK_LABEL,
+} from "../data";
 
-const deepBlueText = "text-[#0E3A66]";
-const deepBlue = "bg-[#0E3A66]";
+// —— Palette nero + giallo
+const deepBlueText = "text-black"; // ex blu -> nero
+const deepBlue = "bg-black"; // ex blu -> nero
 
 // — utils
 function formatPrice(n?: number) {
@@ -75,7 +82,7 @@ export default function ProdottoDettaglio({
           </div>
 
           <div className="grid lg:grid-cols-[minmax(0,1fr)_480px] gap-10 items-start">
-            {/* ————— LEFT: gallery + descrizione + scheda tecniche ————— */}
+            {/* — LEFT: gallery + descrizione + scheda tecniche — */}
             <div className="space-y-5">
               {/* COVER */}
               <div className="relative aspect-[4/3] rounded-xl overflow-hidden border">
@@ -212,7 +219,7 @@ export default function ProdottoDettaglio({
               </Card>
             </div>
 
-            {/* ————— RIGHT: titolo, prezzo, box rapidi + form ————— */}
+            {/* — RIGHT: titolo, prezzo, box rapidi + form — */}
             <div>
               <h1 className={`text-3xl md:text-4xl font-bold ${deepBlueText}`}>
                 {item.title}
@@ -226,6 +233,12 @@ export default function ProdottoDettaglio({
                 <span className="text-sm font-normal text-muted-foreground">
                   + IVA
                 </span>
+                {/* Badge ROSSO “solo 1 disponibile” */}
+                {isLowStock1(item) && (
+                  <span className="text-sm font-semibold text-red-600">
+                    {LOW_STOCK_LABEL}
+                  </span>
+                )}
               </div>
 
               {/* riassunto rapido */}
@@ -255,13 +268,20 @@ export default function ProdottoDettaglio({
 
               <div className="mt-6 flex gap-3">
                 <Link href="tel:+390983497243">
-                  <Button size="lg" className={`${deepBlue} text-white`}>
+                  <Button
+                    size="lg"
+                    className={`${deepBlue} text-white hover:bg-black/90`}
+                  >
                     <Phone className="mr-2 h-4 w-4" />
                     Chiama ora
                   </Button>
                 </Link>
                 <a href="#contatto" className="inline-flex">
-                  <Button size="lg" variant="outline">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="border-black text-black hover:bg-[#FFD700] hover:text-black"
+                  >
                     Richiedi preventivo
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
@@ -283,7 +303,9 @@ export default function ProdottoDettaglio({
                   <Textarea placeholder="Messaggio" className="min-h-[120px]" />
                   <input type="hidden" value={item.id} />
                   <div className="flex gap-3">
-                    <Button className={`${deepBlue} text-white`}>
+                    <Button
+                      className={`${deepBlue} text-white hover:bg-black/90`}
+                    >
                       Invia richiesta
                     </Button>
                     <span className="text-sm text-muted-foreground self-center">
@@ -300,7 +322,7 @@ export default function ProdottoDettaglio({
   );
 }
 
-/* ————— piccoli componenti tipizzati ————— */
+/* — piccoli componenti tipizzati — */
 function SpecRow({ k, v }: { k: string; v: string }) {
   return (
     <div className="flex items-center justify-between rounded-md border p-3 text-sm">

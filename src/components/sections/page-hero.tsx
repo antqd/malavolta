@@ -20,8 +20,8 @@ export default function PageHero({
     <section
       className="relative pt-28 pb-20 overflow-hidden"
       style={{
-        background:
-          "linear-gradient(135deg,#0E3A66 0%,#164B83 50%,#1C6FB2 100%)",
+        // da blu -> nero
+        background: "linear-gradient(135deg,#000000 0%,#222222 50%,#000000 100%)",
       }}
     >
       <Image
@@ -35,7 +35,8 @@ export default function PageHero({
       <div className="relative container z-10 text-white">
         <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">
           <span className="text-white">{titleWhite} </span>
-          <span className="text-[#D5B46E]">{titleGold}</span>
+          {/* accento giallo */}
+          <span className="text-[#FFD700]">{titleGold}</span>
         </h1>
 
         {description && (
