@@ -377,18 +377,20 @@ export default function Home() {
         </div>
         <div className="relative">
           <div className="brand-strip-inner flex gap-14 whitespace-nowrap will-change-transform items-center">
-            {[...BRANDS, ...BRANDS].map((b, i) => (
-              <div key={i} className="shrink-0 px-2 flex items-center">
-                <div className="relative h-12 w-44">
-                  <Image
-                    src={b.src}
-                    alt={b.name}
-                    fill
-                    className="object-contain"
-                  />
+            {[...BRANDS, ...BRANDS]
+              .filter((b) => b.src && b.src.trim() !== "")
+              .map((b, i) => (
+                <div key={i} className="shrink-0 px-2 flex items-center">
+                  <div className="relative h-12 w-44">
+                    <Image
+                      src={b.src}
+                      alt={b.name || "Brand"}
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
       </section>
