@@ -96,9 +96,34 @@ const BRANDS = [
     name: "New Holland",
     src: "/images/loghi/logo-new-holland-agriculture.png",
   },
-  { name: "Merlo", src: "/images/loghi/merlo-logo.png" },
-  { name: "CASE IH", src: "/images/loghi/logo-case-IH.png" },
-  { name: "Antonio Carraro", src: "/images/loghi/logo-antonio-carraro.png" },
+  {
+    name: "Landini",
+    src: "/images/loghi/logo-landini.png",
+  },
+  {
+    name: "Massey Ferguson",
+    src: "/images/loghi/logo-massey-ferguson.png",
+  },
+  {
+    name: "Ambrogio",
+    src: "/images/loghi/Ambrogio.png",
+  },
+  {
+    name: "Ferri",
+    src: "/images/loghi/logo-ferri.png",
+  },
+  {
+    name: "McCormick",
+    src: "/images/loghi/logo-mccormick.png",
+  },
+  {
+    name: "Kuhn",
+    src: "/images/loghi/logo-kuhn.png",
+  },
+  {
+    name: "Carraro",
+    src: "/images/loghi/logo-carraro.png",
+  },
 ];
 
 const REVIEWS = [
@@ -448,7 +473,7 @@ export default function Home() {
       <section className="py-16 bg-gradient-to-br from-black to-[#222222] text-white">
         <div className="container grid md:grid-cols-2 gap-10 items-center">
           <div>
-            <h3 className="text-3xl font-bold">
+            <h3 className="text-3xl font-bold text-yellow-500">
               Hai bisogno di un preventivo o vuoi una consulenza?
             </h3>
             <p className="mt-3 text-white/90">
