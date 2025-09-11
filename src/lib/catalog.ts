@@ -30,3 +30,6 @@ export function formatPriceCents(cents?: number) {
 export function tipoToTitle(t: Tipo) {
   return t === "nuovi" ? "Trattori nuovi" : "Trattori usati";
 }
+
+export const LOW_STOCK_LABEL = "solo 1 disponibile";
+export const isLowStock1 = (t?: Trattore) => !!t && Number(t.quantity) === 1;

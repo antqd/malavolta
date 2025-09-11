@@ -291,7 +291,7 @@ function ProductCard({ item }: { item: CatalogItem }) {
 
   return (
     <Card
-      onClick={() => router.push(`/prodotti/${item.slug}`)}
+      onClick={() => router.push(`/trattori/${item.slug}`)}
       className="overflow-hidden group hover:shadow-md transition-shadow border-border/60 cursor-pointer"
     >
       <div className="relative aspect-[4/3] bg-muted">

@@ -33,11 +33,11 @@ import {
   HeadphonesIcon,
 } from "lucide-react";
 
-// palette
-const gold = "text-[#D5B46E]";
-const goldBg = "bg-[#D5B46E]";
-const deepBlue = "bg-[#0E3A66]";
-const deepBlueText = "text-[#0E3A66]";
+// PALETTE giallo + nero
+const gold = "text-[#FFD700]";
+const goldBg = "bg-[#FFD700]";
+const deepBlue = "bg-black"; // ex blu → nero
+const deepBlueText = "text-black"; // ex blu → nero
 const white = "text-white";
 
 export default function ServiziClient({
@@ -183,13 +183,13 @@ export default function ServiziClient({
     <div className="min-h-screen bg-background">
       <AnimatedIndicatorNavbar />
 
-      {/* HERO (senza animazioni) */}
+      {/* HERO */}
       <section
         ref={heroRef}
         className="relative pt-28 pb-20 overflow-hidden"
         style={{
           background:
-            "linear-gradient(135deg,#0E3A66 0%,#164B83 50%,#1C6FB2 100%)",
+            "linear-gradient(135deg,#000000 0%,#222222 50%,#000000 100%)",
         }}
       >
         <Image
@@ -224,7 +224,7 @@ export default function ServiziClient({
         </div>
       </section>
 
-      {/* SEZIONI PRINCIPALI (immagini centrate e stabili) */}
+      {/* SEZIONI PRINCIPALI */}
       <section className="py-14">
         <div className="container space-y-8">
           {/* POST VENDITA */}
@@ -265,7 +265,6 @@ export default function ServiziClient({
                 </div>
               </div>
 
-              {/* wrapper immagine con altezza minima stabile */}
               <div className="relative min-h-[260px] md:min-h-[420px]">
                 <Image
                   src="/images/postvendita.png"
@@ -420,8 +419,6 @@ export default function ServiziClient({
         </div>
       </section>
 
-      {/* --- SEZIONI MANCANTI (senza animazioni) --- */}
-
       {/* Competenze & Certificazioni */}
       <section className="py-16 bg-background">
         <div className="container">
@@ -437,8 +434,8 @@ export default function ServiziClient({
             {certifications.map((c, i) => (
               <Card key={i} className="text-center hover:shadow-md transition">
                 <CardHeader>
-                  <div className="mx-auto w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mb-4">
-                    <c.icon className="w-8 h-8 text-accent" />
+                  <div className="mx-auto w-16 h-16 bg-[#FFD700]/10 rounded-full flex items-center justify-center mb-4">
+                    <c.icon className="w-8 h-8 text-[#FFD700]" />
                   </div>
                   <CardTitle className="text-lg">{c.title}</CardTitle>
                 </CardHeader>
@@ -491,12 +488,14 @@ export default function ServiziClient({
               <Card key={i} className="border-border/50">
                 <CardContent className="p-6 space-y-4">
                   <div className="flex justify-center gap-1">
-                    {Array.from({ length: t.rating }).map((_, idx) => (
-                      <Star
-                        key={idx}
-                        className="w-5 h-5 fill-[#8FD19E] text-[#8FD19E]"
-                      />
-                    ))}
+                    {Array.from({ length: Math.round(t.rating) }).map(
+                      (_, idx) => (
+                        <Star
+                          key={idx}
+                          className="w-5 h-5 fill-[#8FD19E] text-[#8FD19E]"
+                        />
+                      )
+                    )}
                   </div>
                   <blockquote className="text-center italic text-muted-foreground">
                     “{t.content}”
@@ -561,7 +560,7 @@ export default function ServiziClient({
                   placeholder="Descrivi la tua richiesta..."
                   className="min-h-[120px]"
                 />
-                <Button className={`${deepBlue} text-white hover:opacity-90`}>
+                <Button className={`${deepBlue} text-white hover:bg-black/90`}>
                   <Phone className="w-4 h-4 mr-2" />
                   Invia richiesta
                 </Button>
@@ -601,8 +600,6 @@ export default function ServiziClient({
           </Card>
         </div>
       </section>
-
-
     </div>
   );
 }

@@ -23,7 +23,7 @@ import {
 
 import { api } from "@/lib/api";
 import type { Trattore } from "@/lib/catalog";
-import { formatPriceCents } from "@/lib/catalog";
+import { formatPriceCents, LOW_STOCK_LABEL, isLowStock1 } from "@/lib/catalog";
 
 const deepBlue = "bg-black";
 const deepBlueText = "text-black";
@@ -51,8 +51,7 @@ export default function TrattoriNuoviPage() {
       setLoading(true);
       setErr(null);
       const d = await api.list("nuovi", q);
-      // Assert the type of d to match the expected response
-      setItems((d as { items?: Trattore[] }).items || []);
+      setItems((d as any).items || []);
     } catch (e: any) {
       setErr(e.message);
     } finally {
@@ -101,7 +100,6 @@ export default function TrattoriNuoviPage() {
         ]}
       />
 
-      {/* Header filtri */}
       <section className="pt-24">
         <div className="container">
           <Card className="overflow-hidden border-border/50">
@@ -165,7 +163,6 @@ export default function TrattoriNuoviPage() {
         </div>
       </section>
 
-      {/* ordinamento */}
       <section className="py-4 bg-muted/40">
         <div className="container flex justify-end">
           <div className="relative w-full md:w-56">
@@ -183,7 +180,6 @@ export default function TrattoriNuoviPage() {
         </div>
       </section>
 
-      {/* elenco */}
       <section className="py-10">
         <div className="container">
           <div className="mb-6 text-sm text-muted-foreground">
@@ -220,7 +216,7 @@ function ProductCard({
   const router = useRouter();
   return (
     <Card
-      onClick={() => router.push(`/prodotti/${tipo}/${item.id}`)}
+      onClick={() => router.push(`/trattori/${tipo}/${item.id}`)}
       className="overflow-hidden group hover:shadow-md transition-shadow border-border/60 cursor-pointer"
     >
       <div className="relative aspect-[4/3] bg-muted">
@@ -234,19 +230,26 @@ function ProductCard({
           loading="lazy"
         />
       </div>
-      <CardContent className="p-4 space-y-3">
+      <CardContent className="p-4 space-y-2">
         <h3 className="text-lg font-semibold">{item.name}</h3>
-        <div className="flex items-center justify-between">
-          <div className="text-sm text-muted-foreground">
+        <div className="flex items-center justify-between gap-2">
+          <div className="text-sm text-muted-foreground line-clamp-2">
             {item.description || "—"}
           </div>
-          <div className={`text-sm font-semibold ${deepBlueText}`}>
+          <div
+            className={`text-sm font-semibold ${deepBlueText} whitespace-nowrap`}
+          >
             {formatPriceCents(item.price_cents)}
           </div>
         </div>
-        <div className="flex gap-2">
+        {isLowStock1(item) && (
+          <div className="text-xs font-semibold text-red-600">
+            {LOW_STOCK_LABEL}
+          </div>
+        )}
+        <div className="flex gap-2 pt-1">
           <Link
-            href={`/prodotti/${tipo}/${item.id}`}
+            href={`/trattori/${tipo}/${item.id}`}
             onClick={(e) => e.stopPropagation()}
             className="w-full"
           >
