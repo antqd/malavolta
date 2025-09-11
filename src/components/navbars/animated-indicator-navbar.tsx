@@ -113,7 +113,7 @@ const AnimatedIndicatorNavbar = () => {
                         isActive
                           ? "text-black"
                           : "text-gray-600 hover:text-black",
-                        "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD700] focus-visible:ring-offset-2 focus-visible:ring-offset-white rounded",
+                        "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#eeff00] focus-visible:ring-offset-2 focus-visible:ring-offset-white rounded",
                       ].join(" ")}
                     >
                       {item.name}
@@ -126,7 +126,7 @@ const AnimatedIndicatorNavbar = () => {
             {activeItem && (
               <div
                 ref={indicatorRef}
-                className="pointer-events-none absolute -bottom-0.5 h-0.5 bg-[#FFD700] transition-all duration-300"
+                className="pointer-events-none absolute -bottom-0.5 h-0.5 bg-[#fffb00fe] transition-all duration-300"
               />
             )}
           </NavigationMenuList>

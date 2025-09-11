@@ -92,7 +92,10 @@ const CATEGORIE = [
 ];
 
 const BRANDS = [
-  { name: "New Holland", src: "/images/loghi/logo-new-holland-agriculture.png" },
+  {
+    name: "New Holland",
+    src: "/images/loghi/logo-new-holland-agriculture.png",
+  },
   { name: "Merlo", src: "/images/loghi/merlo-logo.png" },
   { name: "CASE IH", src: "/images/loghi/logo-case-IH.png" },
   { name: "Antonio Carraro", src: "/images/loghi/logo-antonio-carraro.png" },
@@ -181,10 +184,17 @@ export default function Home() {
         gsap.to(strip, { x: -totalW, ease: "none", duration: 55, repeat: -1 });
       }
 
-      const reviews = document.querySelector(".reviews-track") as HTMLElement | null;
+      const reviews = document.querySelector(
+        ".reviews-track"
+      ) as HTMLElement | null;
       if (reviews) {
         const distance = reviews.scrollWidth / 2;
-        const tween = gsap.to(reviews, { x: -distance, ease: "none", duration: 60, repeat: -1 });
+        const tween = gsap.to(reviews, {
+          x: -distance,
+          ease: "none",
+          duration: 60,
+          repeat: -1,
+        });
         reviews.addEventListener("mouseenter", () => tween.pause());
         reviews.addEventListener("mouseleave", () => tween.resume());
       }
@@ -199,7 +209,10 @@ export default function Home() {
       {/* HERO */}
       <section
         className="hero relative overflow-hidden pt-24 pb-20 md:pb-28"
-        style={{ background: "linear-gradient(135deg,#000000 0%,#222222 50%,#000000 100%)" }}
+        style={{
+          background:
+            "linear-gradient(135deg,#000000 0%,#222222 50%,#000000 100%)",
+        }}
       >
         <div className="absolute inset-0">
           <Image
@@ -276,7 +289,12 @@ export default function Home() {
               <Link key={c.title} href={c.href} className="cat-card group">
                 <article className="relative overflow-hidden rounded-2xl border bg-white hover:shadow-xl transition-all">
                   <div className="relative aspect-[16/10]">
-                    <Image src={c.img} alt={c.title} fill className="object-cover" />
+                    <Image
+                      src={c.img}
+                      alt={c.title}
+                      fill
+                      className="object-cover"
+                    />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                     <div className="absolute bottom-4 left-4 right-4 text-white">
                       <div className="inline-flex items-center gap-2 rounded-full bg-black/60 px-3 py-1 text-sm backdrop-blur">
@@ -286,7 +304,7 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="p-5">
-                    <div className="inline-flex items-center text-[#FFD700] font-medium">
+                    <div className="inline-flex items-center text-[#000000] font-medium">
                       Entra <ArrowRight className="ml-2 h-4 w-4" />
                     </div>
                   </div>
@@ -309,7 +327,10 @@ export default function Home() {
                 Bandi, agevolazioni, consegne e novità dal mondo Malavolta.
               </p>
             </div>
-            <Link href="/blog" className="text-[#FFD700] inline-flex items-center">
+            <Link
+              href="/blog"
+              className="text-[#000000] inline-flex items-center"
+            >
               Vai al blog <ChevronRight className="ml-1 h-4 w-4" />
             </Link>
           </div>
@@ -319,7 +340,12 @@ export default function Home() {
               <Link key={n.slug} href={`/blog/${n.slug}`} className="group">
                 <Card className="news-card hover:shadow-lg transition-shadow overflow-hidden">
                   <div className="relative aspect-[16/10]">
-                    <Image src={n.img} alt={n.title} fill className="object-cover" />
+                    <Image
+                      src={n.img}
+                      alt={n.title}
+                      fill
+                      className="object-cover"
+                    />
                   </div>
                   <CardContent className="p-5">
                     <Badge className="mb-3 bg-[#FFD700] text-black">
@@ -328,8 +354,10 @@ export default function Home() {
                     <h3 className="font-semibold mb-2 leading-snug line-clamp-2">
                       {n.title}
                     </h3>
-                    <p className="text-sm text-gray-600 line-clamp-3">{n.excerpt}</p>
-                    <div className="mt-3 text-sm text-[#FFD700] inline-flex items-center">
+                    <p className="text-sm text-gray-600 line-clamp-3">
+                      {n.excerpt}
+                    </p>
+                    <div className="mt-3 text-sm text-[#000000] inline-flex items-center">
                       Leggi di più <ChevronRight className="ml-1 h-4 w-4" />
                     </div>
                   </CardContent>
@@ -343,14 +371,21 @@ export default function Home() {
       {/* BRANDS */}
       <section className="py-10 bg-black text-white overflow-hidden">
         <div className="container mb-5">
-          <h3 className="text-lg font-semibold text-white">Rivenditori autorizzati</h3>
+          <h3 className="text-lg font-semibold text-white">
+            Rivenditori autorizzati
+          </h3>
         </div>
         <div className="relative">
           <div className="brand-strip-inner flex gap-14 whitespace-nowrap will-change-transform items-center">
             {[...BRANDS, ...BRANDS].map((b, i) => (
               <div key={i} className="shrink-0 px-2 flex items-center">
                 <div className="relative h-12 w-44">
-                  <Image src={b.src} alt={b.name} fill className="object-contain" />
+                  <Image
+                    src={b.src}
+                    alt={b.name}
+                    fill
+                    className="object-contain"
+                  />
                 </div>
               </div>
             ))}
@@ -364,14 +399,19 @@ export default function Home() {
           <h2 className="text-2xl md:text-3xl font-bold text-black">
             Cosa dicono i nostri clienti
           </h2>
-          <p className="text-gray-600">Recensioni verificate da aziende agricole e professionisti.</p>
+          <p className="text-gray-600">
+            Recensioni verificate da aziende agricole e professionisti.
+          </p>
         </div>
 
         <div className="relative">
           <div className="reviews-viewport overflow-hidden">
             <div className="reviews-track flex gap-6 px-4 will-change-transform">
               {[...REVIEWS, ...REVIEWS].map((r, i) => (
-                <Card key={i} className="shrink-0 w-[360px] md:w-[420px] hover:shadow-lg transition-shadow">
+                <Card
+                  key={i}
+                  className="shrink-0 w-[360px] md:w-[420px] hover:shadow-lg transition-shadow"
+                >
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between">
                       <div>
@@ -383,13 +423,17 @@ export default function Home() {
                           <Star
                             key={idx}
                             className={`h-4 w-4 ${
-                              idx < r.rating ? "text-[#FFD700] fill-[#FFD700]" : "text-gray-300"
+                              idx < r.rating
+                                ? "text-[#FFD700] fill-[#FFD700]"
+                                : "text-gray-300"
                             }`}
                           />
                         ))}
                       </div>
                     </div>
-                    <p className="mt-4 text-sm text-gray-600 leading-relaxed">“{r.text}”</p>
+                    <p className="mt-4 text-sm text-gray-600 leading-relaxed">
+                      “{r.text}”
+                    </p>
                   </CardContent>
                 </Card>
               ))}
@@ -406,7 +450,8 @@ export default function Home() {
               Hai bisogno di un preventivo o vuoi una consulenza?
             </h3>
             <p className="mt-3 text-white/90">
-              Siamo al tuo fianco: finanziamenti, officina, ricambi e configurazioni su misura.
+              Siamo al tuo fianco: finanziamenti, officina, ricambi e
+              configurazioni su misura.
             </p>
             <div className="mt-6 flex gap-3">
               <Link href="/contatti">
