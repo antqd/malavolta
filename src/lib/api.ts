@@ -1,4 +1,5 @@
-const BASE = process.env.NEXT_PUBLIC_API_BASE || "http://127.0.0.1:4000";
+// src/lib/api.ts
+const BASE = "/api-proxy"; // <-- usa il proxy, sempre https same-origin
 
 async function fetchJSON<T>(url: string, init?: RequestInit): Promise<T> {
   const r = await fetch(url, { ...init, cache: "no-store" });
@@ -6,10 +7,7 @@ async function fetchJSON<T>(url: string, init?: RequestInit): Promise<T> {
   const data = ct.includes("application/json")
     ? await r.json()
     : await r.text();
-  if (!r.ok) {
-    const msg = (data as any)?.error || (data as any)?.raw || String(data);
-    throw new Error(msg);
-  }
+  if (!r.ok) throw new Error((data as any)?.error || String(data));
   return data as T;
 }
 
