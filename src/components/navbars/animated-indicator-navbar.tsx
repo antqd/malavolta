@@ -27,7 +27,8 @@ const NAV_LOGO = {
 
 const NAV_ITEMS = [
   { name: "Chi Siamo", link: "/chi-siamo" },
-  { name: "Trattori", link: "/prodotti" },
+  { name: "Trattori Nuovi", link: "/trattori/nuovi" },
+  { name: "Trattori Usati", link: "/trattori/usati" },
   { name: "Ricambi", link: "/ricambi" },
   { name: "Servizi", link: "/servizi" },
   { name: "Blog", link: "/blog" },

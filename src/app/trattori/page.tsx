@@ -33,7 +33,7 @@ import {
   // ⬇️ helper per il badge “solo 1 disponibile”
   isLowStock1,
   LOW_STOCK_LABEL,
-} from "@/app/prodotti/data";
+} from "@/app/trattori/data";
 
 import { Search, Filter, ChevronDown } from "lucide-react";
 
