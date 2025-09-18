@@ -1,164 +1,119 @@
-// src/app/login/page.tsx
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
-
-import { AnimatedIndicatorNavbar } from "@/components/navbars/animated-indicator-navbar";
-import SiteFooter from "@/components/footers/newsletter-footer";
-
-import { Card, CardContent } from "@/components/ui/card";
+import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Mail, Lock, ArrowRight, Shield, Clock } from "lucide-react";
-
-// PALETTE giallo + nero
-const gold = "text-[#FFD700]";
-const goldBg = "bg-[#FFD700]";
-const deep = "bg-black";
-const deepText = "text-black";
+import { Mail, Lock, Eye, EyeOff, ArrowRight } from "lucide-react";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
-  const [remember, setRemember] = useState(true);
-
-  const submit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // solo front: gestisci qui eventuale validazione client
-    console.log({ email, pwd, remember });
-  };
+  const [showPwd, setShowPwd] = useState(false);
 
   return (
-    <div className="min-h-screen bg-background">
-      <AnimatedIndicatorNavbar />
-
-      {/* Hero compatto */}
-      <section
-        className="relative pt-28 pb-16 overflow-hidden"
-        style={{
-          background: "linear-gradient(135deg,#000000 0%,#222222 50%,#000000 100%)",
-        }}
-      >
+    <div className="grid min-h-screen grid-cols-1 lg:grid-cols-2 bg-muted/30">
+      {/* LEFT: foto + overlay testo IN ALTO A SINISTRA */}
+      <div className="relative hidden lg:block">
         <Image
           src="/images/postvendita.png"
-          alt="Background"
+          alt="Malavolta"
           fill
           priority
-          sizes="100vw"
-          className="object-cover opacity-20"
+          sizes="(min-width:1024px) 50vw, 100vw"
+          className="object-cover"
         />
-        <div className="relative container z-10 text-white">
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">
-            <span className="text-white">ACCEDI</span>{" "}
-            <span className={gold}>ALLA TUA AREA</span>
-          </h1>
-          <div className="mt-4 flex flex-wrap gap-3">
-            <Badge className="bg-white/15 border-white/25 text-white">
-              <Shield className="w-4 h-4 mr-2" /> Sicuro
-            </Badge>
-            <Badge className="bg-white/15 border-white/25 text-white">
-              <Clock className="w-4 h-4 mr-2" /> Veloce
-            </Badge>
-          </div>
-        </div>
-      </section>
+        <div className="absolute inset-0 bg-black/45" />
 
-      {/* Card login */}
-      <section className="py-12">
-        <div className="container max-w-4xl">
-          <Card className="overflow-hidden border-border/50">
-            <div className="grid md:grid-cols-2">
-              {/* Lato immagine/claim */}
-              <div className={`${deep} text-white p-8 md:p-12`}>
-                <h2 className="text-2xl font-bold">
-                  Benvenuto in <span className={gold}>Malavolta</span>
-                </h2>
-                <p className="mt-3 text-white/90">
-                  Gestisci richieste, preventivi e storico in un’unica area personale.
-                </p>
-                <ul className="mt-6 space-y-2 text-white/90 text-sm">
-                  <li>• Salva i tuoi preferiti</li>
-                  <li>• Richieste più rapide</li>
-                  <li>• Tracciamento stato pratiche</li>
-                </ul>
-                <div className="mt-8">
-                  <Link href="/registrati" className="inline-flex">
-                    <Button className={`${goldBg} ${deepText} hover:opacity-90`}>
-                      Crea un account <ArrowRight className="ml-2 w-4 h-4" />
-                    </Button>
-                  </Link>
-                </div>
+        {/* --> testo in alto a sinistra */}
+        <div className="absolute top-6 left-6 md:top-8 md:left-8 xl:top-10 xl:left-10">
+          <h1 className="text-4xl font-extrabold leading-tight text-white drop-shadow-sm">
+            <span className="text-white/90">Benvenuto nel </span>
+            <span className="text-[#FFD700]">Portale</span>
+          </h1>
+          <p className="mt-2 text-white/80 max-w-xl">
+            Accedi per gestire richieste, preventivi e lo stato delle pratiche.
+          </p>
+        </div>
+      </div>
+
+      {/* RIGHT: card login */}
+      <div className="flex items-center justify-center p-6 sm:p-10">
+        <div className="w-full max-w-xl rounded-2xl bg-white shadow-sm border border-border/50 p-6 sm:p-8">
+          <h2 className="text-3xl font-bold tracking-tight text-black">Accedi</h2>
+
+          <form
+            className="mt-6 space-y-5"
+            onSubmit={(e) => {
+              e.preventDefault();
+              // submit mock
+            }}
+          >
+            {/* Email */}
+            <div>
+              <label className="text-sm font-medium text-black">Email</label>
+              <div className="relative mt-1">
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/70 pointer-events-none" />
+                <Input
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="nome@azienda.it"
+                  className="h-11 pl-9 bg-black text-white placeholder-white/60 border-neutral-700 focus-visible:ring-2 focus-visible:ring-[#FFD700] focus-visible:ring-offset-0"
+                  required
+                />
+              </div>
+            </div>
+
+            {/* Password */}
+            <div>
+              <label className="text-sm font-medium text-black">Password</label>
+              <div className="relative mt-1">
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/70 pointer-events-none" />
+                <Input
+                  type={showPwd ? "text" : "password"}
+                  value={pwd}
+                  onChange={(e) => setPwd(e.target.value)}
+                  placeholder="••••••••"
+                  className="h-11 pl-9 pr-10 bg-black text-white placeholder-white/60 border-neutral-700 focus-visible:ring-2 focus-visible:ring-[#FFD700] focus-visible:ring-offset-0"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPwd((v) => !v)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-white/80 hover:text-white"
+                  aria-label={showPwd ? "Nascondi password" : "Mostra password"}
+                >
+                  {showPwd ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </button>
               </div>
 
-              {/* Form */}
-              <CardContent className="p-8 md:p-12">
-                <form onSubmit={submit} className="space-y-5">
-                  <div>
-                    <label className="text-sm font-medium">Email</label>
-                    <div className="relative mt-1">
-                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                      <Input
-                        type="email"
-                        placeholder="nome@azienda.it"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="pl-9"
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="text-sm font-medium">Password</label>
-                    <div className="relative mt-1">
-                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                      <Input
-                        type="password"
-                        placeholder="••••••••"
-                        value={pwd}
-                        onChange={(e) => setPwd(e.target.value)}
-                        className="pl-9"
-                        required
-                      />
-                    </div>
-                    <div className="mt-2 text-right">
-                      <a className="text-sm underline decoration-[#FFD700] hover:opacity-80" href="#">
-                        Password dimenticata?
-                      </a>
-                    </div>
-                  </div>
-
-                  <label className="flex items-center gap-2 select-none">
-                    <input
-                      type="checkbox"
-                      checked={remember}
-                      onChange={(e) => setRemember(e.target.checked)}
-                      className="h-4 w-4 rounded border-input"
-                    />
-                    <span className="text-sm">Ricordami su questo dispositivo</span>
-                  </label>
-
-                  <Button type="submit" className={`${goldBg} ${deepText} w-full hover:opacity-90`}>
-                    Accedi
-                  </Button>
-
-                  <p className="text-sm text-muted-foreground text-center">
-                    Non hai un account?{" "}
-                    <Link href="/registrati" className="text-[#FFD700] underline">
-                      Registrati
-                    </Link>
-                  </p>
-                </form>
-              </CardContent>
+              <div className="mt-2 text-right">
+                <a
+                  href="#"
+                  className="text-sm underline decoration-[#FFD700] hover:opacity-80 text-black"
+                >
+                  Password dimenticata?
+                </a>
+              </div>
             </div>
-          </Card>
-        </div>
-      </section>
 
-      <SiteFooter />
+            <Button
+              type="submit"
+              className="w-full h-11 bg-[#FFD700] text-black hover:bg-[#e6c200] font-semibold"
+            >
+              Accedi <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </form>
+
+          <p className="mt-6 text-center text-sm text-muted-foreground">
+            Non hai un account?{" "}
+            <Link href="/register" className="font-medium underline decoration-[#FFD700] text-black">
+              Registrati
+            </Link>
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

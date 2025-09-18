@@ -1,223 +1,126 @@
-// src/app/registrati/page.tsx
 "use client";
 
-import { useMemo, useState } from "react";
-import Image from "next/image";
+import { useState } from "react";
 import Link from "next/link";
-
-import { AnimatedIndicatorNavbar } from "@/components/navbars/animated-indicator-navbar";
-import SiteFooter from "@/components/footers/newsletter-footer";
-
-import { Card, CardContent } from "@/components/ui/card";
+import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { User, Mail, Lock, ShieldCheck, ArrowRight } from "lucide-react";
+import { Mail, Lock, User, Eye, EyeOff, ArrowRight } from "lucide-react";
 
-// PALETTE giallo + nero
-const gold = "text-[#FFD700]";
-const goldBg = "bg-[#FFD700]";
-const deep = "bg-black";
-const deepText = "text-black";
-
-export default function RegistratiPage() {
-  const [nome, setNome] = useState("");
-  const [cognome, setCognome] = useState("");
+export default function RegisterPage() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
-  const [pwd2, setPwd2] = useState("");
-  const [privacy, setPrivacy] = useState(false);
-
-  const pwdMatch = useMemo(() => (!pwd && !pwd2) || pwd === pwd2, [pwd, pwd2]);
-  const canSubmit = useMemo(() => {
-    return nome && cognome && email && pwd && pwd2 && pwdMatch && privacy;
-  }, [nome, cognome, email, pwd, pwd2, pwdMatch, privacy]);
-
-  const submit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!canSubmit) return;
-    // solo front
-    console.log({ nome, cognome, email, pwd });
-  };
+  const [showPwd, setShowPwd] = useState(false);
 
   return (
-    <div className="min-h-screen bg-background">
-      <AnimatedIndicatorNavbar />
-
-      {/* Hero compatto */}
-      <section
-        className="relative pt-28 pb-16 overflow-hidden"
-        style={{
-          background: "linear-gradient(135deg,#000000 0%,#222222 50%,#000000 100%)",
-        }}
-      >
+    <div className="grid min-h-screen grid-cols-1 lg:grid-cols-2 bg-muted/30">
+      {/* LEFT: foto + overlay testo IN ALTO A SINISTRA */}
+      <div className="relative hidden lg:block">
         <Image
-          src="/images/home.png"
-          alt="Background"
+          src="/images/postvendita.png"
+          alt="Malavolta"
           fill
           priority
-          sizes="100vw"
-          className="object-cover opacity-20"
+          sizes="(min-width:1024px) 50vw, 100vw"
+          className="object-cover"
         />
-        <div className="relative container z-10 text-white">
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">
-            <span className="text-white">CREA IL TUO</span>{" "}
-            <span className={gold}>ACCOUNT</span>
+        <div className="absolute inset-0 bg-black/45" />
+
+        {/* --> testo in alto a sinistra */}
+        <div className="absolute top-6 left-6 md:top-8 md:left-8 xl:top-10 xl:left-10">
+          <h1 className="text-4xl font-extrabold leading-tight text-white drop-shadow-sm">
+            <span className="text-white/90">Crea il tuo account </span>
+            <span className="text-[#FFD700]">Malavolta</span>
           </h1>
-          <div className="mt-4 flex flex-wrap gap-3">
-            <Badge className="bg-white/15 border-white/25 text-white">
-              <ShieldCheck className="w-4 h-4 mr-2" /> Dati protetti
-            </Badge>
-          </div>
+          <p className="mt-2 text-white/80 max-w-xl">
+            Accedi a servizi, richieste e tracciamento pratiche.
+          </p>
         </div>
-      </section>
+      </div>
 
-      {/* Card registrazione */}
-      <section className="py-12">
-        <div className="container max-w-4xl">
-          <Card className="overflow-hidden border-border/50">
-            <div className="grid md:grid-cols-2">
-              {/* Lato immagine/benefit */}
-              <div className={`${deep} text-white p-8 md:p-12`}>
-                <h2 className="text-2xl font-bold">
-                  Entra nella <span className={gold}>community</span>
-                </h2>
-                <ul className="mt-4 space-y-2 text-white/90 text-sm">
-                  <li>• Preventivi più rapidi</li>
-                  <li>• Storico richieste e preferiti</li>
-                  <li>• Offerte e promozioni dedicate</li>
-                </ul>
+      {/* RIGHT: card registrazione */}
+      <div className="flex items-center justify-center p-6 sm:p-10">
+        <div className="w-full max-w-xl rounded-2xl bg-white shadow-sm border border-border/50 p-6 sm:p-8">
+          <h2 className="text-3xl font-bold tracking-tight text-black">Registrati</h2>
 
-                <div className="mt-8 text-sm text-white/80">
-                  Hai già un account?{" "}
-                  <Link href="/login" className="text-[#FFD700] underline">
-                    Accedi
-                  </Link>
-                </div>
+          <form
+            className="mt-6 space-y-5"
+            onSubmit={(e) => {
+              e.preventDefault();
+              // submit mock
+            }}
+          >
+            {/* Nome */}
+            <div>
+              <label className="text-sm font-medium text-black">Nome</label>
+              <div className="relative mt-1">
+                <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/70 pointer-events-none" />
+                <Input
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Mario Rossi"
+                  className="h-11 pl-9 bg-black text-white placeholder-white/60 border-neutral-700 focus-visible:ring-2 focus-visible:ring-[#FFD700] focus-visible:ring-offset-0"
+                  required
+                />
               </div>
-
-              {/* Form */}
-              <CardContent className="p-8 md:p-12">
-                <form onSubmit={submit} className="space-y-5">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="text-sm font-medium">Nome</label>
-                      <div className="relative mt-1">
-                        <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                        <Input
-                          placeholder="Mario"
-                          value={nome}
-                          onChange={(e) => setNome(e.target.value)}
-                          className="pl-9"
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium">Cognome</label>
-                      <div className="relative mt-1">
-                        <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                        <Input
-                          placeholder="Rossi"
-                          value={cognome}
-                          onChange={(e) => setCognome(e.target.value)}
-                          className="pl-9"
-                          required
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="text-sm font-medium">Email</label>
-                    <div className="relative mt-1">
-                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                      <Input
-                        type="email"
-                        placeholder="nome@azienda.it"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="pl-9"
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="text-sm font-medium">Password</label>
-                      <div className="relative mt-1">
-                        <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                        <Input
-                          type="password"
-                          placeholder="••••••••"
-                          value={pwd}
-                          onChange={(e) => setPwd(e.target.value)}
-                          className="pl-9"
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium">Conferma password</label>
-                      <div className="relative mt-1">
-                        <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                        <Input
-                          type="password"
-                          placeholder="••••••••"
-                          value={pwd2}
-                          onChange={(e) => setPwd2(e.target.value)}
-                          className={`pl-9 ${pwd && pwd2 ? (pwdMatch ? "border-emerald-400" : "border-red-500") : ""}`}
-                          required
-                        />
-                      </div>
-                      {!pwdMatch && (
-                        <p className="mt-1 text-xs text-red-600">
-                          Le password non coincidono.
-                        </p>
-                      )}
-                    </div>
-                  </div>
-
-                  <label className="flex items-start gap-2 text-sm">
-                    <input
-                      type="checkbox"
-                      checked={privacy}
-                      onChange={(e) => setPrivacy(e.target.checked)}
-                      className="mt-1 h-4 w-4 rounded border-input"
-                      required
-                    />
-                    <span>
-                      Accetto il trattamento dei dati personali secondo la{" "}
-                      <a href="#" className="underline text-[#FFD700]">
-                        Privacy Policy
-                      </a>
-                      .
-                    </span>
-                  </label>
-
-                  <Button
-                    type="submit"
-                    disabled={!canSubmit}
-                    className={`${goldBg} ${deepText} w-full hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed`}
-                  >
-                    Crea account <ArrowRight className="ml-2 w-4 h-4" />
-                  </Button>
-
-                  <p className="text-sm text-muted-foreground text-center">
-                    Hai già un account?{" "}
-                    <Link href="/login" className="text-[#FFD700] underline">
-                      Accedi
-                    </Link>
-                  </p>
-                </form>
-              </CardContent>
             </div>
-          </Card>
-        </div>
-      </section>
 
-      <SiteFooter />
+            {/* Email */}
+            <div>
+              <label className="text-sm font-medium text-black">Email</label>
+              <div className="relative mt-1">
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/70 pointer-events-none" />
+                <Input
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="nome@azienda.it"
+                  className="h-11 pl-9 bg-black text-white placeholder-white/60 border-neutral-700 focus-visible:ring-2 focus-visible:ring-[#FFD700] focus-visible:ring-offset-0"
+                  required
+                />
+              </div>
+            </div>
+
+            {/* Password */}
+            <div>
+              <label className="text-sm font-medium text-black">Password</label>
+              <div className="relative mt-1">
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/70 pointer-events-none" />
+                <Input
+                  type={showPwd ? "text" : "password"}
+                  value={pwd}
+                  onChange={(e) => setPwd(e.target.value)}
+                  placeholder="••••••••"
+                  className="h-11 pl-9 pr-10 bg-black text-white placeholder-white/60 border-neutral-700 focus-visible:ring-2 focus-visible:ring-[#FFD700] focus-visible:ring-offset-0"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPwd((v) => !v)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-white/80 hover:text-white"
+                  aria-label={showPwd ? "Nascondi password" : "Mostra password"}
+                >
+                  {showPwd ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </button>
+              </div>
+            </div>
+
+            <Button
+              type="submit"
+              className="w-full h-11 bg-[#FFD700] text-black hover:bg-[#e6c200] font-semibold"
+            >
+              Crea account <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </form>
+
+          <p className="mt-6 text-center text-sm text-muted-foreground">
+            Hai già un account?{" "}
+            <Link href="/login" className="font-medium underline decoration-[#FFD700] text-black">
+              Accedi
+            </Link>
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
