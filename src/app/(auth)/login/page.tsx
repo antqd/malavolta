@@ -58,7 +58,7 @@ export default function LoginPage() {
                 <Input
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="nome@azienda.it"
+                  placeholder="Inserisci la tua email..."
                   className="h-11 pl-9 bg-black text-white placeholder-white/60 border-neutral-700 focus-visible:ring-2 focus-visible:ring-[#FFD700] focus-visible:ring-offset-0"
                   required
                 />
@@ -74,7 +74,7 @@ export default function LoginPage() {
                   type={showPwd ? "text" : "password"}
                   value={pwd}
                   onChange={(e) => setPwd(e.target.value)}
-                  placeholder="••••••••"
+                  placeholder="Inserisci la tua password..."
                   className="h-11 pl-9 pr-10 bg-black text-white placeholder-white/60 border-neutral-700 focus-visible:ring-2 focus-visible:ring-[#FFD700] focus-visible:ring-offset-0"
                   required
                 />
