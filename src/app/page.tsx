@@ -73,13 +73,13 @@ const NEWS = [
 const CATEGORIE = [
   {
     title: "Trattori nuovi",
-    href: "/ttrattori/nuovi",
+    href: "/trattori/nuovi",
     img: "/images/trattori.png",
     icon: <Tractor className="h-5 w-5" />,
   },
   {
     title: "Trattori usati",
-    href: "/ttrattori/usati",
+    href: "/trattori/usati",
     img: "/images/trattori2.png",
     icon: <ShoppingCart className="h-5 w-5" />,
   },
