@@ -73,13 +73,13 @@ const NEWS = [
 const CATEGORIE = [
   {
     title: "Trattori nuovi",
-    href: "/prodotti?condizione=nuovo",
+    href: "/ttrattori/nuovi",
     img: "/images/trattori.png",
     icon: <Tractor className="h-5 w-5" />,
   },
   {
     title: "Trattori usati",
-    href: "/prodotti?condizione=usato",
+    href: "/ttrattori/usati",
     img: "/images/trattori2.png",
     icon: <ShoppingCart className="h-5 w-5" />,
   },
@@ -276,7 +276,7 @@ export default function Home() {
             </div>
 
             <div className="hero-stagger mt-8 flex flex-wrap gap-3">
-              <Link href="/trattori">
+              <Link href="/trattori/nuovi">
                 <Button
                   size="lg"
                   className="text-lg px-7 bg-[#FFD700] text-black hover:bg-yellow-400"
