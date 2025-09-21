@@ -12,6 +12,23 @@ export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
   const [showPwd, setShowPwd] = useState(false);
+  const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const BASE =
+      process.env.NEXT_PUBLIC_API_URL || "https://api.alfonsomalavolta.com";
+    const r = await fetch(`${BASE}/api/auth/register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({ name, email, password: pwd }),
+    });
+    const data = await r.json();
+    if (!r.ok) {
+      // mostra errore data.error
+      return;
+    }
+    window.location.href = "/";
+  };
 
   return (
     <div className="grid min-h-screen grid-cols-1 lg:grid-cols-2 bg-muted/30">
@@ -42,7 +59,9 @@ export default function RegisterPage() {
       {/* RIGHT: card registrazione */}
       <div className="flex items-center justify-center p-6 sm:p-10">
         <div className="w-full max-w-xl rounded-2xl bg-white shadow-sm border border-border/50 p-6 sm:p-8">
-          <h2 className="text-3xl font-bold tracking-tight text-black">Registrati</h2>
+          <h2 className="text-3xl font-bold tracking-tight text-black">
+            Registrati
+          </h2>
 
           <form
             className="mt-6 space-y-5"
@@ -100,13 +119,18 @@ export default function RegisterPage() {
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-white/80 hover:text-white"
                   aria-label={showPwd ? "Nascondi password" : "Mostra password"}
                 >
-                  {showPwd ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  {showPwd ? (
+                    <EyeOff className="h-4 w-4" />
+                  ) : (
+                    <Eye className="h-4 w-4" />
+                  )}
                 </button>
               </div>
             </div>
 
             <Button
               type="submit"
+              onClick={onSubmit}
               className="w-full h-11 bg-[#FFD700] text-black hover:bg-[#e6c200] font-semibold"
             >
               Crea account <ArrowRight className="ml-2 h-4 w-4" />
@@ -115,7 +139,10 @@ export default function RegisterPage() {
 
           <p className="mt-6 text-center text-sm text-muted-foreground">
             Hai già un account?{" "}
-            <Link href="/login" className="font-medium underline decoration-[#FFD700] text-black">
+            <Link
+              href="/login"
+              className="font-medium underline decoration-[#FFD700] text-black"
+            >
               Accedi
             </Link>
           </p>

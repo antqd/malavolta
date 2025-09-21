@@ -35,15 +35,54 @@ const NAV_ITEMS = [
   { name: "Contatti", link: "/contatti" },
 ];
 
+// === Config API ===
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "https://api.alfonsomalavolta.com";
+
+// === Hook sessione minimale ===
+function useSession() {
+  const [authChecked, setAuthChecked] = useState(false);
+  const [user, setUser] = useState<null | {
+    id: string | number;
+    name: string;
+    email: string;
+  }>(null);
+
+  useEffect(() => {
+    let alive = true;
+    (async () => {
+      try {
+        const r = await fetch(`${API_BASE}/api/auth/me`, {
+          credentials: "include",
+        });
+        if (!alive) return;
+        if (r.ok) {
+          const data = await r.json();
+          if (data?.user) setUser(data.user);
+        }
+      } catch {
+        // silenzio: se fallisce, consideriamo non autenticato
+      } finally {
+        if (alive) setAuthChecked(true);
+      }
+    })();
+    return () => {
+      alive = false;
+    };
+  }, []);
+
+  return { user, authChecked };
+}
+
 const AnimatedIndicatorNavbar = () => {
   const pathname = usePathname();
+  const { user, authChecked } = useSession();
 
   const [activeItem, setActiveItem] = useState<string>("");
 
   const indicatorRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLUListElement>(null);
 
-  // aggiorna l'item attivo al cambio pagina (match esatto; in "/" nessuno)
+  // aggiorna l'item attivo al cambio pagina
   useEffect(() => {
     if (pathname === "/") {
       setActiveItem("");
@@ -122,7 +161,27 @@ const AnimatedIndicatorNavbar = () => {
                 </NavigationMenuItem>
               );
             })}
-            {/* Indicatore giallo: mostrato solo se c'è un attivo */}
+
+            {/* --- Accedi: mostrato solo se NON autenticato (niente flash finché non sappiamo) --- */}
+            {authChecked && !user && (
+              <NavigationMenuItem key="accedi">
+                <NavigationMenuLink asChild>
+                  <Link
+                    href="/login"
+                    data-nav-item="accedi"
+                    className={[
+                      "relative cursor-pointer text-sm font-medium transition-colors px-3 py-1.5 rounded border",
+                      "border-[#ffae00] bg-gradient-to-r from-yellow-400 to-orange-400 text-black hover:opacity-90",
+                      "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#eeff00] focus-visible:ring-offset-2 focus-visible:ring-offset-white",
+                    ].join(" ")}
+                  >
+                    Accedi
+                  </Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+            )}
+
+            {/* Indicatore giallo */}
             {activeItem && (
               <div
                 ref={indicatorRef}
@@ -133,7 +192,12 @@ const AnimatedIndicatorNavbar = () => {
         </NavigationMenu>
 
         {/* Mobile */}
-        <MobileNav activeItem={activeItem} setActiveItem={setActiveItem} />
+        <MobileNav
+          activeItem={activeItem}
+          setActiveItem={setActiveItem}
+          isAuthed={!!user}
+          authChecked={authChecked}
+        />
       </nav>
     </section>
   );
@@ -141,7 +205,7 @@ const AnimatedIndicatorNavbar = () => {
 
 export { AnimatedIndicatorNavbar };
 
-/* --- Mobile nav: stessa struttura, palette nero/giallo --- */
+/* --- Mobile nav --- */
 const AnimatedHamburger = ({ isOpen }: { isOpen: boolean }) => (
   <div className="group relative h-6 w-6">
     <Menu
@@ -160,14 +224,18 @@ const AnimatedHamburger = ({ isOpen }: { isOpen: boolean }) => (
 const MobileNav = ({
   activeItem,
   setActiveItem,
+  isAuthed,
+  authChecked,
 }: {
   activeItem: string;
   setActiveItem: (item: string) => void;
+  isAuthed: boolean;
+  authChecked: boolean;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
-  // sincronizza stato anche su mobile (in "/" nessuno attivo)
+  // sincronizza stato anche su mobile
   useEffect(() => {
     if (pathname === "/") {
       setActiveItem("");
@@ -212,6 +280,19 @@ const MobileNav = ({
                 </li>
               );
             })}
+
+            {/* Bottone accedi mobile – mostrato solo se non autenticato */}
+            {authChecked && !isAuthed && (
+              <li className="mt-2 px-6">
+                <Link
+                  href="/login"
+                  onClick={() => setIsOpen(false)}
+                  className="block text-center rounded border border-[#ffae00] bg-gradient-to-r from-yellow-400 to-orange-400 px-4 py-2 text-sm font-semibold text-black hover:opacity-90"
+                >
+                  Accedi
+                </Link>
+              </li>
+            )}
           </ul>
         </PopoverContent>
       </Popover>

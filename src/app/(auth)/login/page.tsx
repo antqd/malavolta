@@ -12,6 +12,26 @@ export default function LoginPage() {
   const [pwd, setPwd] = useState("");
   const [showPwd, setShowPwd] = useState(false);
 
+  const BASE =
+    process.env.NEXT_PUBLIC_API_URL || "https://api.alfonsomalavolta.com";
+
+  const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const r = await fetch(`${BASE}/api/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include", // <--- IMPORTANTE
+      body: JSON.stringify({ email, password: pwd }),
+    });
+    const data = await r.json();
+    if (!r.ok) {
+      // mostra errore data.error
+      return;
+    }
+    // redirect dove vuoi (es. /area-personale)
+    window.location.href = "/";
+  };
+
   return (
     <div className="grid min-h-screen grid-cols-1 lg:grid-cols-2 bg-muted/30">
       {/* LEFT: foto + overlay testo IN ALTO A SINISTRA */}
@@ -41,7 +61,9 @@ export default function LoginPage() {
       {/* RIGHT: card login */}
       <div className="flex items-center justify-center p-6 sm:p-10">
         <div className="w-full max-w-xl rounded-2xl bg-white shadow-sm border border-border/50 p-6 sm:p-8">
-          <h2 className="text-3xl font-bold tracking-tight text-black">Accedi</h2>
+          <h2 className="text-3xl font-bold tracking-tight text-black">
+            Accedi
+          </h2>
 
           <form
             className="mt-6 space-y-5"
@@ -84,7 +106,11 @@ export default function LoginPage() {
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-white/80 hover:text-white"
                   aria-label={showPwd ? "Nascondi password" : "Mostra password"}
                 >
-                  {showPwd ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  {showPwd ? (
+                    <EyeOff className="h-4 w-4" />
+                  ) : (
+                    <Eye className="h-4 w-4" />
+                  )}
                 </button>
               </div>
 
@@ -100,6 +126,7 @@ export default function LoginPage() {
 
             <Button
               type="submit"
+              onClick={onSubmit}
               className="w-full h-11 bg-[#FFD700] text-black hover:bg-[#e6c200] font-semibold"
             >
               Accedi <ArrowRight className="ml-2 h-4 w-4" />
@@ -108,7 +135,10 @@ export default function LoginPage() {
 
           <p className="mt-6 text-center text-sm text-muted-foreground">
             Non hai un account?{" "}
-            <Link href="/register" className="font-medium underline decoration-[#FFD700] text-black">
+            <Link
+              href="/register"
+              className="font-medium underline decoration-[#FFD700] text-black"
+            >
               Registrati
             </Link>
           </p>
