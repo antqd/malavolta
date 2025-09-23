@@ -32,6 +32,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="it" className={poppins.className}>
+      <head>
+        <meta
+          name="google-site-verification"
+          content="hIeTtf4vSQ-nM7pORW0lH9Dm2p6tA_qEEP6gOshu6qw"
+        />{" "}
+      </head>
       <body className="antialiased">
         <ErrorReporter />
         <Script

@@ -271,7 +271,7 @@ const MobileNav = ({
                     className={[
                       "flex items-center border-l-[3px] px-6 py-4 text-sm font-medium transition-all",
                       isActive
-                        ? "border-[#FFD700] text-black"
+                        ? "border-[#fde040] text-black"
                         : "border-transparent text-gray-600 hover:text-black",
                     ].join(" ")}
                   >
