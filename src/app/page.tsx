@@ -29,7 +29,7 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 const HERO = {
   titleTop: " LE TUE SFIDE",
   titleAccent: "DIVENTANO LA NOSTRA MISSIONE",
-  text: "Un’ampia scelta di macchine agricole, attrezzature e servizi post-vendita per accompagnarti in ogni stagione.”",
+  text: "Un’ampia scelta di macchine agricole, attrezzature e servizi post-vendita per accompagnarti in ogni stagione.",
   bgImage: "/images/home.png",
 };
 
