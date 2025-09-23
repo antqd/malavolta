@@ -156,7 +156,7 @@ export default function ChiSiamo() {
         </div>
       </section>
       {/* STAFF — commerciale */}
-      <section className="py-16">
+      {/* <section className="py-16">
         <div className="container">
           <h2 className={`text-3xl md:text-4xl font-bold ${deepBlackText} mb-10 text-center`}>
             Il nostro team
@@ -184,7 +184,7 @@ export default function ChiSiamo() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* RISORSE UMANE */}
       <section className="py-16 bg-gray-50">
