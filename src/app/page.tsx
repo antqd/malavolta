@@ -126,30 +126,31 @@ const BRANDS = [
   },
 ];
 
+// RECENSIONI (aggiornate)
 const REVIEWS = [
   {
-    name: "Marco R.",
-    company: "Azienda Agricola Rossi",
+    name: "Lorenzo F.",
+    company: "Soc. Agricola Verde Campo",
     rating: 5,
-    text: "Professionali e velocissimi nel post-vendita. Trattore consegnato puntuale e pronto lavoro.",
+    text: "Acquisto impeccabile: consegna puntuale e supporto serio. Hanno configurato il mezzo in base ai nostri appezzamenti.",
   },
   {
-    name: "Giulia P.",
-    company: "Vigneti del Sole",
-    rating: 5,
-    text: "Consulenza top per il vigneto. Hanno proposto la macchina perfetta per i nostri filari.",
-  },
-  {
-    name: "Davide B.",
-    company: "Coop. Santa Maria",
+    name: "Marta G.",
+    company: "Frutteti Valmarecchia",
     rating: 4,
-    text: "Ottimo usato, come descritto. Assistenza precisa e ricambi disponibili in tempi brevi.",
+    text: "Macchine affidabili e tecnici disponibili. Un piccolo slittamento sui tempi, ma assistenza davvero risolutiva.",
   },
   {
-    name: "Elisa C.",
-    company: "Ortofrutta C.",
+    name: "Alessandro T.",
+    company: "Azienda Cereali TerraNova",
     rating: 5,
-    text: "Finanziamento gestito senza stress. Esperienza d’acquisto semplice e chiara.",
+    text: "Dal preventivo al finanziamento, tutto seguito con chiarezza. Il trattore arriva già pronto lavoro, zero perdite di tempo.",
+  },
+  {
+    name: "Chiara L.",
+    company: "Coop. Orti di Pianura",
+    rating: 5,
+    text: "Ricambi sempre disponibili e prezzi onesti. Consulenza concreta per scegliere l’attrezzatura giusta per l’orto.",
   },
 ];
 
@@ -205,7 +206,7 @@ export default function Home() {
 
       const strip = document.querySelector(".brand-strip-inner");
       if (strip) {
-        const totalW = strip.scrollWidth / 2;
+        const totalW = (strip as HTMLElement).scrollWidth / 2;
         gsap.to(strip, { x: -totalW, ease: "none", duration: 55, repeat: -1 });
       }
 
