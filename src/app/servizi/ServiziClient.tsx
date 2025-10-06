@@ -236,7 +236,7 @@ export default function ServiziClient({
                   <span className={white}>VENDITA</span>
                 </h2>
                 <p className="mt-4 text-white/90 max-w-prose">
-                  La Giovanni Malavolta assiste il cliente per tutto ciò che
+                  La Alfonso Malavolta assiste il cliente per tutto ciò che
                   serve dopo l’acquisto di un mezzo agricolo: ricambi originali,
                   garanzia, interventi rapidi e supporto dedicato.
                 </p>
