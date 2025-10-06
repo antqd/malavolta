@@ -113,26 +113,21 @@ export default function ChiSiamo() {
       <section className="py-14">
         <div className="container max-w-5xl">
           <h2 className={`text-3xl md:text-4xl font-bold ${deepBlackText} mb-6`}>
-            TESTO
+            IN ALLESTIMENTO
           </h2>
           <div className="prose prose-neutral max-w-none leading-relaxed text-gray-600">
-            <p>TESTO</p>
-            <p>TESTO</p>
-            <p>TESTO</p>
-            <p>
-              TESTO <strong>TESTO</strong> TESTO
-            </p>
+            
           </div>
 
           <h3 className={`mt-10 text-2xl md:text-3xl font-bold ${deepBlackText}`}>
-            TESTO
+            
           </h3>
-          <p className="mt-3 text-gray-600">TESTO</p>
+          <p className="mt-3 text-gray-600"></p>
 
           <h3 className={`mt-10 text-2xl md:text-3xl font-bold ${deepBlackText}`}>
-            TESTO
+            
           </h3>
-          <p className="mt-3 text-gray-600">TESTO</p>
+          <p className="mt-3 text-gray-600"></p>
         </div>
       </section>
 <section className="py-10 bg-muted/30">
