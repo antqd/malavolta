@@ -21,7 +21,7 @@ import {
   SkeletonCard,
   contactHref,
   getPlaceholdersForBrand,
-} from "../../page";
+} from "../../shared";
 
 export default function BrandCatalogPage() {
   const params = useParams<{ brandId: string }>();

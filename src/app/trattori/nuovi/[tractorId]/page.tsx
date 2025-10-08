@@ -19,8 +19,14 @@ import {
   isLowStock1,
 } from "@/lib/catalog";
 
-import { BRAND_BY_ID, PrettyFrame, contactHref, getPlaceholderById, imgSrc } from "../page";
-import type { PlaceholderTractor } from "../page";
+import {
+  BRAND_BY_ID,
+  PrettyFrame,
+  contactHref,
+  getPlaceholderById,
+  imgSrc,
+} from "../shared";
+import type { PlaceholderTractor } from "../shared";
 
 type DetailState =
   | { status: "idle" | "loading"; data?: Trattore; error?: string }
@@ -90,9 +96,13 @@ export default function TractorDetailPage() {
             <Button
               variant="ghost"
               className="px-0 text-muted-foreground hover:text-foreground"
-              onClick={() =>
-                router.back?.() ? router.back() : router.push("/trattori/nuovi")
-              }
+              onClick={() => {
+                if (typeof window !== "undefined" && window.history.length > 1) {
+                  router.back();
+                } else {
+                  router.push("/trattori/nuovi");
+                }
+              }}
             >
               <ArrowLeft className="mr-2 h-4 w-4" />
               Torna alla lista
