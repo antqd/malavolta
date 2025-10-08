@@ -53,7 +53,7 @@ const BRANDS: Brand[] = [
     id: "newholland",
     label: "New Holland",
     query: "New Holland",
-    logo: "/images/loghi/logo-new-holland.png",
+    logo: "/images/loghi/logo-new-holland-agriculture.png",
     accentFrom: "#0047B3",
     accentTo: "#FFD700",
   },
@@ -74,6 +74,194 @@ const BRANDS: Brand[] = [
     accentTo: "#000000",
   },
 ];
+
+const contactHref = (brand: string, model: string) =>
+  `/contatti?brand=${encodeURIComponent(brand)}&modello=${encodeURIComponent(model)}`;
+
+type PlaceholderTractor = {
+  id: string;
+  name: string;
+  image: string;
+  description: string;
+  priceLabel: string;
+  href: string;
+  specs: string[];
+  badge?: string;
+};
+
+const PLACEHOLDER_TRACTORS: Record<Brand["id"], PlaceholderTractor[]> = {
+  newholland: [
+    {
+      id: "ph-newholland-t5120",
+      name: "New Holland T5.120 Dynamic Command",
+      image: "/images/trattori.png",
+      description:
+        "Compatto polivalente Stage V ideale per aziende miste e lavori aziendali.",
+      priceLabel: "120 CV • Dynamic Command",
+      href: contactHref("New Holland", "T5.120 Dynamic Command"),
+      specs: ["NEF Stage V", "Dynamic Command", "Cabina comfort"],
+      badge: "Disponibile su richiesta",
+    },
+    {
+      id: "ph-newholland-t6180",
+      name: "New Holland T6.180 Auto Command",
+      image: "/images/trattori2.png",
+      description:
+        "CVT Auto Command con 180 CV nominali per lavorazioni intensive e PTO.",
+      priceLabel: "180 CV • Auto Command",
+      href: contactHref("New Holland", "T6.180 Auto Command"),
+      specs: ["Auto Command CVT", "Cabina Horizon Ultra", "Idraulica 150 l/min"],
+      badge: "Top di gamma",
+    },
+    {
+      id: "ph-newholland-t7270",
+      name: "New Holland T7.270 PLM Intelligence",
+      image: "/images/home.png",
+      description:
+        "Serie PLM Intelligence con guida di precisione e telemetria integrata.",
+      priceLabel: "270 CV • PLM Intelligence",
+      href: contactHref("New Holland", "T7.270 PLM Intelligence"),
+      specs: ["IntelliView 12\"", "MyPLM Connect", "Sospensioni Terraglide"],
+      badge: "Demo prenotabile",
+    },
+    {
+      id: "ph-newholland-t4110f",
+      name: "New Holland T4.110F Dual Command",
+      image: "/images/home2.png",
+      description:
+        "Specializzato stretto per frutteto con motore 4 cilindri e cabina compatta.",
+      priceLabel: "106 CV • Dual Command",
+      href: contactHref("New Holland", "T4.110F Dual Command"),
+      specs: ["Motore F34 Stage V", "Ponte SuperSteer", "Cabina ribassata"],
+      badge: "Specializzato",
+    },
+    {
+      id: "ph-newholland-t8435",
+      name: "New Holland T8.435 Genesis",
+      image: "/images/postvendita.png",
+      description:
+        "Flagship Genesis con PLM Intelligence e assale sospeso per produttività.",
+      priceLabel: "435 CV • Genesis",
+      href: contactHref("New Holland", "T8.435 Genesis"),
+      specs: ["PLM Intelligence", "SmartTrax RowTrac", "Comfort Ride"],
+      badge: "Flagship",
+    },
+  ],
+  landini: [
+    {
+      id: "ph-landini-serie5",
+      name: "Landini Serie 5-120 Dynamic",
+      image: "/images/ricambi.png",
+      description:
+        "Polivalente Stage V con cabina Total View Slim per fienagione e caricatori.",
+      priceLabel: "115 CV • Power Shuttle",
+      href: contactHref("Landini", "Serie 5-120 Dynamic"),
+      specs: ["36+12 Hi-Lo", "82 l/min CCLS", "Total View Slim"],
+      badge: "Best seller",
+    },
+    {
+      id: "ph-landini-serie7",
+      name: "Landini Serie 7 Robo-Six 215",
+      image: "/images/ricambi2.png",
+      description:
+        "Alta potenza con cambio Robo-Six 54+27 e sospensioni semi-attive.",
+      priceLabel: "206 CV • Robo-Six",
+      href: contactHref("Landini", "Serie 7 Robo-Six 215"),
+      specs: ["Cambio Robo-Six", "Sospensioni semi-attive", "DSM touch 12\""],
+      badge: "Nuovo catalogo",
+    },
+    {
+      id: "ph-landini-rex4",
+      name: "Landini REX4 F 100 GT",
+      image: "/images/ricambibg.png",
+      description:
+        "Specializzato per frutteti con cabina Cat.4 pressurizzata e geometria stretta.",
+      priceLabel: "95 CV • Specializzato",
+      href: contactHref("Landini", "REX4 F 100 GT"),
+      specs: ["Motore 4 cilindri", "Cabina Cat.4", "Inversore elettroidraulico"],
+      badge: "Subito ordinabile",
+    },
+    {
+      id: "ph-landini-serie4",
+      name: "Landini Serie 4-080 Platform",
+      image: "/images/logo.png",
+      description:
+        "Versatile piattaforma leggera con trasmissione 24+24 e PTO indipendente.",
+      priceLabel: "75 CV • 24+24",
+      href: contactHref("Landini", "Serie 4-080 Platform"),
+      specs: ["Motore Perkins 3.6L", "Piattaforma ribassata", "PTO 540/540E"],
+      badge: "In pronta consegna",
+    },
+    {
+      id: "ph-landini-super90",
+      name: "Landini Super T90",
+      image: "/images/logo2.png",
+      description:
+        "Utility robusto con ponte rigido e idraulica da 65 l/min per attrezzi portati.",
+      priceLabel: "88 CV • 12+12",
+      href: contactHref("Landini", "Super T90"),
+      specs: ["Motore Perkins Stage V", "Idraulica 65 l/min", "Assale HD"],
+      badge: "Promo lancio",
+    },
+  ],
+  carraro: [
+    {
+      id: "ph-carraro-tony",
+      name: "Antonio Carraro Tony 10900 SR",
+      image: "/images/trattori2.png",
+      description:
+        "Ibrido idrostatico articolato con 98 CV per vigneti intensivi e pendenze.",
+      priceLabel: "98 CV • CVT 4 stadi",
+      href: contactHref("Antonio Carraro", "Tony 10900 SR"),
+      specs: ["Cambio continuo", "Telaio ACTIO™", "Joystick multifunzione"],
+      badge: "Demo in sede",
+    },
+    {
+      id: "ph-carraro-tora",
+      name: "Antonio Carraro TORA T90",
+      image: "/images/trattori.png",
+      description:
+        "Nuova piattaforma TORA con motore 3.4L Stage V e trazione massima.",
+      priceLabel: "95 CV • Telaio oscillante",
+      href: contactHref("Antonio Carraro", "TORA T90"),
+      specs: ["Motore Kubota", "Assale oscillante", "Cabina Cat.4"],
+      badge: "Anteprima 2024",
+    },
+    {
+      id: "ph-carraro-tigrecar",
+      name: "Antonio Carraro Tigrecar 5800",
+      image: "/images/home.png",
+      description:
+        "Transporter multifunzione con pianale trilaterale e trazione permanente.",
+      priceLabel: "50 CV • Transporter",
+      href: contactHref("Antonio Carraro", "Tigrecar 5800"),
+      specs: ["Pianale trilaterale", "Assali indipendenti", "Portata 1600 kg"],
+      badge: "In allestimento",
+    },
+    {
+      id: "ph-carraro-mach4",
+      name: "Antonio Carraro Mach 4 R",
+      image: "/images/home2.png",
+      description:
+        "Crawler reversibile a 4 cingoli con trasmissione hydrostatica e basso baricentro.",
+      priceLabel: "98 CV • Quadtrack",
+      href: contactHref("Antonio Carraro", "Mach 4 R"),
+      specs: ["Trasmissione continua", "Reversibilità RGS™", "Cingoli in gomma"],
+      badge: "Disponibile su ordine",
+    },
+    {
+      id: "ph-carraro-ttr7600",
+      name: "Antonio Carraro TTR 7600 Infinity",
+      image: "/images/postvendita.png",
+      description:
+        "Motore 75 CV e trasmissione Infinity a doppia gamma per manutenzione e montagna.",
+      priceLabel: "75 CV • Infinity",
+      href: contactHref("Antonio Carraro", "TTR 7600 Infinity"),
+      specs: ["Infinity Dual Speed", "Telaio ACTIO™", "PTO bidirezionale"],
+      badge: "Arrivo previsto",
+    },
+  ],
+};
 
 export default function TrattoriNuoviPage() {
   const [q, setQ] = useState("");
@@ -97,7 +285,6 @@ export default function TrattoriNuoviPage() {
 
   useEffect(() => {
     load();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const filtered = useMemo(() => {
@@ -136,32 +323,6 @@ export default function TrattoriNuoviPage() {
           { label: "Garanzia ufficiale", icon: Shield },
         ]}
       />
-
-      {/* ===== Caroselli per brand ===== */}
-      <section className="pt-8">
-        <div className="container space-y-12">
-          {BRANDS.map((b) => (
-            <BrandCarousel
-              key={b.id}
-              brand={b}
-              items={items}
-              loading={loading}
-              onSeeAll={() => {
-                setQ(b.query);
-                setSort("recenti");
-                setTimeout(() => {
-                  load();
-                  document
-                    .getElementById("results")
-                    ?.scrollIntoView({ behavior: "smooth" });
-                }, 0);
-              }}
-            />
-          ))}
-        </div>
-      </section>
-
-      {/* ===== Ricerca / ordina ===== */}
       <section className="pt-12">
         <div className="container">
           <Card className="overflow-hidden border-border/50">
@@ -234,6 +395,33 @@ export default function TrattoriNuoviPage() {
           </Card>
         </div>
       </section>
+
+      {/* ===== Caroselli per brand ===== */}
+      <section className="pt-8">
+        <div className="container space-y-12">
+          {BRANDS.map((b) => (
+            <BrandCarousel
+              key={b.id}
+              brand={b}
+              items={items}
+              loading={loading}
+              onSeeAll={() => {
+                setQ(b.query);
+                setSort("recenti");
+                setTimeout(() => {
+                  load();
+                  document
+                    .getElementById("results")
+                    ?.scrollIntoView({ behavior: "smooth" });
+                }, 0);
+              }}
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* ===== Ricerca / ordina ===== */}
+      
 
       {/* ===== Ordina ===== */}
       <section className="py-5 bg-muted/40">
@@ -347,6 +535,10 @@ function BrandCarousel({
     );
   }, [items, brand.query]);
 
+  const placeholders = PLACEHOLDER_TRACTORS[brand.id] || [];
+  const showPlaceholders = !loading && list.length === 0 && placeholders.length > 0;
+  const displayItems = showPlaceholders ? placeholders : list;
+
   const updateArrows = () => {
     const el = ref.current;
     if (!el) return;
@@ -361,7 +553,7 @@ function BrandCarousel({
     updateArrows();
     el.addEventListener("scroll", updateArrows, { passive: true });
     return () => el.removeEventListener("scroll", updateArrows);
-  }, [list.length]);
+  }, [displayItems.length]);
 
   const scrollBy = (dir: "prev" | "next") => {
     const el = ref.current;
@@ -413,7 +605,11 @@ function BrandCarousel({
       >
         <style jsx>{`div::-webkit-scrollbar { display: none; }`}</style>
 
-        {loading && list.length === 0 ? (
+        {showPlaceholders ? (
+          placeholders.map((item) => (
+            <PlaceholderCard key={item.id} brand={brand} item={item} />
+          ))
+        ) : loading && list.length === 0 ? (
           Array.from({ length: 6 }).map((_, i) => <SkeletonPoster key={i} />)
         ) : list.length > 0 ? (
           list.map((it) => (
@@ -449,7 +645,7 @@ function BrandCarousel({
                 </PrettyFrame>
               </div>
             </article>
-          ))
+            ))
         ) : (
           <div className="text-muted-foreground py-10">
             Nessun trattore per {brand.label} al momento.
@@ -491,6 +687,69 @@ function ArrowButton({
     >
       {children}
     </button>
+  );
+}
+
+function PlaceholderCard({
+  brand,
+  item,
+}: {
+  brand: Brand;
+  item: PlaceholderTractor;
+}) {
+  const accentOverlay = `linear-gradient(140deg, ${brand.accentFrom}46 0%, ${brand.accentTo}26 60%, transparent 100%)`;
+  const chips = [item.priceLabel, ...item.specs.slice(0, 2)].filter(Boolean);
+
+  return (
+    <article className="relative shrink-0 w-[210px] sm:w-[230px] snap-start">
+      <Link
+        href={item.href}
+        className="group block rounded-[22px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:ring-[#FFD700]"
+        prefetch={false}
+        aria-label={`Richiedi informazioni su ${item.name}`}
+      >
+        <PrettyFrame
+          src={item.image}
+          alt={item.name}
+          ratioClass="aspect-[2/3]"
+          padding={false}
+        >
+          <div
+            className="absolute inset-0"
+            style={{ background: accentOverlay }}
+          />
+          <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
+          <div
+            className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-30"
+            style={{
+              background: `radial-gradient(200% 120% at 50% 100%, ${brand.accentTo}33 0%, transparent 55%)`,
+            }}
+          />
+          <div className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-md bg-black/35 px-2 py-1 text-[11px] font-semibold tracking-wide uppercase text-white shadow backdrop-blur">
+            {item.badge || brand.label}
+          </div>
+          <div className="absolute left-3 right-3 bottom-3 flex flex-col gap-1.5">
+            <div className="flex flex-wrap gap-1">
+              {chips.map((chip) => (
+                <span
+                  key={`${item.id}-chip-${chip}`}
+                  className="inline-flex items-center rounded-full bg-white/15 px-2 py-1 text-[10px] font-medium uppercase tracking-wide text-white backdrop-blur-sm"
+                >
+                  {chip}
+                </span>
+              ))}
+            </div>
+            <h3 className="text-sm font-semibold leading-snug text-white drop-shadow line-clamp-2">
+              {item.name}
+            </h3>
+            <p className="text-xs text-white/80 line-clamp-2">{item.description}</p>
+            <span className="inline-flex items-center gap-1 self-start rounded-md bg-white/90 px-2 py-1 text-[11px] font-semibold uppercase tracking-wide text-black transition-transform duration-200 group-hover:-translate-y-0.5">
+              Richiedi disponibilità
+            </span>
+          </div>
+        </PrettyFrame>
+      </Link>
+    </article>
   );
 }
 
