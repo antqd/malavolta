@@ -232,12 +232,12 @@ export default function ServiziClient({
             <div className="grid md:grid-cols-2 gap-0">
               <div className={`${deepBlue} text-white p-8 md:p-12`}>
                 <h2 className="text-3xl md:text-4xl font-extrabold">
-                  <span className={gold}>POST</span>{" "}
-                  <span className={white}>VENDITA</span>
+                  <span className={gold}>RICAMBI</span>{" "}
+                  <span className={white}>OFFICINA</span>
                 </h2>
                 <p className="mt-4 text-white/90 max-w-prose">
                   La Alfonso Malavolta assiste il cliente per tutto ciò che
-                  serve dopo l’acquisto di un mezzo agricolo: ricambi originali,
+                  serve prima e dopo l’acquisto: ricambi originali,
                   garanzia, interventi rapidi e supporto dedicato.
                 </p>
                 <ul className="mt-6 space-y-2">
@@ -256,18 +256,18 @@ export default function ServiziClient({
                   <Button
                     className={`${goldBg} ${deepBlueText} hover:opacity-90`}
                     onClick={() => {
-                      window.location.hash = "contatti";
+                      window.location.href = "ricambi";
                       setMotivo("Post Vendita");
                     }}
                   >
-                    Richiedi assistenza <ArrowRight className="w-4 h-4 ml-2" />
+                    Scopri di Piu! <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 </div>
               </div>
 
               <div className="relative min-h-[260px] md:min-h-[420px]">
                 <Image
-                  src="/images/postvendita.png"
+                  src="/images/home2.png"
                   alt="Post vendita"
                   fill
                   sizes="(min-width: 768px) 50vw, 100vw"
@@ -333,8 +333,7 @@ export default function ServiziClient({
                 </h2>
                 <p className="mt-4 text-white/90 max-w-prose">
                   Tecnici qualificati, formazione continua e ricambi originali
-                  per diagnosi e riparazioni meccaniche, elettriche ed
-                  elettroniche.
+                  per diagnosi e riparazioni.
                 </p>
                 <div className="mt-5 flex flex-wrap gap-2">
                   <Badge className="bg-white/10 border-white/20 text-white">
@@ -357,14 +356,8 @@ export default function ServiziClient({
                   </Button>
                 </div>
               </div>
-              <div className="relative min-h-[260px] md:min-h-[420px]">
-                <Image
-                  src="/images/ricambi2.png"
-                  alt="Officina"
-                  fill
-                  sizes="(min-width: 768px) 50vw, 100vw"
-                  className="object-cover object-center"
-                />
+              <div className="relative min-h-[260px] md:min-h-[420px] bg-black">
+                
               </div>
             </div>
           </Card>
@@ -387,8 +380,7 @@ export default function ServiziClient({
                   <span className={white}>ENZA </span>
                 </h2>
                 <p className="mt-4 text-white/90 max-w-prose">
-                  Ti guidiamo nell’adeguamento normativo e nell’ottimizzazione
-                  dei processi: sicurezza, qualità e riduzione dei costi.
+                  Rivolgiti al supporto per un servizio dedicato
                 </p>
                 <ul className="mt-6 space-y-2">
                   {[
@@ -422,29 +414,7 @@ export default function ServiziClient({
       {/* Competenze & Certificazioni */}
       <section className="py-16 bg-background">
         <div className="container">
-          <div className="text-center mb-12">
-            <h2 className={`text-3xl md:text-4xl font-bold ${deepBlueText}`}>
-              Competenze Tecniche e Certificazioni
-            </h2>
-            <p className="text-muted-foreground">
-              Esperienza e certificazioni che garantiscono qualità e conformità.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {certifications.map((c, i) => (
-              <Card key={i} className="text-center hover:shadow-md transition">
-                <CardHeader>
-                  <div className="mx-auto w-16 h-16 bg-[#FFD700]/10 rounded-full flex items-center justify-center mb-4">
-                    <c.icon className="w-8 h-8 text-[#FFD700]" />
-                  </div>
-                  <CardTitle className="text-lg">{c.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription>{c.description}</CardDescription>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          
 
           <div className="mt-12 bg-card rounded-2xl p-8 border border-border/50">
             <h3 className="text-2xl font-bold text-center mb-6">
@@ -452,7 +422,7 @@ export default function ServiziClient({
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
               <div>
-                <div className={`text-3xl font-bold ${deepBlueText}`}>25+</div>
+                <div className={`text-3xl font-bold ${deepBlueText}`}>65+</div>
                 <p className="text-muted-foreground">Anni di Esperienza</p>
               </div>
               <div>
@@ -573,7 +543,7 @@ export default function ServiziClient({
                 </CardTitle>
                 <ul className="mt-4 space-y-3">
                   {[
-                    "Oltre 25 anni di esperienza",
+                    "Oltre 65 anni di esperienza",
                     "Tecnici certificati dalle case costruttrici",
                     "Ricambi originali e garanzie ufficiali",
                     "Copertura capillare Nord Italia",
@@ -587,7 +557,7 @@ export default function ServiziClient({
 
                 <div className="mt-8 grid grid-cols-2 gap-6">
                   <div className="text-center">
-                    <div className="text-3xl font-bold">25+</div>
+                    <div className="text-3xl font-bold">65+</div>
                     <div className="text-sm text-white/80">Anni esperienza</div>
                   </div>
                   <div className="text-center">

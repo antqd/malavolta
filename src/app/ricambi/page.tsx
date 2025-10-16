@@ -45,15 +45,15 @@ export default function RicambiPage() {
   const [query, setQuery] = useState("");
 
   const top15Logos = [
-    { src: "/images/loghi/petronas-logo.png", alt: "petronas" },
+
     { src: "/images/loghi/claas-logo.png", alt: "CLAAS" },
     {
       src: "/images/loghi/logo-new-holland-agriculture.png",
       alt: "New Holland",
     },
-    { src: "/images/loghi/logo-case-IH.png", alt: "Case IH" },
+
     { src: "/images/loghi/logo-massey-ferguson.png", alt: "Massey Ferguson" },
-    { src: "/images/loghi/toyota-material-handling.png", alt: "toyota" },
+
     { src: "/images/loghi/logo-krone.png", alt: "Krone" },
     { src: "/images/loghi/logo-kuhn.png", alt: "Kuhn" },
     { src: "/images/loghi/logo-landini.png", alt: "Landini" },
@@ -122,8 +122,8 @@ export default function RicambiPage() {
 
       <PageHero
         titleWhite="RICAMBI"
-        titleGold="AGRICOLI E INDUSTRIALI"
-        description="Magazzino con oltre 15.000 codici. Originali e di concorrenza, spedizioni 24/48h."
+        titleGold="E OFFICINA"
+        description="Magazzino con codici originali e di concorrenza, spedizioni rapide e in caso di indisponibilità arrivo in 24/48 ore."
         imageSrc="/images/ricambibg.png"
         badges={[
           { label: "Garanzia 24 mesi", icon: Shield },
@@ -142,14 +142,13 @@ export default function RicambiPage() {
                 <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
                   <span className={gold}>RICAMBI</span>{" "}
                   <span className="text-white">
-                    AGRICOLI <br /> E INDUSTRIALI
+                     <br /> E OFFICINA
                   </span>
                 </h1>
                 <p className="mt-5 text-white/90 max-w-prose">
-                  Disponiamo di un magazzino con oltre <strong>15.000</strong>{" "}
+                  Disponiamo di un magazzino con
                   ricambi per trattori e macchine agricole/industriali di ogni
-                  marca: originali e di concorrenza. Spedizioni rapide,
-                  compatibilità garantita.
+                  marca: originali e di concorrenza.
                 </p>
 
                 <div className="mt-6 flex flex-wrap gap-2">
@@ -235,129 +234,7 @@ export default function RicambiPage() {
       </section>
 
       {/* MOTORE DI RICERCA MACCHINE (filtri) */}
-      <section className="pb-6">
-        <div className="container">
-          <Card className="overflow-hidden border-border/50">
-            <div className="grid lg:grid-cols-[360px_1fr]">
-              {/* Pannello info (nero) */}
-              <div className={`${deepBlue} text-white p-8`}>
-                <h3 className="text-2xl font-extrabold">
-                  <span className={gold}>
-                    {" "}
-                    Cerca trattori e macchine
-                    <br /> agricole e industriali
-                  </span>
-                </h3>
-                <p className="mt-3 text-white/85">
-                  Trova velocemente mezzi <strong>nuovi</strong> e{" "}
-                  <strong>usati</strong> filtrando per stato, marca, anno,
-                  condizioni e molto altro.
-                </p>
-                <div className="mt-5 grid gap-2">
-                  <div className="flex items-center text-white/90">
-                    <CheckCircle className="h-4 w-4 mr-2 text-[#8FD19E]" />
-                    Compatibilità certificata
-                  </div>
-                  <div className="flex items-center text-white/90">
-                    <Clock className="h-4 w-4 mr-2" />
-                    Tempi di risposta rapidi
-                  </div>
-                </div>
-              </div>
 
-              {/* Filtri */}
-              <div className="p-6 md:p-8 bg-[#FFD700]/10">
-                <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
-                  <SelectBlock
-                    label="STATO"
-                    value={stato}
-                    onChange={setStato}
-                    options={["Nuovo", "Usato", "Aziendale"]}
-                  />
-                  <SelectBlock
-                    label="TIPO"
-                    value={tipo}
-                    onChange={setTipo}
-                    options={[
-                      "Trattore",
-                      "Mietitrebbia",
-                      "Pala",
-                      "Attrezzatura",
-                    ]}
-                  />
-                  <SelectBlock
-                    label="MARCA"
-                    value={marca}
-                    onChange={setMarca}
-                    options={[
-                      "New Holland",
-                      "John Deere",
-                      "Case IH",
-                      "Massey Ferguson",
-                      "Fendt",
-                      "Claas",
-                    ]}
-                  />
-                  <SelectBlock
-                    label="MODELLO"
-                    value={modello}
-                    onChange={setModello}
-                    options={["Seleziona modello…"]}
-                  />
-                  <SelectBlock
-                    label="FINANZIABILE"
-                    value={finanziabile}
-                    onChange={setFinanziabile}
-                    options={["Sì", "No"]}
-                  />
-                  <SelectBlock
-                    label="NOLEGGIO"
-                    value={noleggio}
-                    onChange={setNoleggio}
-                    options={["Sì", "No"]}
-                  />
-                  <SelectBlock
-                    label="ANNO"
-                    value={anno}
-                    onChange={setAnno}
-                    options={["2025", "2024", "2023", "2022", "2021", "≤ 2020"]}
-                  />
-                  <SelectBlock
-                    label="CONDIZIONE"
-                    value={condizione}
-                    onChange={setCondizione}
-                    options={["Ottimo", "Buono", "Da verificare"]}
-                  />
-                  <SelectBlock
-                    label="POTENZA"
-                    value={potenza}
-                    onChange={setPotenza}
-                    options={["≤ 80 CV", "81–120 CV", "121–180 CV", "≥ 181 CV"]}
-                  />
-                </div>
-
-                <div className="mt-6 flex items-center justify-between gap-4">
-                  <div className={`${deepBlueText} text-sm`}>
-                    <span className="font-semibold">{resultsCount}</span>{" "}
-                    macchine trovate
-                  </div>
-                  <div className="flex gap-3">
-                    <Button variant="outline" onClick={resetFiltri}>
-                      Pulisci filtri
-                    </Button>
-                    <Button
-                      onClick={apriRisultati}
-                      className={`${goldBg} ${deepBlueText} hover:opacity-90`}
-                    >
-                      Vedi <ArrowRight className="h-4 w-4 ml-2" />
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Card>
-        </div>
-      </section>
 
       {/* VANTAGGI / PLUS */}
       <section className="py-14">

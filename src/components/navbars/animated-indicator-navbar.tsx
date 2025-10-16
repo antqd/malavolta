@@ -29,6 +29,7 @@ const NAV_ITEMS = [
   { name: "Chi Siamo", link: "/chi-siamo" },
   { name: "Trattori Nuovi", link: "/trattori/nuovi" },
   { name: "Trattori Usati", link: "/trattori/usati" },
+  { name: "Attrezzatura", link: "/attrezzatura" },
   { name: "Ricambi", link: "/ricambi" },
   { name: "Servizi", link: "/servizi" },
   { name: "Blog", link: "/blog" },

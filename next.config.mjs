@@ -6,6 +6,34 @@ const nextConfig = {
         protocol: "https",
         hostname: "images.unsplash.com",
       },
+      {
+        protocol: "https",
+        hostname: "www.spedo.it",
+      },
+      {
+        protocol: "https",
+        hostname: "www.calderoni.it",
+      },
+      {
+        protocol: "https",
+        hostname: "www.agrionica.it",
+      },
+      {
+        protocol: "https",
+        hostname: "www.gamberinisrl.com",
+      },
+      {
+        protocol: "https",
+        hostname: "www.bicchi.com",
+      },
+      {
+        protocol: "https",
+        hostname: "www.rinieri.com",
+      },
+      {
+        protocol: "https",
+        hostname: "www.argnaniemonti.it",
+      },
     ],
   },
   async rewrites() {

@@ -84,9 +84,9 @@ const CATEGORIE = [
     icon: <ShoppingCart className="h-5 w-5" />,
   },
   {
-    title: "Officina meccanica",
+    title: "Officina Ricambi",
     href: "/servizi#officina",
-    img: "/images/ricambi.png",
+    img: "/images/ricambi2.png",
     icon: <Wrench className="h-5 w-5" />,
   },
 ];
@@ -502,7 +502,7 @@ export default function Home() {
           </div>
           <div className="relative min-h-[280px]">
             <Image
-              src="/images/logo2.png"
+              src="/images/logo.png"
               alt="Consulenza e assistenza"
               fill
               className="object-cover rounded-2xl ring-1 ring-white/10"

@@ -49,6 +49,7 @@ export interface CatalogItem {
   slug: string; // /prodotti/[slug]
   title: string; // nome commerciale
   brand?: string;
+  usageType?: "standard" | "aziendale" | "demo";
   category: Category;
   condition: Condition; // nuovo | usato
   year?: number;
@@ -63,6 +64,9 @@ export interface CatalogItem {
 
   // ⬇️ nuovo campo opzionale per disponibilità
   stock?: number;
+  financingAvailable?: boolean;
+  rentalAvailable?: boolean;
+  conditionRating?: "ottimo" | "buono" | "da_verificare";
 }
 
 /** Helpers riutilizzabili per il badge “solo 1 disponibile” */
@@ -77,6 +81,7 @@ export const ITEMS: CatalogItem[] = [
     slug: "trattore-usato-massey-ferguson-mf-168",
     title: "Trattore usato Massey Ferguson MF 168",
     brand: "Massey Ferguson",
+    usageType: "standard",
     category: "trattori_gommati",
     condition: "usato",
     cover:
@@ -102,6 +107,9 @@ export const ITEMS: CatalogItem[] = [
     hours: 14445,
     powerHp: 60,
     // stock non presente => nessun badge
+    financingAvailable: false,
+    rentalAvailable: false,
+    conditionRating: "buono",
   },
 
   // ——— NUOVO TRATTORE DI ESEMPIO con stock: 1 (per mostrare il badge rosso)
@@ -110,6 +118,7 @@ export const ITEMS: CatalogItem[] = [
     slug: "new-holland-t5-100-demo",
     title: "New Holland T5.100 (Demo)",
     brand: "New Holland",
+    usageType: "aziendale",
     category: "trattori_gommati",
     condition: "usato",
     year: 2021,
@@ -132,5 +141,8 @@ export const ITEMS: CatalogItem[] = [
       tyresRearState: "70%",
     },
     stock: 1, // ⬅️ attiva il badge “solo 1 disponibile”
+    financingAvailable: true,
+    rentalAvailable: true,
+    conditionRating: "ottimo",
   },
 ];
